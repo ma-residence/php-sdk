@@ -1,0 +1,19 @@
+{
+    "name": "ma-residence/php-sdk",
+    "type": "library",
+    "require": {
+        "php": "^5.6",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
+    "autoload": {
+        "psr-0": { "MR": "src/" }
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "master-dev"
+        }
+    }
+}
