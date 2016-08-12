@@ -34,13 +34,13 @@ And don't forget to run:
 ```php
 <?php
 
-use MR\MRClient;
+use MR\SDK\Client;
 
 $host = 'https://api.ma-residence.fr/';
 $clientId = 'CLIENT_ID';
 $clientSecret = 'CLIENT_SECRET';
 
-$mrClient = new MRClient($host, $clientId, $clientSecret);
+$mrClient = new Client($host, $clientId, $clientSecret);
 ```
 
 After you have initialized the class, you can login with an email and password :
