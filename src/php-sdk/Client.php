@@ -1,12 +1,12 @@
 <?php
 
-namespace MR;
+namespace MR\SDK;
 
-use MR\Auth\MROAuth;
-use MR\Endpoints\Endpoint;
-use MR\Transport\Request;
+use MR\SDK\Auth\OAuth;
+use MR\SDK\Endpoints\Endpoint;
+use MR\SDK\Transport\Request;
 
-class MRClient
+class Client
 {
     /**
      * @var Request
@@ -14,7 +14,7 @@ class MRClient
     private $request;
 
     /**
-     * @var MROAuth
+     * @var OAuth
      */
     private $auth;
 
@@ -25,7 +25,7 @@ class MRClient
 
     public function __construct($host, $clientId, $clientSecret)
     {
-        $this->auth = new MROAuth($this, $clientId, $clientSecret);
+        $this->auth = new OAuth($this, $clientId, $clientSecret);
         $this->request = new Request($this, $host);
         $this->cachedEndpoints = [];
     }
@@ -52,7 +52,7 @@ class MRClient
     }
 
     /**
-     * @return MROAuth
+     * @return OAuth
      */
     public function auth()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace MR\Auth;
+namespace MR\SDK\Auth;
 
-use MR\MRClient;
+use MR\SDK\Client;
 
-class MROAuth
+class OAuth
 {
     const TOKEN_ENDPOINT = "/oauth/v2/token";
 
@@ -38,16 +38,16 @@ class MROAuth
     private $refreshToken;
 
     /**
-     * @var MRClient
+     * @var Client
      */
     private $client;
 
     /**
-     * @param MRClient $client
+     * @param Client $client
      * @param string   $clientId
      * @param string   $clientSecret
      */
-    public function __construct(MRClient $client, $clientId, $clientSecret)
+    public function __construct(Client $client, $clientId, $clientSecret)
     {
         $this->client = $client;
         $this->clientId = $clientId;

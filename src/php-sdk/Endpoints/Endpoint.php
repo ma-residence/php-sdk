@@ -1,8 +1,8 @@
 <?php
 
-namespace MR\Endpoints;
+namespace MR\SDK\Endpoints;
 
-use MR\Transport\Request;
+use MR\SDK\Transport\Request;
 
 abstract class Endpoint
 {

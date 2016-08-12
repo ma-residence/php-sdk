@@ -1,35 +1,32 @@
 <?php
 
-namespace MR\Transport;
+namespace MR\SDK\Transport;
 
-use GuzzleHttp\Client;
-use MR\MRClient;
+use GuzzleHttp\Client as HttpClient;
+use MR\SDK\Client;
 
 class Request
 {
     /**
-     * @var Client
+     * @var HttpClient
      */
     private $httpClient;
 
     /**
-     * @var MRClient
+     * @var Client
      */
     private $client;
 
     /**
-     * @var string
-     */
-    private $host;
-
-    /**
-     * @param MRClient $client
+     * @param Client $client
      * @param string $host
      */
-    public function __construct(MRClient $client, $host)
+    public function __construct(Client $client, $host)
     {
         $this->client = $client;
-        $this->host = $host;
+        $this->httpClient = new HttpClient([
+            'base_uri' => $host
+        ]);
     }
 
     /**
@@ -106,7 +103,7 @@ class Request
             $parameters['access_token'] = $accessToken;
         }
 
-        return $this->httpClient->request($method, $this->host . $endpoint, [
+        return $this->httpClient->request($method, $endpoint, [
             'query' => $parameters,
             'json' => $data,
         ]);

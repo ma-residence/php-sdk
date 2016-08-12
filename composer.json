@@ -9,7 +9,14 @@
         "phpunit/phpunit": "^5.5"
     },
     "autoload": {
-        "psr-0": { "MR": "src/" }
+        "psr-4": {
+            "MR\\SDK\\": "src/php-sdk"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MR\\SDK\\": "tests/php-sdk"
+        }
     },
     "extra" : {
         "branch-alias" : {

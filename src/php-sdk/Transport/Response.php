@@ -1,6 +1,6 @@
 <?php
 
-namespace MR\Transport;
+namespace MR\SDK\Transport;
 
 /**
  * @todo: Add some special getters or create models directly ?
