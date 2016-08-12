@@ -1,10 +1,11 @@
 # php-sdk
 
-Official PHP sdk for [ma-residence](http://www.ma-residence.fr) API.
+Official PHP SDK for [ma-residence](https://www.ma-residence.fr)'s API.
 
 # Get started
 
-To use the MR API you have to register your application. After you've a client_id and client_secret, you can use the API.
+To use [ma-residence's API](https://github.com/ma-residence/api), you have to register your application. When registering your application, you will obtain a ***client_id*** and ***client_secret***. 
+The ***client_id*** and ***client_secret*** will be necessary to use the API.
 
 ## Installation
 
@@ -13,12 +14,12 @@ Edit your `composer.json` :
 ```json
 {
     "require": {
-        "ma-residence/mr-sdk-php": "dev-master"
+        "ma-residence/php-sdk": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:ma-residence/mr-sdk-php.git"
+            "url":  "git@github.com:ma-residence/php-sdk.git"
         }
     ]
 }
@@ -35,35 +36,35 @@ And don't forget to run:
 
 use MR\MRClient;
 
-$host = 'http://api.ma-residence.fr/';
+$host = 'https://api.ma-residence.fr/';
 $clientId = 'CLIENT_ID';
 $clientSecret = 'CLIENT_SECRET';
 
 $mrClient = new MRClient($host, $clientId, $clientSecret);
 ```
 
-After you have initialized the class you can login with an email and password:
+After you have initialized the class, you can login with an email and password :
 
 ```php
-$mrClient->auth()->loginWithCredentials('laurent.brieu@gmail.com', 'password');
+$mrClient->auth()->loginWithCredentials('developpeur@ma-residence.fr', 'password');
 ```
 
-Or with an external token (after login with facebook for example):
+Or with an external token (after login with facebook for example) :
 
 ```php
 $mrClient->auth()->loginWithExternalToken('facebook', 'FACEBOOK_ACCESS_TOKEN');
 ```
 
-And if you want to logout to do some requests anonymously:
+And if you want to logout to do some requests anonymously, do the following :
 
 ```php
-$mrClient->auth()->logout()
+$mrClient->auth()->logout();
 ```
 
 ## Endpoints
 
 ```php
-$mrClient->myEndpoint()->foo()
+$mrClient->myEndpoint()->foo();
 ```
 
 Available endpoints:
