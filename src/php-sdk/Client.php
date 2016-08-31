@@ -4,6 +4,7 @@ namespace MR\SDK;
 
 use MR\SDK\Auth\OAuth;
 use MR\SDK\Endpoints\Endpoint;
+use MR\SDK\Endpoints\UserEndpoint;
 use MR\SDK\Transport\Request;
 
 class Client
@@ -30,18 +31,28 @@ class Client
         $this->cachedEndpoints = [];
     }
 
-    /*
-     * @todo: Add endpoints
-     *
-     * public function foo()
-     * {
-     *    if (isset($this->$cachedEndpoints[__METHOD__])) {
-     *        $this->$cachedEndpoints[__METHOD__] = new Endpoints\Foo($this->request);
-     *    }
-     *
-     *    return $this->$cachedEndpoints[__METHOD__];
-     * }
+    /**
+     * @return UserEndpoint
      */
+    public function users()
+    {
+        return $this->getEndpoint('users', Endpoints\UserEndpoint::class);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param string $class
+     *
+     * @return Endpoint
+     */
+    private function getEndpoint($endpoint, $class)
+    {
+        if (!isset($this->cachedEndpoints[$endpoint])) {
+            $this->cachedEndpoints[$endpoint] = new $class($this->request);
+        }
+
+        return $this->cachedEndpoints[$endpoint];
+    }
 
     /**
      * @return Request

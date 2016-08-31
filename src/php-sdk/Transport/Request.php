@@ -3,6 +3,7 @@
 namespace MR\SDK\Transport;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\RequestException;
 use MR\SDK\Client;
 
 class Request
@@ -102,10 +103,17 @@ class Request
         if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
             $parameters['access_token'] = $accessToken;
         }
+        try {
+            $response = $this->httpClient->request($method, $endpoint, [
+                'query' => $parameters,
+                'json' => [
+                    'data' => $data
+                ],
+            ]);
+        } catch (RequestException $re) {
+            $response = $re->getResponse();
+        }
 
-        return $this->httpClient->request($method, $endpoint, [
-            'query' => $parameters,
-            'json' => $data,
-        ]);
+        return new Response($response);
     }
 }
