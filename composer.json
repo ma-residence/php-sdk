@@ -15,7 +15,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MR\\SDK\\": "tests/php-sdk"
+            "Tests\\MR\\SDK\\": "tests/php-sdk"
         }
     },
     "extra" : {

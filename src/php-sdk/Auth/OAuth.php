@@ -3,6 +3,7 @@
 namespace MR\SDK\Auth;
 
 use MR\SDK\Client;
+use MR\SDK\Exceptions\OAuthException;
 
 class OAuth
 {
@@ -57,8 +58,6 @@ class OAuth
     /**
      * @param string $email
      * @param string $password
-     *
-     * @return string
      */
     public function loginWithCredentials($email, $password)
     {
@@ -66,15 +65,11 @@ class OAuth
             'username' => $email,
             'password' => $password,
         ]);
-
-        return $this->accessToken;
     }
 
     /**
      * @param string $type
      * @param string $token
-     *
-     * @return string
      */
     public function loginWithExternalToken($type, $token)
     {
@@ -82,8 +77,6 @@ class OAuth
             'type' => $type,
             'token' => $token,
         ]);
-
-        return $this->accessToken;
     }
 
     public function logout()
@@ -125,24 +118,26 @@ class OAuth
      * @param string $grant
      * @param array  $options
      *
-     * @throws \OAuthException
+     * @throws OAuthException
      */
     private function requestAccessToken($grant, array $options = [])
     {
         $response = $this->client->request()->get(self::TOKEN_ENDPOINT, array_merge([
             'grant_type' => $grant,
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
         ], $options));
 
-        $json = \GuzzleHttp\json_decode($response->getBody()->getContents());
-
         if ($response->getStatusCode() !== 200) {
-            throw new \OAuthException($json->error_description);
+            throw new OAuthException($response);
         }
 
         $now = new \DateTime();
 
-        $this->accessToken = $json->access_token;
-        $this->refreshToken = $json->refresh_token;
-        $this->accessTokenLifetime = $now->modify("+ {$json->expires_in} seconds");
+        $data = $response->getData();
+
+        $this->accessToken = $data['access_token'];
+        $this->refreshToken = $data['refresh_token'];
+        $this->accessTokenLifetime = $now->modify("+ {$data['expires_in']} seconds");
     }
 }
