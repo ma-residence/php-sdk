@@ -19,7 +19,8 @@ Edit your `composer.json` :
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:ma-residence/php-sdk.git"
+            "url":  "git@github.com:ma-residence/php-sdk.git",
+            "no-api": true
         }
     ]
 }
