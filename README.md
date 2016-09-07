@@ -70,4 +70,42 @@ $mrClient->myEndpoint()->foo();
 
 Available endpoints:
 
- - NONE
+ - Me
+ - User
+ - Groups
+ - Associations
+ - CityHalls
+ - Categories
+
+## Request
+
+If you have to call an url which no endpoint handle it, you can still do your own request:
+
+```php
+// GET Request
+$mrClient->request()->get('/foo', [
+    'id' => $id
+]);
+
+// POST Request
+$mrClient->request()->post('/foo', [], [
+    'field_a' => 'A',
+    'field_b' => 'B',
+]);
+
+// PUT Request
+$mrClient->request()->put('/foo', [], [
+    'field_a' => 'AA',
+    'field_b' => 'BB',
+]);
+
+// PATCH Request
+$mrClient->request()->patch('/foo', [], [
+    'field_b' => 'C',
+]);
+
+// DELETE Request
+$mrClient->request()->delete('/foo');
+```
+
+Each request returns an `Response` object.

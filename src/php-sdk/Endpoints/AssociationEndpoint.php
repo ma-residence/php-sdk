@@ -2,14 +2,14 @@
 
 namespace MR\SDK\Endpoints;
 
-class UserEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
+class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
      * {@inheritdoc}
      */
     public function all($page = 1, $perPage = 20)
     {
-        return $this->request->get('/users', [
+        return $this->request->get('/associations', [
             'page' => $page,
             'perPage' => $perPage,
         ]);
@@ -20,7 +20,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function get($id)
     {
-        return $this->request->get('/users/'.$id);
+        return $this->request->get('/associations/'.$id);
     }
 
     /**
@@ -28,7 +28,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function post(array $data)
     {
-        return $this->request->post('/users', [], $data);
+        return $this->request->post('/associations', [], $data);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function put($id, array $data)
     {
-        return $this->request->put('/users/'.$id, [], $data);
+        return $this->request->put('/associations/'.$id, [], $data);
     }
 
     /**
@@ -44,7 +44,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function patch($id, array $data)
     {
-        return $this->request->patch('/users/'.$id, [], $data);
+        return $this->request->patch('/associations/'.$id, [], $data);
     }
 
     /**
@@ -52,7 +52,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function delete($id)
     {
-        return $this->request->delete('/users/'.$id);
+        return $this->request->delete('/associations/'.$id);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function postSettings($id, $key, $value)
     {
-        return $this->request->post("/users/$id/settings", [], [
+        return $this->request->post("/associations/$id/settings", [], [
             'key' => $key,
             'value' => $value,
         ]);
@@ -71,7 +71,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function putSettings($id, $key, $value)
     {
-        return $this->request->put("/users/$id/settings/$key", [], [
+        return $this->request->put("/associations/$id/settings/$key", [], [
             'value' => $value,
         ]);
     }
@@ -81,6 +81,6 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function deleteSettings($id, $key)
     {
-        return $this->request->delete("/users/$id/settings/$key");
+        return $this->request->delete("/associations/$id/settings/$key");
     }
 }
