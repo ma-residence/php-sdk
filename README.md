@@ -108,4 +108,4 @@ $mrClient->request()->patch('/foo', [], [
 $mrClient->request()->delete('/foo');
 ```
 
-Each request returns an `Response` object.
+Each request returns a `Response` object.
