@@ -79,7 +79,7 @@ Available endpoints:
 
 ## Request
 
-If you have to call an url which no endpoint handle it, you can still do your own request:
+If you have to call an url which has no endpoint, you can still do your own request:
 
 ```php
 // GET Request
