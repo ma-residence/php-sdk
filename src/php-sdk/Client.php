@@ -3,8 +3,7 @@
 namespace MR\SDK;
 
 use MR\SDK\Auth\OAuth;
-use MR\SDK\Endpoints\Endpoint;
-use MR\SDK\Endpoints\UserEndpoint;
+use MR\SDK\Endpoints;
 use MR\SDK\Transport\Request;
 
 class Client
@@ -20,7 +19,7 @@ class Client
     private $auth;
 
     /**
-     * @var Endpoint[]
+     * @var Endpoints\Endpoint[]
      */
     private $cachedEndpoints;
 
@@ -32,7 +31,15 @@ class Client
     }
 
     /**
-     * @return UserEndpoint
+     * @return Endpoints\MeEndpoint
+     */
+    public function me()
+    {
+        return $this->getEndpoint('me', Endpoints\MeEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\UserEndpoint
      */
     public function users()
     {
@@ -40,10 +47,42 @@ class Client
     }
 
     /**
+     * @return Endpoints\GroupEndpoint
+     */
+    public function groups()
+    {
+        return $this->getEndpoint('groups', Endpoints\GroupEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\AssociationEndpoint
+     */
+    public function associations()
+    {
+        return $this->getEndpoint('associations', Endpoints\AssociationEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\CityHallEndpoint
+     */
+    public function cityHalls()
+    {
+        return $this->getEndpoint('city_halls', Endpoints\CityHallEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\CategoryEndpoint
+     */
+    public function categories()
+    {
+        return $this->getEndpoint('categories', Endpoints\CategoryEndpoint::class);
+    }
+
+    /**
      * @param string $endpoint
      * @param string $class
      *
-     * @return Endpoint
+     * @return Endpoints\Endpoint
      */
     private function getEndpoint($endpoint, $class)
     {

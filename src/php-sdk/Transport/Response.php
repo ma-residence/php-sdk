@@ -30,6 +30,7 @@ class Response
     public function __construct(\GuzzleHttp\Psr7\Response $response)
     {
         $this->response = $response;
+        $this->decodeContent();
     }
 
     /**
@@ -37,11 +38,7 @@ class Response
      */
     public function getData()
     {
-        if ($this->data === null) {
-            $this->decodeContent();
-        }
-
-        return !empty($this->data) ? $this->data : null;
+        return $this->data;
     }
 
     /**
@@ -49,11 +46,7 @@ class Response
      */
     public function getErrors()
     {
-        if ($this->errors === null) {
-            $this->decodeContent();
-        }
-
-        return !empty($this->errors) ? $this->errors : null;
+        return $this->errors;
     }
 
     /**
@@ -61,10 +54,6 @@ class Response
      */
     public function getMetadata()
     {
-        if ($this->metadata === null) {
-            $this->decodeContent();
-        }
-
         return $this->metadata;
     }
 
@@ -74,6 +63,14 @@ class Response
     public function getStatusCode()
     {
         return $this->response->getStatusCode();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->response->getHeaderLine('location');
     }
 
     private function decodeContent()
@@ -86,12 +83,8 @@ class Response
 
         $data = \GuzzleHttp\json_decode($content, true);
 
-        $this->metadata = isset($data['metadata']) ? $data['metadata'] : [];
-        unset($data['metadata']);
-
         $this->errors = isset($data['errors']) ? $data['errors'] : [];
-        unset($data['errors']);
-
-        $this->data = isset($data['data']) ? $data['data'] : $data;
+        $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->data = isset($data['data']) ? $data['data'] : null;
     }
 }
