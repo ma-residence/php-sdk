@@ -79,6 +79,22 @@ class Client
     }
 
     /**
+     * @return Endpoints\MeEndpoint
+     */
+    public function roles()
+    {
+        return $this->getEndpoint('roles', Endpoints\RoleEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\MeEndpoint
+     */
+    public function members()
+    {
+        return $this->getEndpoint('members', Endpoints\MemberOfEndpoint::class);
+    }
+
+    /**
      * @param string $endpoint
      * @param string $class
      *
