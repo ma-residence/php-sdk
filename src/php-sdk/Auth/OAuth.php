@@ -134,7 +134,7 @@ class OAuth
 
         $now = new \DateTime();
 
-        $data = $response->getData();
+        $data = json_decode($response->getContent(), true);
 
         $this->accessToken = $data['access_token'];
         $this->refreshToken = $data['refresh_token'];

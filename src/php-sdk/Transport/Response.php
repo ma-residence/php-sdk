@@ -10,6 +10,11 @@ class Response
     private $data;
 
     /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var array
      */
     private $errors;
@@ -39,6 +44,14 @@ class Response
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
@@ -83,13 +96,13 @@ class Response
 
     private function decodeContent()
     {
-        $content = $this->response->getBody()->getContents();
+        $this->content = $this->response->getBody()->getContents();
 
-        if ($this->response->getStatusCode() === 204 || $content === null || $content === '') {
+        if ($this->response->getStatusCode() === 204 || $this->content === null || $this->content === '') {
             return;
         }
 
-        $data = \GuzzleHttp\json_decode($content, true);
+        $data = \GuzzleHttp\json_decode($this->content, true);
 
         $this->errors = isset($data['errors']) ? $data['errors'] : null;
         $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
