@@ -73,17 +73,25 @@ class Response
         return $this->response->getHeaderLine('location');
     }
 
+    /**
+     * @return bool
+     */
+    public function isPaginate()
+    {
+        return $this->response->getStatusCode() === 206;
+    }
+
     private function decodeContent()
     {
         $content = $this->response->getBody()->getContents();
 
-        if ($content === null || $content === '') {
+        if ($this->response->getStatusCode() === 204 || $content === null || $content === '') {
             return;
         }
 
         $data = \GuzzleHttp\json_decode($content, true);
 
-        $this->errors = isset($data['errors']) ? $data['errors'] : [];
+        $this->errors = isset($data['errors']) ? $data['errors'] : null;
         $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
         $this->data = isset($data['data']) ? $data['data'] : null;
     }
