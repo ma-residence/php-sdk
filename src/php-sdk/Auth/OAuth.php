@@ -12,6 +12,7 @@ class OAuth
     const GRANT_REFRESH  = 'refresh';
     const GRANT_PASSWORD = 'password';
     const GRANT_EXTERNAL = 'urn:external';
+    const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
 
     /**
      * @var string
@@ -77,6 +78,14 @@ class OAuth
             'type' => $type,
             'token' => $token,
         ]);
+    }
+
+    /**
+     * Login as client
+     */
+    public function login()
+    {
+        $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
     public function logout()
