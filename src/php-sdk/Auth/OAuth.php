@@ -145,8 +145,10 @@ class OAuth
 
         $data = json_decode($response->getContent(), true);
 
-        $this->accessToken = $data['access_token'];
-        $this->refreshToken = $data['refresh_token'];
-        $this->accessTokenLifetime = $now->modify("+ {$data['expires_in']} seconds");
+        $this->accessToken = array_key_exists('access_token', $data) ? $data['access_token'] : null;
+        $this->refreshToken = array_key_exists('refresh_token', $data) ? $data['refresh_token'] : null;
+        $this->accessTokenLifetime = array_key_exists('expires_in', $data)
+            ? $now->modify("+ {$data['expires_in']} seconds")
+            : null;
     }
 }
