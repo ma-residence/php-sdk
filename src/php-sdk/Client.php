@@ -47,6 +47,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\ForgotPasswordEndPoint
+     */
+    public function forgetPassword()
+    {
+        return $this->getEndpoint('forget_password', Endpoints\ForgotPasswordEndPoint::class);
+    }
+
+    /**
      * @return Endpoints\GroupEndpoint
      */
     public function groups()
@@ -79,7 +87,7 @@ class Client
     }
 
     /**
-     * @return Endpoints\MeEndpoint
+     * @return Endpoints\RoleEndpoint
      */
     public function roles()
     {
