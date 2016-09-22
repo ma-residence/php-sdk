@@ -62,7 +62,7 @@ class OAuth
      */
     public function loginWithCredentials($email, $password)
     {
-        $this->requestAccessToken(self::GRANT_PASSWORD, [
+        return $this->requestAccessToken(self::GRANT_PASSWORD, [
             'username' => $email,
             'password' => $password,
         ]);
@@ -74,7 +74,7 @@ class OAuth
      */
     public function loginWithExternalToken($type, $token)
     {
-        $this->requestAccessToken(self::GRANT_EXTERNAL, [
+        return $this->requestAccessToken(self::GRANT_EXTERNAL, [
             'type' => $type,
             'token' => $token,
         ]);
@@ -85,7 +85,7 @@ class OAuth
      */
     public function login()
     {
-        $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
+        return $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
     public function logout()
@@ -140,7 +140,7 @@ class OAuth
         }
 
         if (!$this->checkLifetime()) {
-            $this->requestAccessToken(self::GRANT_REFRESH, [
+            return $this->requestAccessToken(self::GRANT_REFRESH, [
                 'refresh_token' => $this->refreshToken,
             ]);
         }
