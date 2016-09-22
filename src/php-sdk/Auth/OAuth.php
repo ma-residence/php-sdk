@@ -90,9 +90,42 @@ class OAuth
 
     public function logout()
     {
-        $this->accessToken =
-        $this->accessTokenLifetime =
+        $this->accessToken = null;
+        $this->accessTokenLifetime = null;
         $this->refreshToken = null;
+    }
+
+    /**
+     * @param $accessToken
+     * @return $this
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $accessTokenLifetime
+     * @return $this
+     */
+    public function setAccessTokenLifetime($accessTokenLifetime)
+    {
+        $this->accessTokenLifetime = $accessTokenLifetime;
+
+        return $this;
+    }
+
+    /**
+     * @param $refreshToken
+     * @return $this
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
+
+        return $this;
     }
 
     /**
@@ -127,6 +160,7 @@ class OAuth
      * @param string $grant
      * @param array  $options
      *
+     * @return array
      * @throws OAuthException
      */
     private function requestAccessToken($grant, array $options = [])
@@ -150,5 +184,11 @@ class OAuth
         $this->accessTokenLifetime = array_key_exists('expires_in', $data)
             ? $now->modify("+ {$data['expires_in']} seconds")
             : null;
+
+        return [
+            'accessToken' => $this->accessToken,
+            'refreshToken' => $this->refreshToken,
+            'accessTokenLifetime' => $this->accessTokenLifetime
+        ];
     }
 }
