@@ -2,7 +2,7 @@
     "name": "ma-residence/php-sdk",
     "type": "library",
     "require": {
-        "php": "^5.6",
+        "php": "^5.6 || ^7.0",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
