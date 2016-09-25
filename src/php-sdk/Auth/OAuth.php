@@ -7,9 +7,9 @@ use MR\SDK\Exceptions\OAuthException;
 
 class OAuth
 {
-    const TOKEN_ENDPOINT = "/oauth/v2/token";
+    const TOKEN_ENDPOINT = '/oauth/v2/token';
 
-    const GRANT_REFRESH  = 'refresh';
+    const GRANT_REFRESH = 'refresh';
     const GRANT_PASSWORD = 'password';
     const GRANT_EXTERNAL = 'urn:external';
     const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
@@ -46,8 +46,8 @@ class OAuth
 
     /**
      * @param Client $client
-     * @param string   $clientId
-     * @param string   $clientSecret
+     * @param string $clientId
+     * @param string $clientSecret
      */
     public function __construct(Client $client, $clientId, $clientSecret)
     {
@@ -81,7 +81,7 @@ class OAuth
     }
 
     /**
-     * Login as client
+     * Login as client.
      */
     public function login()
     {
@@ -97,6 +97,7 @@ class OAuth
 
     /**
      * @param $accessToken
+     *
      * @return $this
      */
     public function setAccessToken($accessToken)
@@ -108,6 +109,7 @@ class OAuth
 
     /**
      * @param mixed $accessTokenLifetime
+     *
      * @return $this
      */
     public function setAccessTokenLifetime($accessTokenLifetime)
@@ -119,6 +121,7 @@ class OAuth
 
     /**
      * @param $refreshToken
+     *
      * @return $this
      */
     public function setRefreshToken($refreshToken)
@@ -161,6 +164,7 @@ class OAuth
      * @param array  $options
      *
      * @return array
+     *
      * @throws OAuthException
      */
     private function requestAccessToken($grant, array $options = [])
@@ -188,7 +192,7 @@ class OAuth
         return [
             'accessToken' => $this->accessToken,
             'refreshToken' => $this->refreshToken,
-            'accessTokenLifetime' => $this->accessTokenLifetime
+            'accessTokenLifetime' => $this->accessTokenLifetime,
         ];
     }
 }

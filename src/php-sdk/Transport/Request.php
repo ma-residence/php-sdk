@@ -26,14 +26,14 @@ class Request
     {
         $this->client = $client;
         $this->httpClient = new HttpClient([
-            'base_uri' => $host
+            'base_uri' => $host,
         ]);
     }
 
     /**
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
      *
      * @return Response
      */
@@ -44,8 +44,8 @@ class Request
 
     /**
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
      *
      * @return Response
      */
@@ -56,8 +56,8 @@ class Request
 
     /**
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
      *
      * @return Response
      */
@@ -68,8 +68,8 @@ class Request
 
     /**
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
      *
      * @return Response
      */
@@ -80,8 +80,8 @@ class Request
 
     /**
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
      *
      * @return Response
      */
@@ -93,12 +93,13 @@ class Request
     /**
      * @param string $method
      * @param string $endpoint
-     * @param array $parameters
-     * @param array $data
+     * @param array  $parameters
+     * @param array  $data
+     * @param array  $options
      *
      * @return Response
      */
-    private function execute($method, $endpoint, array $parameters = [], array $data = [])
+    private function execute($method, $endpoint, array $parameters = [], array $data = [], array $options = [])
     {
         if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
             $parameters['access_token'] = $accessToken;
@@ -107,9 +108,9 @@ class Request
             $response = $this->httpClient->request($method, $endpoint, [
                 'query' => $parameters,
                 'json' => [
-                    'data' => $data
+                    'data' => $data,
                 ],
-            ]);
+            ] + $options);
         } catch (RequestException $re) {
             $response = $re->getResponse();
         }
