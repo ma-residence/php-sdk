@@ -2,17 +2,14 @@
 
 namespace MR\SDK\Endpoints;
 
-class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
+class LotEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
      * {@inheritdoc}
      */
     public function all($page = 1, $perPage = 20)
     {
-        return $this->request->get('/groups', [
-            'page' => $page,
-            'perPage' => $perPage,
-        ]);
+        throw new \Exception('Not Implemented Yet');
     }
 
     /**
@@ -20,7 +17,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function get($id)
     {
-        return $this->request->get('/groups/'.$id);
+        return $this->request->get('/lots/'.$id);
     }
 
     /**
@@ -28,7 +25,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function post(array $data)
     {
-        return $this->request->post('/groups', [], $data);
+        return $this->request->post('/lots', [], $data);
     }
 
     /**
@@ -36,7 +33,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function put($id, array $data)
     {
-        return $this->request->put('/groups/'.$id, [], $data);
+        return $this->request->put('/lots/'.$id, [], $data);
     }
 
     /**
@@ -44,7 +41,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function patch($id, array $data)
     {
-        return $this->request->patch('/groups/'.$id, [], $data);
+        return $this->request->patch('/lots/'.$id, [], $data);
     }
 
     /**
@@ -52,7 +49,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function delete($id)
     {
-        return $this->request->delete('/groups/'.$id);
+        return $this->request->delete('/lots/'.$id);
     }
 
     /**
@@ -60,7 +57,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function postSettings($id, $key, $value)
     {
-        return $this->request->post("/groups/$id/settings", [], [
+        return $this->request->post("/lots/$id/settings", [], [
             'key' => $key,
             'value' => $value,
         ]);
@@ -71,7 +68,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function putSettings($id, $key, $value)
     {
-        return $this->request->put("/groups/$id/settings/$key", [], [
+        return $this->request->put("/lots/$id/settings/$key", [], [
             'value' => $value,
         ]);
     }
@@ -81,7 +78,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function deleteSettings($id, $key)
     {
-        return $this->request->delete("/groups/$id/settings/$key");
+        return $this->request->delete("/lots/$id/settings/$key");
     }
 
     /**
@@ -91,27 +88,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function getMembers($id)
     {
-        return $this->request->get("/groups/$id/members");
-    }
-
-    /**
-     * @param $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFollowers($id)
-    {
-        return $this->request->get("/groups/$id/followers");
-    }
-
-    /**
-     * @param $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getRecommendations($id)
-    {
-        return $this->request->get("/groups/$id/recommendations");
+        return $this->request->get("/lots/$id/members");
     }
 
     /**
@@ -121,6 +98,6 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      */
     public function getActivity($id)
     {
-        return $this->request->get("/groups/$id/activity");
+        return $this->request->get("/lots/$id/activity");
     }
 }

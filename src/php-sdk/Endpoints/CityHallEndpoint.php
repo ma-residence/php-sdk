@@ -83,4 +83,44 @@ class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, Se
     {
         return $this->request->delete("/city-halls/$id/settings/$key");
     }
+
+    /**
+     * @param $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getMembers($id)
+    {
+        return $this->request->get("/city-halls/$id/members");
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getFollowers($id)
+    {
+        return $this->request->get("/city-halls/$id/followers");
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getRecommendations($id)
+    {
+        return $this->request->get("/city-halls/$id/recommendations");
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getActivity($id)
+    {
+        return $this->request->get("/city-halls/$id/activity");
+    }
 }

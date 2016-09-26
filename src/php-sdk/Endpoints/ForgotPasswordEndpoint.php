@@ -2,7 +2,7 @@
 
 namespace MR\SDK\Endpoints;
 
-class ForgotPasswordEndPoint extends Endpoint
+class ForgotPasswordEndpoint extends Endpoint
 {
     public function postRequest(array $data)
     {

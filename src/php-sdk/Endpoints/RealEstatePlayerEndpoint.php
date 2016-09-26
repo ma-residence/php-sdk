@@ -2,14 +2,14 @@
 
 namespace MR\SDK\Endpoints;
 
-class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
+class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
      * {@inheritdoc}
      */
     public function all($page = 1, $perPage = 20)
     {
-        return $this->request->get('/associations', [
+        return $this->request->get('/real-estate-players', [
             'page' => $page,
             'perPage' => $perPage,
         ]);
@@ -20,7 +20,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function get($id)
     {
-        return $this->request->get('/associations/'.$id);
+        return $this->request->get('/real-estate-players/'.$id);
     }
 
     /**
@@ -28,7 +28,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function post(array $data)
     {
-        return $this->request->post('/associations', [], $data);
+        return $this->request->post('/real-estate-players', [], $data);
     }
 
     /**
@@ -36,7 +36,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function put($id, array $data)
     {
-        return $this->request->put('/associations/'.$id, [], $data);
+        return $this->request->put('/real-estate-players/'.$id, [], $data);
     }
 
     /**
@@ -44,7 +44,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function patch($id, array $data)
     {
-        return $this->request->patch('/associations/'.$id, [], $data);
+        return $this->request->patch('/real-estate-players/'.$id, [], $data);
     }
 
     /**
@@ -52,7 +52,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function delete($id)
     {
-        return $this->request->delete('/associations/'.$id);
+        return $this->request->delete('/real-estate-players/'.$id);
     }
 
     /**
@@ -60,7 +60,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function postSettings($id, $key, $value)
     {
-        return $this->request->post("/associations/$id/settings", [], [
+        return $this->request->post("/real-estate-players/$id/settings", [], [
             'key' => $key,
             'value' => $value,
         ]);
@@ -71,7 +71,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function putSettings($id, $key, $value)
     {
-        return $this->request->put("/associations/$id/settings/$key", [], [
+        return $this->request->put("/real-estate-players/$id/settings/$key", [], [
             'value' => $value,
         ]);
     }
@@ -81,7 +81,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function deleteSettings($id, $key)
     {
-        return $this->request->delete("/associations/$id/settings/$key");
+        return $this->request->delete("/real-estate-players/$id/settings/$key");
     }
 
     /**
@@ -91,7 +91,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function getMembers($id)
     {
-        return $this->request->get("/associations/$id/members");
+        return $this->request->get("/real-estate-players/$id/members");
     }
 
     /**
@@ -101,7 +101,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function getFollowers($id)
     {
-        return $this->request->get("/associations/$id/followers");
+        return $this->request->get("/real-estate-players/$id/followers");
     }
 
     /**
@@ -111,7 +111,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function getRecommendations($id)
     {
-        return $this->request->get("/associations/$id/recommendations");
+        return $this->request->get("/real-estate-players/$id/recommendations");
     }
 
     /**
@@ -121,6 +121,6 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      */
     public function getActivity($id)
     {
-        return $this->request->get("/associations/$id/activity");
+        return $this->request->get("/real-estate-players/$id/activity");
     }
 }
