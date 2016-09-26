@@ -4,6 +4,8 @@ namespace MR\SDK\Auth;
 
 use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
+use MR\SDK\TokenStorage\InMemoryTokenStorage;
+use MR\SDK\TokenStorage\TokenStorageInterface;
 
 class OAuth
 {
@@ -45,20 +47,29 @@ class OAuth
     private $client;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $storage;
+
+    /**
      * @param Client $client
      * @param string $clientId
      * @param string $clientSecret
+     * @param TokenStorageInterface $storage
      */
-    public function __construct(Client $client, $clientId, $clientSecret)
+    public function __construct(Client $client, $clientId, $clientSecret, TokenStorageInterface $storage = null)
     {
         $this->client = $client;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+        $this->storage = $storage ?: new InMemoryTokenStorage();
     }
 
     /**
-     * @param string $email
-     * @param string $password
+     * @param $email
+     * @param $password
+     * @return array
+     * @throws OAuthException
      */
     public function loginWithCredentials($email, $password)
     {
@@ -69,8 +80,10 @@ class OAuth
     }
 
     /**
-     * @param string $type
-     * @param string $token
+     * @param $type
+     * @param $token
+     * @return array
+     * @throws OAuthException
      */
     public function loginWithExternalToken($type, $token)
     {
@@ -88,6 +101,9 @@ class OAuth
         return $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
+    /**
+     * Logout.
+     */
     public function logout()
     {
         $this->accessToken = null;
@@ -169,20 +185,9 @@ class OAuth
      */
     private function requestAccessToken($grant, array $options = [])
     {
-        $response = $this->client->request()->get(self::TOKEN_ENDPOINT, array_merge([
-            'grant_type' => $grant,
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
-        ], $options));
-
-        if ($response->getStatusCode() !== 200) {
-            throw new OAuthException($response);
-        }
+        $data = $this->doRequestAccessToken($grant, $options);
 
         $now = new \DateTime();
-
-        $data = json_decode($response->getContent(), true);
-
         $this->accessToken = array_key_exists('access_token', $data) ? $data['access_token'] : null;
         $this->refreshToken = array_key_exists('refresh_token', $data) ? $data['refresh_token'] : null;
         $this->accessTokenLifetime = array_key_exists('expires_in', $data)
@@ -194,5 +199,40 @@ class OAuth
             'refreshToken' => $this->refreshToken,
             'accessTokenLifetime' => $this->accessTokenLifetime,
         ];
+    }
+
+    /**
+     * @param $grant
+     * @param array $options
+     *
+     * @return mixed|null
+     *
+     * @throws OAuthException
+     */
+    private function doRequestAccessToken($grant, array $options)
+    {
+        $parameters = array_merge([
+            'grant_type' => $grant,
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ], $options);
+
+        $key = md5(json_encode($parameters));
+
+        if (null !== $data = $this->storage->get($key)) {
+            return json_decode($data, true);
+        }
+
+        $response = $this->client->request()->get(self::TOKEN_ENDPOINT, $parameters);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new OAuthException($response);
+        }
+
+        $data = json_decode($response->getContent(), true);
+
+        $this->storage->set($key, $response->getContent(), array_key_exists('expires_in', $data) ? $data['expires_in'] : 3600);
+
+        return $data;
     }
 }

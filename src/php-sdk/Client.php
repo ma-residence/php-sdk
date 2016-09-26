@@ -126,7 +126,7 @@ class Client
     }
 
     /**
-     * @return Endpoints\MeEndpoint
+     * @return Endpoints\MemberOfEndpoint
      */
     public function members()
     {
@@ -230,9 +230,10 @@ class Client
     }
 
     /**
+     * @param $type
      * @return Endpoints\TransactionEndpoint
      */
-    public function publications($type)
+    public function endpoints($type)
     {
         if (method_exists($this, $type)) {
             return call_user_func_array([$this, $type], []);
@@ -243,7 +244,7 @@ class Client
             return call_user_func_array([$this, $type], []);
         }
 
-        throw new \InvalidArgumentException("Unknown publication type $type");
+        throw new \InvalidArgumentException("Unknown endpoint type $type");
     }
 
     /**
