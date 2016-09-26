@@ -9,7 +9,7 @@ class OAuth
 {
     const TOKEN_ENDPOINT = '/oauth/v2/token';
 
-    const GRANT_REFRESH = 'refresh';
+    const GRANT_REFRESH = 'refresh_token';
     const GRANT_PASSWORD = 'password';
     const GRANT_EXTERNAL = 'urn:external';
     const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
