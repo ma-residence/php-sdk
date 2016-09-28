@@ -83,28 +83,4 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     {
         return $this->request->delete("/users/$id/settings/$key");
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function postEmails($id, $data)
-    {
-        return $this->request->post("/users/$id/emails", [], $data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function putEmails($id, $email, $data)
-    {
-        return $this->request->put("/users/$id/emails/$email", [], $data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteEmails($id, $email)
-    {
-        return $this->request->delete("/users/$id/emails/$email");
-    }
 }
