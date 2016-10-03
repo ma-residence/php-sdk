@@ -22,6 +22,11 @@ class Client
      */
     private $cachedEndpoints;
 
+    /**
+     * @param $host
+     * @param $clientId
+     * @param $clientSecret
+     */
     public function __construct($host, $clientId, $clientSecret)
     {
         $this->auth = new OAuth($this, $clientId, $clientSecret);
@@ -235,6 +240,14 @@ class Client
     public function notifications()
     {
         return $this->getEndpoint('notifications', Endpoints\NotificationEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\MediaEndpoint
+     */
+    public function widget()
+    {
+        return $this->getEndpoint('widget', Endpoints\WidgetEndpoint::class);
     }
 
     /**

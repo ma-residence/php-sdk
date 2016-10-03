@@ -11,6 +11,9 @@ abstract class Endpoint
      */
     protected $request;
 
+    /**
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->request = $request;

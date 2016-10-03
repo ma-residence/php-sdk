@@ -5,7 +5,9 @@ namespace MR\SDK\Endpoints;
 class LotEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
-     * {@inheritdoc}
+     * @param int $page
+     * @param int $perPage
+     * @throws \Exception
      */
     public function all($page = 1, $perPage = 20)
     {
@@ -13,7 +15,8 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @return \MR\SDK\Transport\Response
      */
     public function get($id)
     {
@@ -21,7 +24,8 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $data
+     * @return \MR\SDK\Transport\Response
      */
     public function post(array $data)
     {
@@ -29,7 +33,9 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @param array $data
+     * @return \MR\SDK\Transport\Response
      */
     public function put($id, array $data)
     {
@@ -37,7 +43,9 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @param array $data
+     * @return \MR\SDK\Transport\Response
      */
     public function patch($id, array $data)
     {
@@ -45,7 +53,8 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @return \MR\SDK\Transport\Response
      */
     public function delete($id)
     {
@@ -53,7 +62,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @param string $key
+     * @param string $value
+     * @return \MR\SDK\Transport\Response
      */
     public function postSettings($id, $key, $value)
     {
@@ -64,7 +76,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @param string $key
+     * @param string $value
+     * @return \MR\SDK\Transport\Response
      */
     public function putSettings($id, $key, $value)
     {
@@ -74,7 +89,9 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $id
+     * @param string $key
+     * @return \MR\SDK\Transport\Response
      */
     public function deleteSettings($id, $key)
     {
