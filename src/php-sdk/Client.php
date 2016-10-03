@@ -230,7 +230,7 @@ class Client
     }
 
     /**
-     * @return Endpoints\MediaEndpoint
+     * @return Endpoints\NotificationEndpoint
      */
     public function notifications()
     {
