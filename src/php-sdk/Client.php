@@ -245,9 +245,9 @@ class Client
     /**
      * @return Endpoints\MediaEndpoint
      */
-    public function widget()
+    public function widgets()
     {
-        return $this->getEndpoint('widget', Endpoints\WidgetEndpoint::class);
+        return $this->getEndpoint('widgets', Endpoints\WidgetEndpoint::class);
     }
 
     /**

@@ -12,7 +12,7 @@ class WidgetEndpoint extends Endpoint
      */
     public function all($page = 1, $perPage = 20, array $zipCodes = [])
     {
-        return $this->request->get('/widget/activity', [
+        return $this->request->get('/widgets/activity', [
             'page' => $page,
             'perPage' => $perPage,
             'zipCodes' => $zipCodes
