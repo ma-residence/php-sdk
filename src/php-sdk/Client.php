@@ -50,7 +50,7 @@ class Client
      */
     public function forgetPassword()
     {
-        return $this->getEndpoint('forget_password', Endpoints\ForgotPasswordEndPoint::class);
+        return $this->getEndpoint('forget_password', Endpoints\ForgotPasswordEndpoint::class);
     }
 
     /**
@@ -227,6 +227,14 @@ class Client
     public function medias()
     {
         return $this->getEndpoint('medias', Endpoints\MediaEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\MediaEndpoint
+     */
+    public function notifications()
+    {
+        return $this->getEndpoint('notifications', Endpoints\NotificationEndpoint::class);
     }
 
     /**
