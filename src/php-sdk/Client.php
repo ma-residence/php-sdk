@@ -243,7 +243,7 @@ class Client
     }
 
     /**
-     * @return Endpoints\MediaEndpoint
+     * @return Endpoints\WidgetEndpoint
      */
     public function widgets()
     {
@@ -251,11 +251,19 @@ class Client
     }
 
     /**
-     * @return Endpoints\MediaEndpoint
+     * @return Endpoints\PublicationEndpoint
      */
     public function publications()
     {
         return $this->getEndpoint('publications', Endpoints\PublicationEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\ProfileEndpoint
+     */
+    public function profiles()
+    {
+        return $this->getEndpoint('profiles', Endpoints\ProfileEndpoint::class);
     }
 
     /**
