@@ -251,6 +251,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\MediaEndpoint
+     */
+    public function publications()
+    {
+        return $this->getEndpoint('publications', Endpoints\PublicationEndpoint::class);
+    }
+
+    /**
      * @param $type
      * @return Endpoints\TransactionEndpoint
      */
