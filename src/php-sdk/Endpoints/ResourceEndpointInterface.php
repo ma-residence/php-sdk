@@ -6,11 +6,11 @@ interface ResourceEndpointInterface
 {
     /**
      * @param int $page
-     * @param int $perPage
+     * @param int $per_page
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function all($page = 1, $perPage = 20);
+    public function all($page = 1, $per_page = 20);
 
     /**
      * @param string $id

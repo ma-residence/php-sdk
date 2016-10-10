@@ -6,10 +6,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
 {
     /**
      * @param int $page
-     * @param int $perPage
+     * @param int $per_page
      * @throws \Exception
      */
-    public function all($page = 1, $perPage = 20)
+    public function all($page = 1, $per_page = 20)
     {
         throw new \Exception('Not Implemented Yet');
     }
