@@ -5,11 +5,11 @@ namespace MR\SDK\Endpoints;
 class ProfileEndpoint extends Endpoint
 {
     /**
-     * @param string $slug
+     * @param string $id
      * @return \MR\SDK\Transport\Response
      */
-    public function get($slug)
+    public function get($id)
     {
-        return $this->request->get('/publications/'.$slug);
+        return $this->request->get('/profiles/'.$id);
     }
 }
