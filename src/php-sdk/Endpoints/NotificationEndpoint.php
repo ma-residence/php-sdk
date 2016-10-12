@@ -5,9 +5,10 @@ namespace MR\SDK\Endpoints;
 class NotificationEndpoint extends Endpoint
 {
     /**
-     * @param $diffusionId
-     * @param int $page
-     * @param int $per_page
+     * @param string $diffusionId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getDiffusionRecipients($diffusionId, $page = 1, $per_page = 100)
@@ -19,9 +20,10 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $sourceId
-     * @param $targetId
-     * @param $roleId
+     * @param string $sourceId
+     * @param string $targetId
+     * @param string $roleId
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getMembersOfRecipients($sourceId, $targetId, $roleId, $page = 1, $per_page = 100)
@@ -33,9 +35,10 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $userId
-     * @param int $page
-     * @param int $per_page
+     * @param string $userId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getUserRecipients($userId, $page = 1, $per_page = 100)
@@ -47,10 +50,11 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $commentId
+     * @param string $commentId
      * @param string $type
-     * @param int $page
-     * @param int $per_page
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getCommentRecipients($commentId, $type = 'author', $page = 1, $per_page = 100)
@@ -63,9 +67,10 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $shareId
-     * @param int $page
-     * @param int $per_page
+     * @param string $shareId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getShareRecipients($shareId, $page = 1, $per_page = 100)
@@ -77,9 +82,10 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $recommendationId
-     * @param int $page
-     * @param int $per_page
+     * @param string $recommendationId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getRecommendationRecipients($recommendationId, $page = 1, $per_page = 100)
@@ -91,10 +97,11 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $targetType
-     * @param $targetId
-     * @param int $page
-     * @param int $per_page
+     * @param string $targetType
+     * @param string $targetId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getParticipateRecipients($targetType, $targetId, $page = 1, $per_page = 100)
@@ -106,10 +113,11 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $targetType
-     * @param $targetId
-     * @param int $page
-     * @param int $per_page
+     * @param string $targetType
+     * @param string $targetId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getLikeRecipients($targetType, $targetId, $page = 1, $per_page = 100)
@@ -121,10 +129,11 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $targetType
-     * @param $targetId
-     * @param int $page
-     * @param int $per_page
+     * @param string $targetType
+     * @param string $targetId
+     * @param int    $page
+     * @param int    $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowRecipients($targetType, $targetId, $page = 1, $per_page = 100)

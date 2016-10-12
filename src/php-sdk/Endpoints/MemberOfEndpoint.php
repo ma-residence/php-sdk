@@ -37,25 +37,16 @@ class MemberOfEndpoint extends Endpoint
      */
     public function createFormData($sourceId, $targetId, array $roleIds = [])
     {
-        $data = [
+        return [
             'source' => [
                 'id' => $sourceId,
             ],
             'target' => [
                 'id' => $targetId,
             ],
-            'roles' => null,
+            'roles' => array_map(function ($roleId) {
+                return ['id' => $roleId];
+            }, $roleIds),
         ];
-
-        if (!empty($roleIds)) {
-            $data['roles'] = [];
-            foreach ($roleIds as $roleId) {
-                $data['roles'][] = [
-                    'id' => $roleId,
-                ];
-            }
-        }
-
-        return $data;
     }
 }

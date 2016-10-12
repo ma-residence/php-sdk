@@ -52,9 +52,9 @@ class OAuth
     private $storage;
 
     /**
-     * @param Client $client
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param Client                $client
+     * @param string                $clientId
+     * @param string                $clientSecret
      * @param TokenStorageInterface $storage
      */
     public function __construct(Client $client, $clientId, $clientSecret, TokenStorageInterface $storage = null)
@@ -68,7 +68,9 @@ class OAuth
     /**
      * @param $email
      * @param $password
+     *
      * @return array
+     *
      * @throws OAuthException
      */
     public function loginWithCredentials($email, $password)
@@ -82,7 +84,9 @@ class OAuth
     /**
      * @param $type
      * @param $token
+     *
      * @return array
+     *
      * @throws OAuthException
      */
     public function loginWithExternalToken($type, $token)

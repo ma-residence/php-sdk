@@ -13,6 +13,7 @@ class FollowEndpoint extends Endpoint
     {
         return $this->request->post('/follows', [], $data);
     }
+
     /**
      * @param array $data
      *

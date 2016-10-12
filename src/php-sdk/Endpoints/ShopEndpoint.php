@@ -7,6 +7,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     /**
      * @param int $page
      * @param int $per_page
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function all($page = 1, $per_page = 20)
@@ -19,6 +20,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function get($id)
@@ -28,6 +30,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param array $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function post(array $data)
@@ -37,7 +40,8 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function put($id, array $data)
@@ -47,7 +51,8 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function patch($id, array $data)
@@ -57,6 +62,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function delete($id)
@@ -68,6 +74,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      * @param string $id
      * @param string $key
      * @param string $value
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function postSettings($id, $key, $value)
@@ -82,6 +89,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      * @param string $id
      * @param string $key
      * @param string $value
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function putSettings($id, $key, $value)
@@ -94,6 +102,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     /**
      * @param string $id
      * @param string $key
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function deleteSettings($id, $key)
@@ -102,7 +111,8 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param $id
+     * @param string $id
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getMembers($id)
@@ -111,7 +121,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -121,7 +131,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -131,7 +141,7 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */

@@ -104,6 +104,7 @@ class Request
         if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
             $parameters['access_token'] = $accessToken;
         }
+
         try {
             $response = $this->httpClient->request($method, $endpoint, [
                 'query' => $parameters,

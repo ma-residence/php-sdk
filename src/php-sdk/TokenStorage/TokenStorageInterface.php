@@ -5,20 +5,20 @@ namespace MR\SDK\TokenStorage;
 interface TokenStorageInterface
 {
     /**
-     * Set token to storage
+     * Set token to storage.
      *
-     * @param $key
-     * @param $token
-     * @param $ttl
+     * @param string $key
+     * @param string $token
+     * @param int    $ttl
      *
      * @return mixed
      */
     public function set($key, $token, $ttl);
 
     /**
-     * Get token from storage
+     * Get token from storage.
      *
-     * @param $key
+     * @param string $key
      *
      * @return mixed
      */

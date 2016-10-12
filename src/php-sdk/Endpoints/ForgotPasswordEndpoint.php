@@ -6,6 +6,7 @@ class ForgotPasswordEndpoint extends Endpoint
 {
     /**
      * @param array $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function postRequest(array $data)
@@ -14,8 +15,9 @@ class ForgotPasswordEndpoint extends Endpoint
     }
 
     /**
-     * @param $token
-     * @param array $data
+     * @param string $token
+     * @param array  $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getReset($token, array $data)
@@ -24,8 +26,9 @@ class ForgotPasswordEndpoint extends Endpoint
     }
 
     /**
-     * @param $token
-     * @param array $data
+     * @param string $token
+     * @param array  $data
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function postReset($token, array $data)

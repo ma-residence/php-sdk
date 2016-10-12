@@ -20,9 +20,10 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * @param $key
-     * @param $token
-     * @param int $ttl
+     * @param string $key
+     * @param string $token
+     * @param int    $ttl
+     *
      * @return mixed
      */
     public function set($key, $token, $ttl = 0)
@@ -34,7 +35,8 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function get($key)

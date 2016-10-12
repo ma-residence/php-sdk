@@ -87,7 +87,7 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $type
+     * @param string $type
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -105,7 +105,7 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $type
+     * @param string $type
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -123,8 +123,8 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param string $value
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -137,8 +137,8 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param string $value
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -150,7 +150,7 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return \MR\SDK\Transport\Response
      */
