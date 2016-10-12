@@ -23,9 +23,9 @@ class Client
     private $cachedEndpoints;
 
     /**
-     * @param $host
-     * @param $clientId
-     * @param $clientSecret
+     * @param string $host
+     * @param string $clientId
+     * @param string $clientSecret
      */
     public function __construct($host, $clientId, $clientSecret)
     {
@@ -267,7 +267,8 @@ class Client
     }
 
     /**
-     * @param $type
+     * @param string $type
+     *
      * @return Endpoints\TransactionEndpoint
      */
     public function endpoints($type)

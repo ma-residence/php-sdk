@@ -5,7 +5,7 @@ namespace MR\SDK\Endpoints;
 class MediaEndpoint extends Endpoint
 {
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -15,7 +15,7 @@ class MediaEndpoint extends Endpoint
     }
 
     /**
-     * @param $resource
+     * @param mixed $resource
      *
      * @return mixed
      */
@@ -29,7 +29,7 @@ class MediaEndpoint extends Endpoint
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */

@@ -5,7 +5,7 @@ namespace MR\SDK\Endpoints;
 class TradeEndpoint extends Endpoint
 {
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -25,8 +25,8 @@ class TradeEndpoint extends Endpoint
     }
 
     /**
-     * @param $id
-     * @param array $data
+     * @param string $id
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -36,8 +36,8 @@ class TradeEndpoint extends Endpoint
     }
 
     /**
-     * @param $id
-     * @param array $data
+     * @param string $id
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -47,7 +47,7 @@ class TradeEndpoint extends Endpoint
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
