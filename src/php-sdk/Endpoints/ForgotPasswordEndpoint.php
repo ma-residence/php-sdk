@@ -33,6 +33,6 @@ class ForgotPasswordEndpoint extends Endpoint
      */
     public function postReset($token, array $data)
     {
-        return $this->request->patch('/forgot-password/reset/'.$token, [], $data);
+        return $this->request->post('/forgot-password/reset/'.$token, [], $data);
     }
 }
