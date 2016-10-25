@@ -128,35 +128,11 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postSettings($key, $value)
-    {
-        return $this->request->post('/me/settings', [], [
-            'key' => $key,
-            'value' => $value,
-        ]);
-    }
-
-    /**
-     * @param string $key
-     * @param string $value
-     *
-     * @return \MR\SDK\Transport\Response
-     */
     public function putSettings($key, $value)
     {
         return $this->request->put("/me/settings/$key", [], [
             'value' => $value,
         ]);
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function deleteSettings($key)
-    {
-        return $this->request->delete("/me/settings/$key");
     }
 
     /**

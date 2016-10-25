@@ -77,37 +77,11 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postSettings($id, $key, $value)
-    {
-        return $this->request->post("/associations/$id/settings", [], [
-            'key' => $key,
-            'value' => $value,
-        ]);
-    }
-
-    /**
-     * @param string $id
-     * @param string $key
-     * @param string $value
-     *
-     * @return \MR\SDK\Transport\Response
-     */
     public function putSettings($id, $key, $value)
     {
         return $this->request->put("/associations/$id/settings/$key", [], [
             'value' => $value,
         ]);
-    }
-
-    /**
-     * @param string $id
-     * @param string $key
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function deleteSettings($id, $key)
-    {
-        return $this->request->delete("/associations/$id/settings/$key");
     }
 
     /**
