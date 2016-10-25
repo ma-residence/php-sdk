@@ -77,37 +77,11 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postSettings($id, $key, $value)
-    {
-        return $this->request->post("/groups/$id/settings", [], [
-            'key' => $key,
-            'value' => $value,
-        ]);
-    }
-
-    /**
-     * @param string $id
-     * @param string $key
-     * @param string $value
-     *
-     * @return \MR\SDK\Transport\Response
-     */
     public function putSettings($id, $key, $value)
     {
         return $this->request->put("/groups/$id/settings/$key", [], [
             'value' => $value,
         ]);
-    }
-
-    /**
-     * @param string $id
-     * @param string $key
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function deleteSettings($id, $key)
-    {
-        return $this->request->delete("/groups/$id/settings/$key");
     }
 
     /**
