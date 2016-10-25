@@ -158,4 +158,20 @@ class MeEndpoint extends Endpoint
     {
         return $this->request->delete("/me/settings/$key");
     }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getRecommendations()
+    {
+        return $this->request->get('/me/recommendations');
+    }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getDevices()
+    {
+        return $this->request->get('/me/devices');
+    }
 }
