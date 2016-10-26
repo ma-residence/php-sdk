@@ -99,15 +99,19 @@ class Request
      *
      * @return Response
      */
-    private function execute($method, $endpoint, array $parameters = [], array $data = [], array $options = [])
+    public function execute($method, $endpoint, array $parameters = [], array $data = [], array $options = [])
     {
-        if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
-            $parameters['access_token'] = $accessToken;
+        $headers = [];
+        if (!(isset($options['anonymous']) && $options['anonymous'])) {
+            if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
+                $headers['Authorization'] = "Bearer $accessToken";
+            }
         }
 
         try {
             $response = $this->httpClient->request($method, $endpoint, [
                 'query' => $parameters,
+                'headers' => $headers,
                 'json' => [
                     'data' => $data,
                 ],
