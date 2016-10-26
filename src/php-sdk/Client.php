@@ -139,6 +139,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\TopicEndpoint
+     */
+    public function topics()
+    {
+        return $this->getEndpoint('topics', Endpoints\TopicEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\LikeEndpoint
      */
     public function likes()
