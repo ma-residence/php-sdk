@@ -163,7 +163,7 @@ class OAuth
         }
 
         if (!$this->checkLifetime()) {
-            return $this->requestAccessToken(self::GRANT_REFRESH, [
+            $this->requestAccessToken(self::GRANT_REFRESH, [
                 'refresh_token' => $this->refreshToken,
             ]);
         }
@@ -174,7 +174,7 @@ class OAuth
     /**
      * @return bool
      */
-    private function checkLifetime()
+    public function checkLifetime()
     {
         return new \DateTime() < $this->accessTokenLifetime;
     }
@@ -227,7 +227,9 @@ class OAuth
             return json_decode($data, true);
         }
 
-        $response = $this->client->request()->get(self::TOKEN_ENDPOINT, $parameters);
+        $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $parameters, [], [
+            'anonymous' => true,
+        ]);
 
         if ($response->getStatusCode() !== 200) {
             throw new OAuthException($response);
