@@ -83,4 +83,16 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
             'value' => $value,
         ]);
     }
+
+    /**
+     * @param string $id
+     * @param string $type
+     * @param string $targetId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getMemberOf($id, $type, $targetId)
+    {
+        return $this->request->get("/users/$id/member-of/$type/$targetId");
+    }
 }
