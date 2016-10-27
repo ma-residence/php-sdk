@@ -32,6 +32,8 @@ And don't forget to run:
 
 ## Usage
 
+To user the client, you need to instantiate a `Client` with your clientId, clientSecret of your application and host of the API.
+
 ```php
 <?php
 
@@ -42,6 +44,16 @@ $clientId = 'CLIENT_ID';
 $clientSecret = 'CLIENT_SECRET';
 
 $mrClient = new Client($host, $clientId, $clientSecret);
+```
+By default, the `Client` will store tokens in the memory.
+But if you need to implement a custom token storage, you can use `TokenStorageInterface` and assigned it to the `Client`.
+
+```php
+<?php
+
+$storage = new MyTokenStorage();
+
+$mrClient = new Client($host, $clientId, $clientSecret, $storage);
 ```
 
 After you have initialized the class, you can login with an email and password :

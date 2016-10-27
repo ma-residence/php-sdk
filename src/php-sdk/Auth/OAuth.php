@@ -29,17 +29,7 @@ class OAuth
     /**
      * @var string
      */
-    private $accessToken;
-
-    /**
-     * @var string
-     */
-    private $accessTokenLifetime;
-
-    /**
-     * @var string
-     */
-    private $refreshToken;
+    private $credentialsKey;
 
     /**
      * @var Client
@@ -75,7 +65,7 @@ class OAuth
      */
     public function loginWithCredentials($email, $password)
     {
-        return $this->requestAccessToken(self::GRANT_PASSWORD, [
+        $this->requestAccessToken(self::GRANT_PASSWORD, [
             'username' => $email,
             'password' => $password,
         ]);
@@ -91,7 +81,7 @@ class OAuth
      */
     public function loginWithExternalToken($type, $token)
     {
-        return $this->requestAccessToken(self::GRANT_EXTERNAL, [
+        $this->requestAccessToken(self::GRANT_EXTERNAL, [
             'type' => $type,
             'token' => $token,
         ]);
@@ -102,7 +92,7 @@ class OAuth
      */
     public function login()
     {
-        return $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
+        $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
     /**
@@ -110,45 +100,44 @@ class OAuth
      */
     public function logout()
     {
-        $this->accessToken = null;
-        $this->accessTokenLifetime = null;
-        $this->refreshToken = null;
+        $this->storage->remove($this->credentialsKey);
+        $this->credentialsKey = null;
     }
 
     /**
-     * @param $accessToken
-     *
-     * @return $this
+     * @return string
      */
-    public function setAccessToken($accessToken)
+    public function getCredentialsKey()
     {
-        $this->accessToken = $accessToken;
-
-        return $this;
+        return $this->credentialsKey;
     }
 
     /**
-     * @param mixed $accessTokenLifetime
-     *
-     * @return $this
+     * @param string $credentialsKey
      */
-    public function setAccessTokenLifetime($accessTokenLifetime)
+    public function setCredentialsKey($credentialsKey)
     {
-        $this->accessTokenLifetime = $accessTokenLifetime;
-
-        return $this;
+        $this->credentialsKey = $credentialsKey;
     }
 
     /**
-     * @param $refreshToken
-     *
-     * @return $this
+     * @return array
      */
-    public function setRefreshToken($refreshToken)
+    public function getToken()
     {
-        $this->refreshToken = $refreshToken;
+        if ($this->hasToken()) {
+            return $this->storage->get($this->credentialsKey);
+        }
 
-        return $this;
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasToken()
+    {
+        return ($this->credentialsKey !== null || $this->storage->has($this->credentialsKey));
     }
 
     /**
@@ -158,87 +147,65 @@ class OAuth
      */
     public function getAccessToken()
     {
-        if ($this->accessToken === null) {
+        if (!$this->hasToken()) {
             return null;
         }
 
         if (!$this->checkLifetime()) {
             $this->requestAccessToken(self::GRANT_REFRESH, [
-                'refresh_token' => $this->refreshToken,
+                'refresh_token' => $this->getToken()['refresh_token'],
             ]);
         }
 
-        return $this->accessToken;
+        return $this->getToken()['access_token'];
     }
 
     /**
      * @return bool
+     *
+     * @throws OAuthException
      */
     public function checkLifetime()
     {
-        return new \DateTime() < $this->accessTokenLifetime;
+        if (!$this->hasToken()) {
+            throw new \LogicException('No token is registered.');
+        }
+
+        return new \DateTime() < (new \DateTime())->modify("+ {$this->getToken()['lifetime']} seconds");
     }
 
     /**
      * @param string $grant
-     * @param array  $options
+     * @param array  $credentials
      *
      * @return array
      *
      * @throws OAuthException
      */
-    private function requestAccessToken($grant, array $options = [])
+    private function requestAccessToken($grant, array $credentials = [])
     {
-        $data = $this->doRequestAccessToken($grant, $options);
-
-        $now = new \DateTime();
-        $this->accessToken = array_key_exists('access_token', $data) ? $data['access_token'] : null;
-        $this->refreshToken = array_key_exists('refresh_token', $data) ? $data['refresh_token'] : null;
-        $this->accessTokenLifetime = array_key_exists('expires_in', $data)
-            ? $now->modify("+ {$data['expires_in']} seconds")
-            : null;
-
-        return [
-            'accessToken' => $this->accessToken,
-            'refreshToken' => $this->refreshToken,
-            'accessTokenLifetime' => $this->accessTokenLifetime,
-        ];
-    }
-
-    /**
-     * @param $grant
-     * @param array $options
-     *
-     * @return mixed|null
-     *
-     * @throws OAuthException
-     */
-    private function doRequestAccessToken($grant, array $options)
-    {
-        $parameters = array_merge([
+        $credentials = array_merge([
             'grant_type' => $grant,
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
-        ], $options);
+        ], $credentials);
 
-        $key = md5(json_encode($parameters));
+        $credentialsKey = md5(json_encode($credentials));
 
-        if (null !== $data = $this->storage->get($key)) {
-            return json_decode($data, true);
-        }
-
-        $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $parameters, [], [
+        $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $credentials, [], [
             'anonymous' => true,
         ]);
 
         if ($response->getStatusCode() !== 200) {
             throw new OAuthException($response);
         }
-
+        $this->credentialsKey = $credentialsKey;
         $data = json_decode($response->getContent(), true);
 
-        $this->storage->set($key, $response->getContent(), array_key_exists('expires_in', $data) ? $data['expires_in'] : 3600);
-
-        return $data;
+        $this->storage->save($this->credentialsKey, [
+            'access_token' => $data['access_token'],
+            'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
+            'lifetime' => isset($data['expires_in']) ? $data['expires_in'] : null,
+        ]);
     }
 }
