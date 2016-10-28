@@ -5,14 +5,14 @@ namespace MR\SDK\TokenStorage;
 class InMemoryTokenStorage implements TokenStorageInterface
 {
     /**
-     * @var array
+     * @var array[]
      */
     private $store = [];
 
     /**
      * {@inheritdoc}
      */
-    public function set($key, $token, $ttl = 0)
+    public function save($key, array $token)
     {
         $this->store[$key] = $token;
 
@@ -24,6 +24,28 @@ class InMemoryTokenStorage implements TokenStorageInterface
      */
     public function get($key)
     {
-        return isset($this->store[$key]) ? $this->store[$key] : null;
+        return $this->has($key) ? $this->store[$key] : null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($key)
+    {
+        return isset($this->store[$key]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        if ($this->has($key)) {
+            unset($this->store[$key]);
+
+            return true;
+        }
+
+        return false;
     }
 }

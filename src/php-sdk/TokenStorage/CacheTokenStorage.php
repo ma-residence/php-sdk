@@ -20,29 +20,40 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * @param string $key
-     * @param string $token
-     * @param int    $ttl
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
-    public function set($key, $token, $ttl = 0)
+    public function save($key, array $token)
     {
         $item = $this->cache->getItem($key);
-        $item->set($token);
+        $item->set(serialize($token));
+        $item->expiresAfter($token['lifetime']);
 
         return $this->cache->save($item);
     }
 
     /**
-     * @param string $key
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
     public function get($key)
     {
         $item = $this->cache->getItem($key);
 
-        return $item->get();
+        return $item->isHit() ? $item->get() : false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function has($key)
+    {
+        return $this->cache->getItem($key)->isHit();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function remove($key)
+    {
+        return $this->cache->deleteItem($key);
     }
 }

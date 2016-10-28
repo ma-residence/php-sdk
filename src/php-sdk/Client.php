@@ -3,6 +3,7 @@
 namespace MR\SDK;
 
 use MR\SDK\Auth\OAuth;
+use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
 
 class Client
@@ -20,18 +21,18 @@ class Client
     /**
      * @var Endpoints\Endpoint[]
      */
-    private $cachedEndpoints;
+    private $cachedEndpoints = [];
 
     /**
-     * @param string $host
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string                $host
+     * @param string                $clientId
+     * @param string                $clientSecret
+     * @param TokenStorageInterface $storage
      */
-    public function __construct($host, $clientId, $clientSecret)
+    public function __construct($host, $clientId, $clientSecret, TokenStorageInterface $storage = null)
     {
-        $this->auth = new OAuth($this, $clientId, $clientSecret);
+        $this->auth = new OAuth($this, $clientId, $clientSecret, $storage);
         $this->request = new Request($this, $host);
-        $this->cachedEndpoints = [];
     }
 
     /**
