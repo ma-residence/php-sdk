@@ -5,44 +5,46 @@ namespace MR\SDK\Endpoints;
 class MemberOfEndpoint extends Endpoint
 {
     /**
-     * @param string $sourceId
-     * @param string $targetId
-     * @param array  $roleIds
+     * @param array $source
+     * @param array $target
+     * @param array $roleIds
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post($sourceId, $targetId, array $roleIds = [])
+    public function post(array $source, array $target, array $roleIds = [])
     {
-        return $this->request->post('/members', [], $this->createFormData($sourceId, $targetId, $roleIds));
+        return $this->request->post('/members', [], $this->createFormData($source, $target, $roleIds));
     }
 
     /**
-     * @param string $sourceId
-     * @param string $targetId
-     * @param array  $roleIds
+     * @param array $source
+     * @param array $target
+     * @param array $roleIds
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($sourceId, $targetId, array $roleIds = [])
+    public function delete(array $source, array $target, array $roleIds = [])
     {
-        return $this->request->delete('/members', [], $this->createFormData($sourceId, $targetId, $roleIds));
+        return $this->request->delete('/members', [], $this->createFormData($source, $target, $roleIds));
     }
 
     /**
-     * @param string $sourceId
-     * @param string $targetId
-     * @param array  $roleIds
+     * @param array $source
+     * @param array $target
+     * @param array $roleIds
      *
      * @return array
      */
-    public function createFormData($sourceId, $targetId, array $roleIds = [])
+    public function createFormData(array $source, array $target, array $roleIds = [])
     {
         return [
             'source' => [
-                'id' => $sourceId,
+                'id' => $source['id'],
+                'model_type' => $source['model_type'],
             ],
             'target' => [
-                'id' => $targetId,
+                'id' => $target['id'],
+                'model_type' => $target['model_type'],
             ],
             'roles' => array_map(function ($roleId) {
                 return ['id' => $roleId];
