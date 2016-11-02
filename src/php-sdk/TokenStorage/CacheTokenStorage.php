@@ -38,7 +38,7 @@ class CacheTokenStorage implements TokenStorageInterface
     {
         $item = $this->cache->getItem($key);
 
-        return $item->isHit() ? $item->get() : false;
+        return $item->isHit() ? unserialize($item->get()) : false;
     }
 
     /**

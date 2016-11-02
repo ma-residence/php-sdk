@@ -137,7 +137,7 @@ class OAuth
      */
     public function hasToken()
     {
-        return ($this->credentialsKey !== null || $this->storage->has($this->credentialsKey));
+        return ($this->credentialsKey !== null && $this->storage->has($this->credentialsKey));
     }
 
     /**

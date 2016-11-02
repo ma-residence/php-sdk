@@ -19,7 +19,7 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
-     * @param string $placeId
+     * @param array $placeId
      *
      * @return \MR\SDK\Transport\Response
      */
