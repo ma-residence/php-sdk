@@ -72,6 +72,16 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings($id)
+    {
+        return $this->request->get('/shops/'.$id.'/settings');
+    }
+
+    /**
+     * @param string $id
      * @param string $key
      * @param string $value
      *

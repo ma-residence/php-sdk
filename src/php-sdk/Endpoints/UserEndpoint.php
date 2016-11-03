@@ -72,6 +72,16 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings($id)
+    {
+        return $this->request->get('/users/'.$id.'/settings');
+    }
+
+    /**
+     * @param string $id
      * @param string $key
      * @param string $value
      *

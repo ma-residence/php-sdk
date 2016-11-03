@@ -72,6 +72,16 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
 
     /**
      * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings($id)
+    {
+        return $this->request->get('/associations/'.$id.'/settings');
+    }
+
+    /**
+     * @param string $id
      * @param string $key
      * @param string $value
      *

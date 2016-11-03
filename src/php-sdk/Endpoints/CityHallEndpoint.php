@@ -72,6 +72,16 @@ class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, Se
 
     /**
      * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings($id)
+    {
+        return $this->request->get('/city-halls/'.$id.'/settings');
+    }
+
+    /**
+     * @param string $id
      * @param string $key
      * @param string $value
      *

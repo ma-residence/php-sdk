@@ -72,6 +72,16 @@ class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInter
 
     /**
      * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings($id)
+    {
+        return $this->request->get('/real-estate-players/'.$id.'/settings');
+    }
+
+    /**
+     * @param string $id
      * @param string $key
      * @param string $value
      *
