@@ -123,6 +123,14 @@ class MeEndpoint extends Endpoint
     }
 
     /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getSettings()
+    {
+        return $this->request->get('/me/settings');
+    }
+
+    /**
      * @param string $key
      * @param string $value
      *
