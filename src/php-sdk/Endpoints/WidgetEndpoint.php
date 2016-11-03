@@ -21,18 +21,17 @@ class WidgetEndpoint extends Endpoint
     }
     
     /**
-     * @param int   $page
-     * @param int   $per_page
-     * @param array $place
+     * @param int    $page
+     * @param int    $per_page
+     * @param string $place
      *
      * @return \MR\SDK\Transport\Response
      */
     public function allFromPlace($page = 1, $per_page = 20, $place)
     {
-        return $this->request->get('/widgets/activity', [
+        return $this->request->get('/widgets/activity/'.$place, [
             'page' => $page,
             'per_page' => $per_page,
-            'place' => $place,
         ]);
     }
 }
