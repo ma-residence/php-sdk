@@ -19,4 +19,20 @@ class WidgetEndpoint extends Endpoint
             'zipCodes' => $zipCodes,
         ]);
     }
+    
+    /**
+     * @param int   $page
+     * @param int   $per_page
+     * @param array $place
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function allFromPlace($page = 1, $per_page = 20, $place)
+    {
+        return $this->request->get('/widgets/activity', [
+            'page' => $page,
+            'per_page' => $per_page,
+            'place' => $place,
+        ]);
+    }
 }
