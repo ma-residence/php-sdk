@@ -148,10 +148,8 @@ class OAuth
     public function getAccessToken()
     {
         if (!$this->hasToken()) {
-            return null;
-        }
-
-        if (!$this->checkLifetime()) {
+            $this->login();
+        } else if (!$this->checkLifetime()) {
             $this->requestAccessToken(self::GRANT_REFRESH, [
                 'refresh_token' => $this->getToken()['refresh_token'],
             ]);
