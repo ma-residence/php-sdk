@@ -30,7 +30,7 @@ class FileTokenStorage implements TokenStorageInterface
      */
     public function has($key)
     {
-        return file_exists($key);
+        return file_exists("{$this->path}/{$key}");
     }
 
     /**
