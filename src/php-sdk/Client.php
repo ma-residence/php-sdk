@@ -76,6 +76,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\HallNumericEndpoint
+     */
+    public function hallNumerics()
+    {
+        return $this->getEndpoint('hall_numerics', Endpoints\HallNumericEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\ShopEndpoint
      */
     public function shops()
