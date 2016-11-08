@@ -2,7 +2,7 @@
 
 namespace MR\SDK\Endpoints;
 
-class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
+class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
 {
     /**
      * @param int $page
