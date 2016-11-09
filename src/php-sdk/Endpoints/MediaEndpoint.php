@@ -21,11 +21,11 @@ class MediaEndpoint extends Endpoint
      */
     public function post($resource)
     {
-        if (false === is_resource($resource)) {
-            throw new \InvalidArgumentException('Expecting a resource');
-        }
-
-        return $this->post('/medias', [], [], ['body' => $resource]);
+        return $this->request->post('/medias', [], [], [
+            'contentLength' => $resource->getClientSize(),
+            'contentType' => $resource->getClientMimeType(),
+            'body' => file_get_contents($resource)
+        ]);
     }
 
     /**
