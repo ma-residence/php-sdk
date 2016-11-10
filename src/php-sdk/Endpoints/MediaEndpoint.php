@@ -15,17 +15,13 @@ class MediaEndpoint extends Endpoint
     }
 
     /**
-     * @param mixed $resource
+     * @param array $data
      *
      * @return mixed
      */
-    public function post($resource)
+    public function post($data)
     {
-        return $this->request->post('/medias', [], [], [
-            'contentLength' => $resource->getClientSize(),
-            'contentType' => $resource->getClientMimeType(),
-            'body' => file_get_contents($resource)
-        ]);
+        return $this->request->post('/medias', [], $data);
     }
 
     /**
