@@ -144,11 +144,14 @@ class MeEndpoint extends Endpoint
     }
 
     /**
+     * @param null $type
      * @return \MR\SDK\Transport\Response
      */
-    public function getRecommendations()
+    public function getRecommendations($type = null)
     {
-        return $this->request->get('/me/recommendations');
+        return $this->request->get('/me/recommendations',
+            ['type' => $type]
+        );
     }
 
     /**
@@ -157,5 +160,13 @@ class MeEndpoint extends Endpoint
     public function getDevices()
     {
         return $this->request->get('/me/devices');
+    }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function postLendObject(array $data)
+    {
+        return $this->request->post('/me/lend-objects', [], $data);
     }
 }
