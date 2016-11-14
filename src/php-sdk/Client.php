@@ -260,6 +260,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\DiffusionEndpoint
+     */
+    public function diffusions()
+    {
+        return $this->getEndpoint('diffusions', Endpoints\DiffusionEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\WidgetEndpoint
      */
     public function widgets()
