@@ -105,4 +105,42 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     {
         return $this->request->get("/users/$id/member-of/$type/$targetId");
     }
+
+    /**
+     * @param $id
+     * @param $type
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getRecommendations($id, $type = null)
+    {
+        return $this->request->get("/users/$id/recommendations",
+            ['type' => $type]
+        );
+    }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getActivity($id)
+    {
+        return $this->request->get("/users/$id/activity");
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getFollows($id, $type)
+    {
+        return $this->request->get("/users/$id/follows/$type");
+    }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getFollowers($id)
+    {
+        return $this->request->get("users/$id/followers");
+    }
 }
