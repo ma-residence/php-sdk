@@ -110,4 +110,14 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     {
         return $this->request->get("/lots/$id/activity");
     }
+
+    /**
+     * @param array $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function join(array $data)
+    {
+        return $this->request->post('/lots/join', [], $data);
+    }
 }
