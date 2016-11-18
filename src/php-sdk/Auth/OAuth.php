@@ -150,9 +150,13 @@ class OAuth
         if (!$this->hasToken()) {
             $this->login();
         } else if (!$this->checkLifetime()) {
-            $this->requestAccessToken(self::GRANT_REFRESH, [
-                'refresh_token' => $this->getToken()['refresh_token'],
-            ]);
+            if ($this->getToken()['refresh_token'] === null) {
+                $this->login();
+            } else {
+                $this->requestAccessToken(self::GRANT_REFRESH, [
+                    'refresh_token' => $this->getToken()['refresh_token'],
+                ]);
+            }
         }
 
         return $this->getToken()['access_token'];
