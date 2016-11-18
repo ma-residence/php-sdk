@@ -157,6 +157,14 @@ class MeEndpoint extends Endpoint
     /**
      * @return \MR\SDK\Transport\Response
      */
+    public function getNotifications()
+    {
+        return $this->request->get('/me/notifications');
+    }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
     public function getDevices()
     {
         return $this->request->get('/me/devices');
