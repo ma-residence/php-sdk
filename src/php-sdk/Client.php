@@ -2,6 +2,7 @@
 
 namespace MR\SDK;
 
+use GuzzleHttp\HandlerStack;
 use MR\SDK\Auth\OAuth;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
@@ -24,16 +25,23 @@ class Client
     private $cachedEndpoints = [];
 
     /**
+     * @var array
+     */
+    private $handlerStack = [];
+
+    /**
      * @param string                $host
      * @param string                $clientId
      * @param string                $clientSecret
+     * @param HandlerStack          $handlerStack
      * @param TokenStorageInterface $storage
      */
-    public function __construct($host, $clientId, $clientSecret, TokenStorageInterface $storage = null)
+    public function __construct($host, $clientId, $clientSecret, TokenStorageInterface $storage = null, HandlerStack $handlerStack = null)
     {
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage);
-        $this->request = new Request($this, $host);
+        $this->request = new Request($this, $host, $handlerStack);
     }
+
 
     /**
      * @return Endpoints\MeEndpoint

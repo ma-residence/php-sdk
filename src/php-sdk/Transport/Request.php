@@ -4,6 +4,7 @@ namespace MR\SDK\Transport;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\HandlerStack;
 use MR\SDK\Client;
 
 class Request
@@ -22,12 +23,18 @@ class Request
      * @param Client $client
      * @param string $host
      */
-    public function __construct(Client $client, $host)
+    public function __construct(Client $client, $host, HandlerStack $handlerStack = null)
     {
         $this->client = $client;
-        $this->httpClient = new HttpClient([
-            'base_uri' => $host,
-        ]);
+
+        $options = ['base_uri' => $host];
+
+        if ($handlerStack) {
+            $options['handler'] = $handlerStack;
+
+        }
+
+        $this->httpClient = new HttpClient($options);
     }
 
     /**
