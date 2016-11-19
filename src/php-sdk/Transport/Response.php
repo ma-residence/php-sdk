@@ -108,4 +108,9 @@ class Response
         $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
         $this->data = isset($data['data']) ? $data['data'] : null;
     }
+
+    public function __toString()
+    {
+        return (string) $this->response->getBody();
+    }
 }
