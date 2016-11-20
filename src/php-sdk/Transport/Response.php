@@ -96,7 +96,7 @@ class Response
 
     private function decodeContent()
     {
-        $this->content = $this->response->getBody()->getContents();
+        $this->content = (string) $this->response->getBody();
 
         if ($this->response->getStatusCode() === 204 || $this->content === null || $this->content === '') {
             return;
