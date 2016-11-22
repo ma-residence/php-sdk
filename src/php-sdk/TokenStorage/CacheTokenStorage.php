@@ -26,7 +26,7 @@ class CacheTokenStorage implements TokenStorageInterface
     {
         $item = $this->cache->getItem($key);
         $item->set(serialize($token));
-        $item->expiresAfter($token['lifetime']);
+        $item->expiresAfter(5184000); // 60 days in seconds => see config.yml in API
 
         return $this->cache->save($item);
     }
