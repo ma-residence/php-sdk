@@ -109,6 +109,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     /**
      * @param $id
      * @param $type
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getRecommendations($id, $type = null)

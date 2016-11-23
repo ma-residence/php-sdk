@@ -42,7 +42,6 @@ class Client
         $this->request = new Request($this, $host, $handlerStack);
     }
 
-
     /**
      * @return Endpoints\MeEndpoint
      */

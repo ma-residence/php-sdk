@@ -19,7 +19,7 @@ class WidgetEndpoint extends Endpoint
             'zipCodes' => $zipCodes,
         ]);
     }
-    
+
     /**
      * @param int    $page
      * @param int    $per_page
