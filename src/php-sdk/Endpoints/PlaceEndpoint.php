@@ -5,9 +5,9 @@ namespace MR\SDK\Endpoints;
 class PlaceEndpoint extends Endpoint
 {
     /**
-     * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int   $page
+     * @param int   $per_page
+     * @param array $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */

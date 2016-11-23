@@ -20,7 +20,7 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function save($key, array $token)
     {
@@ -32,7 +32,7 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function get($key)
     {
@@ -42,7 +42,7 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function has($key)
     {
@@ -50,7 +50,7 @@ class CacheTokenStorage implements TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove($key)
     {

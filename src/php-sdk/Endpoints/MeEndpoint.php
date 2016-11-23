@@ -145,6 +145,7 @@ class MeEndpoint extends Endpoint
 
     /**
      * @param null $type
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getRecommendations($type = null)

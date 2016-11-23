@@ -137,7 +137,7 @@ class OAuth
      */
     public function hasToken()
     {
-        return ($this->credentialsKey !== null && $this->storage->has($this->credentialsKey));
+        return $this->credentialsKey !== null && $this->storage->has($this->credentialsKey);
     }
 
     /**
@@ -149,7 +149,7 @@ class OAuth
     {
         if (!$this->hasToken()) {
             $this->login();
-        } else if (!$this->checkLifetime()) {
+        } elseif (!$this->checkLifetime()) {
             if ($this->getToken()['refresh_token'] === null) {
                 $this->login();
             } else {

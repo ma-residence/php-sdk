@@ -31,7 +31,6 @@ class Request
 
         if ($handlerStack) {
             $options['handler'] = $handlerStack;
-
         }
 
         $this->httpClient = new HttpClient($options);
