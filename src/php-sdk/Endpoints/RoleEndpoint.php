@@ -12,7 +12,7 @@ class RoleEndpoint extends Endpoint
     public function all($type = null)
     {
         $params = $type ? ['type' => $type] : [];
-        
+
         return $this->request->get('/roles', $params);
     }
 }
