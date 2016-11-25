@@ -27,7 +27,7 @@ class WidgetEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function allFromPlace($page = 1, $per_page = 20, $place)
+    public function allFromPlace($page, $per_page, $place)
     {
         return $this->request->get('/widgets/activity/'.$place, [
             'page' => $page,

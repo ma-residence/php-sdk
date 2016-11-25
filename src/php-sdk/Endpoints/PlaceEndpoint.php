@@ -24,10 +24,13 @@ class PlaceEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMap($placeId, $radius = null)
+    public function getMap($placeId, $radius = null, $page = 1, $per_page = 20)
     {
         $params = $radius ? ['radius' => $radius] : [];
 
-        return $this->request->get('/places/'.$placeId.'/map', $params);
+        return $this->request->get('/places/'.$placeId.'/map', array_merge([
+            'page' => $page,
+            'per_page' => $per_page,
+        ], $params));
     }
 }
