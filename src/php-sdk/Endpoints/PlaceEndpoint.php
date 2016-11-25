@@ -20,11 +20,11 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
-     * @param array $placeId
+     * @param string $placeId
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMap(array $placeId, $radius = null)
+    public function getMap($placeId, $radius = null)
     {
         $params = $radius ? ['radius' => $radius] : [];
 
