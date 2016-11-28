@@ -299,6 +299,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\SitemapEndpoint
+     */
+    public function sitemap()
+    {
+        return $this->getEndpoint('sitemap', Endpoints\SitemapEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
