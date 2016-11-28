@@ -4,7 +4,6 @@ namespace MR\SDK\Endpoints;
 
 class SitemapEndpoint extends Endpoint
 {
-
     /**
      * @return \MR\SDK\Transport\Response
      */
@@ -26,6 +25,6 @@ class SitemapEndpoint extends Endpoint
         return $this->request->get($path, [
             'page' => $page,
             'per_page' => $per_page,
-        ];
+        ]);
     }
 }
