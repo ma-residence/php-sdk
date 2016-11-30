@@ -307,6 +307,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\LendObjectEndpoint
+     */
+    public function lendObjects()
+    {
+        return $this->getEndpoint('lend_objects', Endpoints\LendObjectEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
