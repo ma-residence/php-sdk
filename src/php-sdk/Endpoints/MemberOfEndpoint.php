@@ -19,6 +19,16 @@ class MemberOfEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
+    public function put(array $data)
+    {
+        return $this->request->put('/members', [], $data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
     public function delete(array $data)
     {
         return $this->request->delete('/members', [], $data);
