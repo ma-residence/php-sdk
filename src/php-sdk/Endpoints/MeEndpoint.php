@@ -178,4 +178,14 @@ class MeEndpoint extends Endpoint
     {
         return $this->request->post('/me/lend-objects', [], $data);
     }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function deleteLendObject($id)
+    {
+        return $this->request->delete('/me/lend-objects/'.$id);
+    }
 }
