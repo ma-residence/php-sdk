@@ -150,12 +150,12 @@ class OAuth
         if (!$this->hasToken()) {
             $this->login();
         } elseif (!$this->checkLifetime()) {
-            if ($this->getToken()['refresh_token'] === null) {
-                $this->login();
-            } else {
+            if ($this->getToken()['refresh_token']) {
                 $this->requestAccessToken(self::GRANT_REFRESH, [
                     'refresh_token' => $this->getToken()['refresh_token'],
                 ]);
+            } else {
+                $this->login();
             }
         }
 
@@ -173,7 +173,7 @@ class OAuth
             throw new \LogicException('No token is registered.');
         }
 
-        return new \DateTime() < (new \DateTime())->modify("+ {$this->getToken()['lifetime']} seconds");
+        return time() < $this->getToken()['expires_at'];
     }
 
     /**
@@ -207,7 +207,7 @@ class OAuth
         $this->storage->save($this->credentialsKey, [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
-            'lifetime' => isset($data['expires_in']) ? $data['expires_in'] : null,
+            'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
         ]);
     }
 }
