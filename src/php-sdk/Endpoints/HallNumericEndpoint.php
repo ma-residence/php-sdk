@@ -71,22 +71,34 @@ class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
     }
 
     /**
-     * @param $id
+     * @param string   $id
+     * @param int      $page
+     * @param int      $per_page
+     * @param array    $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getLotActivity($id)
+    public function getLotActivity($id, $page = 1, $per_page = 20, $extra_params = [])
     {
-        return $this->request->get("/hall-numerics/$id/lot/activity");
+        return $this->request->get("/hall-numerics/$id/lot/activity", array_merge([
+            'page' => $page,
+            'per_page' => $per_page,
+        ], $extra_params));
     }
 
     /**
-     * @param $id
+     * @param string   $id
+     * @param int      $page
+     * @param int      $per_page
+     * @param array    $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPlaceActivity($id)
+    public function getPlaceActivity($id, $page = 1, $per_page = 20, $extra_params = [])
     {
-        return $this->request->get("/hall-numerics/$id/place/activity");
+        return $this->request->get("/hall-numerics/$id/place/activity", array_merge([
+            'page' => $page,
+            'per_page' => $per_page,
+        ], $extra_params));
     }
 }
