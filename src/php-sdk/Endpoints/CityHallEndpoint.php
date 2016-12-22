@@ -105,13 +105,18 @@ class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, Se
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param int    $page
+     * @param int    $per_page
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollowers($id)
+    public function getFollowers($id, $page, $perPage)
     {
-        return $this->request->get("/city-halls/$id/followers");
+        return $this->request->get("/city-halls/$id/followers", [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
     }
 
     /**
