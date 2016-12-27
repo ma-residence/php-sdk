@@ -315,6 +315,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\JoinRequestEndpoint
+     */
+    public function joinRequests()
+    {
+        return $this->getEndpoint('join_requests', Endpoints\JoinRequestEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
