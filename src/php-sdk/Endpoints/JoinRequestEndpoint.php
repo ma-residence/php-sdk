@@ -15,23 +15,22 @@ class JoinRequestEndpoint extends Endpoint
     }
 
     /**
-     * @param string $id
-     * @param array  $data
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data)
+    public function put(array $data)
     {
-        return $this->request->put('/join-requests/'.$id, [], $data);
+        return $this->request->put('/join-requests', [], $data);
     }
 
     /**
-     * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete(array $data)
     {
-        return $this->request->delete('/join-requests/'.$id);
+        return $this->request->delete('/join-requests', [], $data);
     }
 }
