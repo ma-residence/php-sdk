@@ -36,8 +36,13 @@ class Client
      * @param HandlerStack          $handlerStack
      * @param TokenStorageInterface $storage
      */
-    public function __construct($host, $clientId, $clientSecret, TokenStorageInterface $storage = null, HandlerStack $handlerStack = null)
-    {
+    public function __construct(
+        $host,
+        $clientId,
+        $clientSecret,
+        TokenStorageInterface $storage = null,
+        HandlerStack $handlerStack = null
+    ) {
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage);
         $this->request = new Request($this, $host, $handlerStack);
     }
@@ -320,6 +325,14 @@ class Client
     public function joinRequests()
     {
         return $this->getEndpoint('join_requests', Endpoints\JoinRequestEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\ContactEndpoint
+     */
+    public function contacts()
+    {
+        return $this->getEndpoint('contacts', Endpoints\ContactEndpoint::class);
     }
 
     /**
