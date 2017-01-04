@@ -19,9 +19,19 @@ class JoinRequestEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put(array $data)
+    public function accept(array $data)
     {
-        return $this->request->put('/join-requests', [], $data);
+        return $this->request->put('/join-requests/accept', [], $data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function decline(array $data)
+    {
+        return $this->request->put('/join-requests/decline', [], $data);
     }
 
     /**
