@@ -20,6 +20,21 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
+     * @param int   $page
+     * @param int   $per_page
+     * @param array $extra_params
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getEvents($page = 1, $per_page = 20, $extra_params = [])
+    {
+        return $this->request->get('/places/events', array_merge([
+            'page' => $page,
+            'per_page' => $per_page,
+        ], $extra_params));
+    }
+
+    /**
      * @param string $placeId
      *
      * @return \MR\SDK\Transport\Response
