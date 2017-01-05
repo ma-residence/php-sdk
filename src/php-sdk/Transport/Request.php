@@ -143,7 +143,7 @@ class Request
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
                 throw new SdkRequestException(sprintf(
-                    "Request Error: `% %`\nBody: %",
+                    "Request Error: `%s %s`\nBody: %s",
                     $method,
                     $endpoint,
                     $re->getResponse()->getBody()
