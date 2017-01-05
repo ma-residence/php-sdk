@@ -39,6 +39,14 @@ class Response
     }
 
     /**
+     * @return \GuzzleHttp\Psr7\Response
+     */
+    public function getInnerResponse()
+    {
+        return $this->response;
+    }
+
+    /**
      * @param string $key
      *
      * @return array|null
