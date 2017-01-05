@@ -39,11 +39,36 @@ class Response
     }
 
     /**
+     * @param string $key
+     *
      * @return array|null
      */
-    public function getData()
+    public function getData($key = null)
     {
-        return $this->data;
+        return $key ? $this->get("data.{$key}") : $this->data;
+    }
+
+    /**
+     * @param  string $key
+     *
+     * @return mixed|null
+     */
+    public function get($key)
+    {
+        if (false === strpos($key, '.')) {
+            return isset($this->data[$key]) ? $this->data[$key] : null;
+        }
+
+        $current = &$this->data;
+        foreach (explode('.', $key) as $part) {
+            if (!isset($current[$part])) {
+                return null;
+            }
+
+            $current = &$current[$part];
+        }
+
+        return $current;
     }
 
     /**
