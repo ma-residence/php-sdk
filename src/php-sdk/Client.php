@@ -10,6 +10,7 @@ use MR\SDK\Transport\Request;
 class Client
 {
     const OPT_FOLLOW_LOCATION = "follow_location";
+    const OPT_ERRMODE_EXCEPTION = "errmode_exception";
 
     /**
      * @var Request
