@@ -139,6 +139,15 @@ class Request
                 'json' => compact('data'),
             ] + $options);
         } catch (RequestException $re) {
+            if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
+                throw new SdkRequestException(sprintf(
+                    "Request Error: `% %`\nBody: %",
+                    $method,
+                    $endpoint,
+                    $re->getResponse()->getBody()
+                ), 0, $re);
+            }
+
             $response = $re->getResponse();
         } finally {
             $bounces--;
