@@ -9,6 +9,8 @@ use MR\SDK\Transport\Request;
 
 class Client
 {
+    const OPT_FOLLOW_LOCATION = "follow_location";
+
     /**
      * @var Request
      */
@@ -41,10 +43,15 @@ class Client
         $clientId,
         $clientSecret,
         TokenStorageInterface $storage = null,
-        HandlerStack $handlerStack = null
+        HandlerStack $handlerStack = null,
+        array $options = []
     ) {
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage);
         $this->request = new Request($this, $host, $handlerStack);
+
+        foreach ($options as $option => $value) {
+            $this->setOption($option, $value);
+        }
     }
 
     /**
@@ -383,5 +390,55 @@ class Client
     public function auth()
     {
         return $this->auth;
+    }
+
+    /**
+     * @param string $option
+     * @param mixed  $value
+     *
+     * @return Client
+     */
+    public function setOption($option, $value)
+    {
+        $this->options[$option] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param  string $option
+     *
+     * @return mixed
+     */
+    public function getOption($option)
+    {
+        return isset($this->options[$option]) ? $this->options[$option] : null;
+    }
+
+    /**
+     * @param  array   $options
+     * @param  callable $fn
+     *
+     * @return mixed
+     */
+    public function withOptions(array $options, callable $fn)
+    {
+        try {
+            $previous = [];
+            foreach ($options as $key => $value) {
+                $previous[$key] = $this->getOption($key);
+                $this->setOption($key, $value);
+            }
+
+            $result = $fn();
+        } catch (\Exception $e) {
+            throw $e;
+        } finally {
+            foreach ($previous as $key => $value) {
+                $this->setOption($key, $value);
+            }
+        }
+
+        return $result;
     }
 }

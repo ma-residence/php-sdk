@@ -105,8 +105,14 @@ class Request
      *
      * @return Response
      */
-    public function execute($method, $endpoint, array $parameters = [], array $data = [], array $options = [])
-    {
+    public function execute(
+        $method,
+        $endpoint,
+        array $parameters = [],
+        array $data = [],
+        array $options = [],
+        $bounces = 0
+    ) {
         $headers = [];
         if (!(isset($options['anonymous']) && $options['anonymous'])) {
             if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
@@ -123,15 +129,23 @@ class Request
         }
 
         try {
+            if (++$bounces > 5)  {
+                throw new RequestException("Redirects exceed threshold", $this);
+            }
+
             $response = $this->httpClient->request($method, $endpoint, [
                 'query' => $parameters,
                 'headers' => $headers,
-                'json' => [
-                    'data' => $data,
-                ],
+                'json' => compact('data'),
             ] + $options);
         } catch (RequestException $re) {
             $response = $re->getResponse();
+        } finally {
+            $bounces--;
+        }
+
+        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
+            return $this->execute('GET', $response->getHeader('location'), [], [], [], $bounces++);
         }
 
         return new Response($response);
