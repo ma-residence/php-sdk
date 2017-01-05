@@ -2,6 +2,7 @@
 
 namespace MR\SDK\Auth;
 
+use Monolog\Logger;
 use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
 use MR\SDK\TokenStorage\InMemoryTokenStorage;
@@ -42,17 +43,24 @@ class OAuth
     private $storage;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * @param Client                $client
      * @param string                $clientId
      * @param string                $clientSecret
      * @param TokenStorageInterface $storage
+     * @param array                 $options
      */
-    public function __construct(Client $client, $clientId, $clientSecret, TokenStorageInterface $storage = null)
+    public function __construct(Client $client, $clientId, $clientSecret, TokenStorageInterface $storage = null, $options = [])
     {
         $this->client = $client;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->storage = $storage ?: new InMemoryTokenStorage();
+        $this->logger = array_key_exists('logger', $options) ? $options['logger'] : null;
     }
 
     /**
@@ -65,6 +73,11 @@ class OAuth
      */
     public function loginWithCredentials($email, $password)
     {
+        $this->logMessage('Logging in with credentials', [
+            'grant_type' => self::GRANT_PASSWORD,
+            'username' => $email,
+        ]);
+
         $this->requestAccessToken(self::GRANT_PASSWORD, [
             'username' => $email,
             'password' => $password,
@@ -81,6 +94,12 @@ class OAuth
      */
     public function loginWithExternalToken($type, $token)
     {
+        $this->logMessage('Logging in with external token', [
+            'grant_type' => self::GRANT_EXTERNAL,
+            'type' => $type,
+            'token' => $token,
+        ]);
+
         $this->requestAccessToken(self::GRANT_EXTERNAL, [
             'type' => $type,
             'token' => $token,
@@ -92,6 +111,10 @@ class OAuth
      */
     public function login()
     {
+        $this->logMessage('Logging in as client', [
+            'grant_type' => self::GRANT_CLIENT_CREDENTIALS,
+        ]);
+
         $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
@@ -100,6 +123,8 @@ class OAuth
      */
     public function logout()
     {
+        $this->logMessage('Logging out');
+
         $this->storage->remove($this->credentialsKey);
         $this->credentialsKey = null;
     }
@@ -148,13 +173,22 @@ class OAuth
     public function getAccessToken()
     {
         if (!$this->hasToken()) {
+            $this->logMessage('User does not have an token. Logging in ...');
+
             $this->login();
         } elseif (!$this->checkLifetime()) {
-            if ($this->getToken()['refresh_token']) {
+            $token = $this->getToken();
+            $this->logMessage('Token has expired');
+
+            if ($token['refresh_token']) {
                 $this->requestAccessToken(self::GRANT_REFRESH, [
-                    'refresh_token' => $this->getToken()['refresh_token'],
+                    'refresh_token' => $token['refresh_token'],
+                ]);
+                $this->logMessage('Refreshing token', [
+                    'old_token' => $token
                 ]);
             } else {
+                $this->logMessage('User does not have an refresh token. Logging in ...');
                 $this->login();
             }
         }
@@ -194,13 +228,23 @@ class OAuth
 
         $credentialsKey = md5(json_encode($credentials));
 
+        $this->logMessage('Generating new credentials key', [
+            'credentials_key_name' => $credentialsKey,
+            'credentials' => $credentials
+        ]);
+
         $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $credentials, [], [
             'anonymous' => true,
         ]);
 
         if ($response->getStatusCode() !== 200) {
+            $this->logMessage('Error when getting token', [
+                'error' => (string)$response->getContent()
+            ]);
+
             throw new OAuthException($response);
         }
+
         $this->credentialsKey = $credentialsKey;
         $data = json_decode($response->getContent(), true);
 
@@ -209,5 +253,22 @@ class OAuth
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
         ]);
+
+        $this->logMessage('Saving access token');
+    }
+
+    /**
+     * Log message
+     *
+     * @param $message
+     * @param $params
+     */
+    private function logMessage($message, $params = []) {
+        if (null !== $this->logger) {
+            $this->logger->info($message, array_merge($params, [
+                'credentials_key' => $this->credentialsKey,
+                'token' => $this->getToken()
+            ]));
+        }
     }
 }

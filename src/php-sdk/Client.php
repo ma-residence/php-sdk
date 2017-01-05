@@ -46,7 +46,7 @@ class Client
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
-        $this->auth = new OAuth($this, $clientId, $clientSecret, $storage);
+        $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
         foreach ($options as $option => $value) {
