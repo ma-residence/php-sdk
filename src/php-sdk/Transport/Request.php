@@ -131,7 +131,7 @@ class Request
         }
 
         try {
-            if (++$bounces > 5)  {
+            if (++$bounces > 5) {
                 throw new RequestException("Redirects exceed threshold", $this);
             }
 
@@ -150,12 +150,18 @@ class Request
             $bounces--;
         }
 
-        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
+        $response = new Response($response);
+
+        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) &&
+            $response->getInnerResponse()->hasHeader('location')
+        ) {
             return $this->execute('GET', $response->getHeader('location'), [], [], [], $bounces++);
         }
 
-        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) && $response->getErrors()) {
-            foreach ($response->getErrors() as $error) {
+        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) &&
+            $errors = $response->getErrors()
+        ) {
+            foreach ($errors as $error) {
                 if (!isset($error['message'], $error['trace'])) {
                     continue;
                 }
@@ -172,6 +178,6 @@ class Request
             }
         }
 
-        return new Response($response);
+        return $response;
     }
 }
