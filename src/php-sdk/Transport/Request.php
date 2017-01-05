@@ -6,6 +6,7 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use MR\SDK\Client;
+use MR\SDK\Exceptions\RequestException as SdkRequestException;
 
 class Request
 {
@@ -114,22 +115,23 @@ class Request
         $bounces = 0
     ) {
         $headers = [];
+
         if (!(isset($options['anonymous']) && $options['anonymous'])) {
             if (null !== $accessToken = $this->client->auth()->getAccessToken()) {
                 $headers['Authorization'] = "Bearer $accessToken";
             }
         }
 
-        if (array_key_exists('contentType', $options)) {
+        if (isset($options['contentType'])) {
             $headers['Content-Type'] = $options['contentType'];
         }
 
-        if (array_key_exists('contentLength', $options)) {
+        if (isset($options['contentLength'])) {
             $headers['Content-Length'] = $options['contentLength'];
         }
 
         try {
-            if (++$bounces > 5)  {
+            if (++$bounces > 5) {
                 throw new RequestException("Redirects exceed threshold", $this);
             }
 
@@ -153,10 +155,34 @@ class Request
             $bounces--;
         }
 
-        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
+        $response = new Response($response);
+
+        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) &&
+            $response->getInnerResponse()->hasHeader('location')
+        ) {
             return $this->execute('GET', $response->getHeader('location'), [], [], [], $bounces++);
         }
 
-        return new Response($response);
+        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) &&
+            $errors = $response->getErrors()
+        ) {
+            foreach ($errors as $error) {
+                if (!isset($error['message'], $error['trace'])) {
+                    continue;
+                }
+
+                $exception = (new SdkRequestException(
+                    $error['message'],
+                    $error['trace'],
+                    isset($exception) ? $exception : null
+                ))->setTrace($error['trace']);
+            };
+
+            if (isset($exception)) {
+                throw $exception;
+            }
+        }
+
+        return $response;
     }
 }

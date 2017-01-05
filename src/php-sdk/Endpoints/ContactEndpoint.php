@@ -21,7 +21,7 @@ class ContactEndpoint extends Endpoint
      */
     public function post(array $data)
     {
-        return $this->request->post('/contact', [], $data);
+        return $this->request->post('/contacts', [], $data);
     }
 
     /**
