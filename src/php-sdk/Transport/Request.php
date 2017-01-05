@@ -142,7 +142,12 @@ class Request
             ] + $options);
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
-                throw new SdkRequestException("Error in request '{$method}:{$endpoint}", 0, $re);
+                throw new SdkRequestException(sprintf(
+                    "Request Error: `%s %s`\nBody: %s",
+                    $method,
+                    $endpoint,
+                    $re->getResponse()->getBody()
+                ), 0, $re);
             }
 
             $response = $re->getResponse();
