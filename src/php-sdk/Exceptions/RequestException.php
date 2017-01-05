@@ -9,12 +9,12 @@ class RequestException extends RuntimeException
 {
     private $trace = [];
 
-    public function getTrace()
+    public function getExtTrace()
     {
         return $this->trace;
     }
 
-    public function setTrace(array $trace)
+    public function setExtTrace(array $trace)
     {
         $this->trace = $trace;
 
