@@ -28,31 +28,37 @@ class Client
     private $cachedEndpoints = [];
 
     /**
-     * @var array
+     * @var LoggerInterface
      */
-    private $handlerStack = [];
+    private $logger;
+
+    private $session;
 
     /**
      * @param string                $host
      * @param string                $clientId
      * @param string                $clientSecret
-     * @param HandlerStack          $handlerStack
+     * @param object                $session
      * @param TokenStorageInterface $storage
+     * @param object                $logger
+     * @param HandlerStack          $handlerStack
+     * @param array                 $options
      */
     public function __construct(
         $host,
         $clientId,
         $clientSecret,
+        $session,
         TokenStorageInterface $storage = null,
+        $logger = null,
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
-        foreach ($options as $option => $value) {
-            $this->setOption($option, $value);
-        }
+        $this->session = $session;
+        $this->options = $options;
     }
 
     /**
@@ -399,6 +405,22 @@ class Client
     public function auth()
     {
         return $this->auth;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionId()
+    {
+        return $this->session->getId();
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
     }
 
     /**
