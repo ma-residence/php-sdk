@@ -344,6 +344,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\InvitationEndpoint
+     */
+    public function invitations()
+    {
+        return $this->getEndpoint('invitations', Endpoints\InvitationEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
