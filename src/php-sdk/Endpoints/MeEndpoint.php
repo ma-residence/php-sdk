@@ -195,4 +195,25 @@ class MeEndpoint extends Endpoint
     {
         return $this->request->delete('/me/lend-objects/'.$id);
     }
+
+    /**
+     * @param string $type
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequestList($type)
+    {
+        return $this->request->get("/me/join-request/$type");
+    }
+
+    /**
+     * @param string $type
+     * @param string $targetId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequest($type, $targetId)
+    {
+        return $this->request->get("/me/join-request/$type/$targetId");
+    }
 }
