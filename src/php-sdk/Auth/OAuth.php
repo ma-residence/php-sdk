@@ -2,7 +2,6 @@
 
 namespace MR\SDK\Auth;
 
-use Monolog\Logger;
 use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
 use MR\SDK\TokenStorage\InMemoryTokenStorage;
@@ -28,11 +27,6 @@ class OAuth
     private $clientSecret;
 
     /**
-     * @var string
-     */
-    private $credentialsKey;
-
-    /**
      * @var Client
      */
     private $client;
@@ -43,7 +37,7 @@ class OAuth
     private $storage;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -60,7 +54,7 @@ class OAuth
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->storage = $storage ?: new InMemoryTokenStorage();
-        $this->logger = array_key_exists('logger', $options) ? $options['logger'] : null;
+        $this->logger = $client->getLogger();
     }
 
     /**
@@ -123,26 +117,9 @@ class OAuth
      */
     public function logout()
     {
+        $this->storage->remove($this->client->getSessionId());
+
         $this->logMessage('Logging out');
-
-        $this->storage->remove($this->credentialsKey);
-        $this->credentialsKey = null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCredentialsKey()
-    {
-        return $this->credentialsKey;
-    }
-
-    /**
-     * @param string $credentialsKey
-     */
-    public function setCredentialsKey($credentialsKey)
-    {
-        $this->credentialsKey = $credentialsKey;
     }
 
     /**
@@ -151,7 +128,7 @@ class OAuth
     public function getToken()
     {
         if ($this->hasToken()) {
-            return $this->storage->get($this->credentialsKey);
+            return $this->storage->get($this->client->getSessionId());
         }
 
         return null;
@@ -162,7 +139,7 @@ class OAuth
      */
     public function hasToken()
     {
-        return $this->credentialsKey !== null && $this->storage->has($this->credentialsKey);
+        return $this->storage->has($this->client->getSessionId());
     }
 
     /**
@@ -226,10 +203,8 @@ class OAuth
             'client_secret' => $this->clientSecret,
         ], $credentials);
 
-        $credentialsKey = md5(json_encode($credentials).time());
-
         $this->logMessage('Generating new credentials key', [
-            'credentials_key_name' => $credentialsKey,
+            'session_id_name' => $this->client->getSessionId(),
             'credentials' => $credentials
         ]);
 
@@ -245,10 +220,9 @@ class OAuth
             throw new OAuthException($response);
         }
 
-        $this->credentialsKey = $credentialsKey;
         $data = json_decode($response->getContent(), true);
 
-        $isSaved = $this->storage->save($this->credentialsKey, [
+        $isSaved = $this->storage->save($this->client->getSessionId(), [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
@@ -271,7 +245,7 @@ class OAuth
     private function logMessage($message, $params = []) {
         if (null !== $this->logger) {
             $this->logger->info($message, array_merge($params, [
-                'credentials_key' => $this->credentialsKey,
+                'session_id' => $this->client->getSessionId(),
                 'token' => $this->getToken()
             ]));
         }
