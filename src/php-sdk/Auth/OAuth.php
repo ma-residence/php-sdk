@@ -226,7 +226,7 @@ class OAuth
             'client_secret' => $this->clientSecret,
         ], $credentials);
 
-        $credentialsKey = md5(json_encode($credentials));
+        $credentialsKey = md5(json_encode($credentials).time());
 
         $this->logMessage('Generating new credentials key', [
             'credentials_key_name' => $credentialsKey,
