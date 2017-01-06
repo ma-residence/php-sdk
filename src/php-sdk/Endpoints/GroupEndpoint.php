@@ -99,9 +99,12 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($id)
+    public function getMembers($id, $page, $per_page)
     {
-        return $this->request->get("/groups/$id/members");
+        return $this->request->get("/groups/$id/members", [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
     }
 
     /**
@@ -143,5 +146,20 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
             'page' => $page,
             'per_page' => $per_page,
         ], $extra_params));
+    }
+
+    /**
+     * @param string $id
+     * @param int    $page
+     * @param int    $per_page
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequests($id, $page, $perPage)
+    {
+        return $this->request->get("/groups/$id/join-requests", [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
     }
 }
