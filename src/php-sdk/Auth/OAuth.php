@@ -248,13 +248,18 @@ class OAuth
         $this->credentialsKey = $credentialsKey;
         $data = json_decode($response->getContent(), true);
 
-        $this->storage->save($this->credentialsKey, [
+        $isSaved = $this->storage->save($this->credentialsKey, [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
         ]);
 
-        $this->logMessage('Saving access token');
+        $this->logMessage('Saving access token', [
+            'is_saved' => $isSaved,
+            'access_token' => $data['access_token'],
+            'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
+            'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
+        ]);
     }
 
     /**
