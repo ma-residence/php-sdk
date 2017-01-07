@@ -135,18 +135,20 @@ class Request
                 throw new RequestException("Redirects exceed threshold", $this);
             }
 
-            $response = $this->httpClient->request($method, $endpoint, [
+            $response = $this->httpClient->request($method, $endpoint, $request = [
                 'query' => $parameters,
                 'headers' => $headers,
                 'json' => compact('data'),
             ] + $options);
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
+                $response = $re->getResponse();
+                $body = (string)$response->getBody();
                 throw new SdkRequestException(sprintf(
-                    "Request Error: `%s %s`\nBody: %s",
+                    "Request Error: `%s %s`\n%s",
                     $method,
                     $endpoint,
-                    $re->getResponse()->getBody()
+                    json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)
                 ), 0, $re);
             }
 
