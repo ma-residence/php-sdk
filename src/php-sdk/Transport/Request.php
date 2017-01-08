@@ -140,6 +140,10 @@ class Request
                 'headers' => $headers,
                 'json' => compact('data'),
             ] + $options);
+
+            if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
+                return $this->execute('GET', $response->getHeader('location')[0], [], [], [], $bounces++);
+            }
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
                 $response = $re->getResponse();
@@ -159,15 +163,7 @@ class Request
 
         $response = new Response($response);
 
-        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) &&
-            $response->getInnerResponse()->hasHeader('location')
-        ) {
-            return $this->execute('GET', $response->getInnerResponse()->getHeader('location'), [], [], [], $bounces++);
-        }
-
-        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) &&
-            $errors = $response->getErrors()
-        ) {
+        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) && $errors = $response->getErrors()) {
             foreach ($errors as $error) {
                 if (!isset($error['message'], $error['trace'])) {
                     continue;
