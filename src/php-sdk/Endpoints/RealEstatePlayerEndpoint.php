@@ -125,10 +125,10 @@ class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInter
     }
 
     /**
-     * @param string   $id
-     * @param int      $page
-     * @param int      $per_page
-     * @param array    $extra_params
+     * @param string $id
+     * @param int    $page
+     * @param int    $per_page
+     * @param array  $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */

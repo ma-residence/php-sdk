@@ -132,7 +132,7 @@ class Request
 
         try {
             if (++$bounces > 5) {
-                throw new RequestException("Redirects exceed threshold", $this);
+                throw new RequestException('Redirects exceed threshold', $this);
             }
 
             $response = $this->httpClient->request($method, $endpoint, $request = [
@@ -143,7 +143,7 @@ class Request
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
                 $response = $re->getResponse();
-                $body = (string)$response->getBody();
+                $body = (string) $response->getBody();
                 throw new SdkRequestException(sprintf(
                     "Request Error: `%s %s`\n%s",
                     $method,
@@ -154,7 +154,7 @@ class Request
 
             $response = $re->getResponse();
         } finally {
-            $bounces--;
+            --$bounces;
         }
 
         $response = new Response($response);
@@ -178,7 +178,7 @@ class Request
                     $error['trace'],
                     isset($exception) ? $exception : null
                 ))->setTrace($error['trace']);
-            };
+            }
 
             if (isset($exception)) {
                 throw $exception;
