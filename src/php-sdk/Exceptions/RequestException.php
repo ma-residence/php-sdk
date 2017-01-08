@@ -2,7 +2,6 @@
 
 namespace MR\SDK\Exceptions;
 
-use MR\SDK\Transport\Response;
 use RuntimeException;
 
 class RequestException extends RuntimeException

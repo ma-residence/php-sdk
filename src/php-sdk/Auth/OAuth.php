@@ -162,7 +162,7 @@ class OAuth
                     'refresh_token' => $token['refresh_token'],
                 ]);
                 $this->logMessage('Refreshing token', [
-                    'old_token' => $token
+                    'old_token' => $token,
                 ]);
             } else {
                 $this->logMessage('User does not have an refresh token. Logging in ...');
@@ -205,7 +205,7 @@ class OAuth
 
         $this->logMessage('Generating new credentials key', [
             'session_id_name' => $this->client->getSessionId(),
-            'credentials' => $credentials
+            'credentials' => $credentials,
         ]);
 
         $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $credentials, [], [
@@ -214,7 +214,7 @@ class OAuth
 
         if ($response->getStatusCode() !== 200) {
             $this->logMessage('Error when getting token', [
-                'error' => (string)$response->getContent()
+                'error' => (string) $response->getContent(),
             ]);
 
             throw new OAuthException($response);
@@ -237,16 +237,17 @@ class OAuth
     }
 
     /**
-     * Log message
+     * Log message.
      *
      * @param $message
      * @param $params
      */
-    private function logMessage($message, $params = []) {
+    private function logMessage($message, $params = [])
+    {
         if (null !== $this->logger) {
             $this->logger->info($message, array_merge($params, [
                 'session_id' => $this->client->getSessionId(),
-                'token' => $this->getToken()
+                'token' => $this->getToken(),
             ]));
         }
     }

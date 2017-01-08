@@ -9,8 +9,8 @@ use MR\SDK\Transport\Request;
 
 class Client
 {
-    const OPT_FOLLOW_LOCATION = "follow_location";
-    const OPT_ERRMODE_EXCEPTION = "errmode_exception";
+    const OPT_FOLLOW_LOCATION = 'follow_location';
+    const OPT_ERRMODE_EXCEPTION = 'errmode_exception';
 
     /**
      * @var Request
@@ -437,7 +437,7 @@ class Client
     }
 
     /**
-     * @param  string $option
+     * @param string $option
      *
      * @return mixed
      */
@@ -447,8 +447,8 @@ class Client
     }
 
     /**
-     * @param  array   $options
-     * @param  callable $fn
+     * @param array    $options
+     * @param callable $fn
      *
      * @return mixed
      */
