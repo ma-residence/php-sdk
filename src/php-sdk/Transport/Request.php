@@ -162,7 +162,7 @@ class Request
         if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) &&
             $response->getInnerResponse()->hasHeader('location')
         ) {
-            return $this->execute('GET', $response->getHeader('location'), [], [], [], $bounces++);
+            return $this->execute('GET', $response->getInnerResponse()->getHeader('location'), [], [], [], $bounces++);
         }
 
         if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) &&
