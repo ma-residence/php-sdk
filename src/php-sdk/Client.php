@@ -35,14 +35,14 @@ class Client
     private $session;
 
     /**
-     * @param string                $host
-     * @param string                $clientId
-     * @param string                $clientSecret
-     * @param object                $session
-     * @param TokenStorageInterface $storage
-     * @param object                $logger
-     * @param HandlerStack          $handlerStack
-     * @param array                 $options
+     * @param $host
+     * @param $clientId
+     * @param $clientSecret
+     * @param $session
+     * @param TokenStorageInterface|null $storage
+     * @param null $logger
+     * @param HandlerStack|null $handlerStack
+     * @param array $options
      */
     public function __construct(
         $host,
@@ -54,6 +54,7 @@ class Client
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
+        $this->logger = $logger;
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
