@@ -96,12 +96,17 @@ class ShopEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
+     * @param int    $page
+     * @param int    $per_page
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($id)
+    public function getMembers($id, $page, $per_page)
     {
-        return $this->request->get("/shops/$id/members");
+        return $this->request->get("/shops/$id/members", [
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
     }
 
     /**

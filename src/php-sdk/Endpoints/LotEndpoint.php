@@ -93,12 +93,17 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
 
     /**
      * @param string $id
+     * @param int    $page
+     * @param int    $per_page
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($id)
+    public function getMembers($id, $page, $per_page)
     {
-        return $this->request->get("/lots/$id/members");
+        return $this->request->get("/lots/$id/members", [
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
     }
 
     /**

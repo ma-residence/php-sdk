@@ -95,8 +95,9 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
     }
 
     /**
-     * @param string $id
-     *
+     * @param $id
+     * @param $page
+     * @param $per_page
      * @return \MR\SDK\Transport\Response
      */
     public function getMembers($id, $page, $per_page)
