@@ -225,7 +225,8 @@ class OAuth
         $isSaved = $this->storage->save($this->client->getSessionId(), [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
-            'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
+            'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,,
+            'expires_in' => isset($data['expires_in']) ? $data['expires_in'] : null,
         ]);
 
         $this->logMessage('Saving access token', [
