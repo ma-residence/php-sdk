@@ -131,7 +131,13 @@ class OAuth
             return $this->storage->get($this->client->getSessionId());
         }
 
-        return null;
+        // Force the fact that the token is expired
+        return [
+            'access_token' => null,
+            'refresh_token' => null,
+            'expires_at' => time() - 10000,
+            'expires_in' => -10000,
+        ];
     }
 
     /**
