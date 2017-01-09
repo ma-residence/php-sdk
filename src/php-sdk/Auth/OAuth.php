@@ -233,6 +233,7 @@ class OAuth
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
+            'expires_in' => isset($data['expires_in']) ? $data['expires_in'] : null,
         ]);
     }
 
