@@ -136,6 +136,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param string $id
      * @param string $type
      *
      * @return \MR\SDK\Transport\Response
@@ -146,11 +147,13 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param string $id
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowers($id)
     {
-        return $this->request->get("users/$id/followers");
+        return $this->request->get("/users/$id/followers");
     }
 
     /**
@@ -174,5 +177,15 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     public function getJoinRequest($id, $type, $targetId)
     {
         return $this->request->get("/users/$id/join-request/$type/$targetId");
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getDevices($id)
+    {
+        return $this->request->get("/users/$id/devices");
     }
 }
