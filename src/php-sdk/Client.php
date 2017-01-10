@@ -2,7 +2,6 @@
 
 namespace MR\SDK;
 
-use GuzzleHttp\HandlerStack;
 use MR\SDK\Auth\OAuth;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
@@ -32,13 +31,16 @@ class Client
      */
     private $logger;
 
-    private $session;
+    /**
+     * @var string
+     */
+    private $tokenCacheKey;
 
     /**
      * @param $host
      * @param $clientId
      * @param $clientSecret
-     * @param $session
+     * @param $tokenCacheKey
      * @param TokenStorageInterface|null $storage
      * @param null $logger
      * @param HandlerStack|null $handlerStack
@@ -48,7 +50,7 @@ class Client
         $host,
         $clientId,
         $clientSecret,
-        $session,
+        $tokenCacheKey,
         TokenStorageInterface $storage = null,
         $logger = null,
         HandlerStack $handlerStack = null,
@@ -58,7 +60,7 @@ class Client
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
-        $this->session = $session;
+        $this->tokenCacheKey = $tokenCacheKey;
         $this->options = $options;
     }
 
@@ -411,9 +413,9 @@ class Client
     /**
      * @return string
      */
-    public function getSessionId()
+    public function getTokenCacheKey()
     {
-        return $this->session->getId();
+        return $this->tokenCacheKey;
     }
 
     /**

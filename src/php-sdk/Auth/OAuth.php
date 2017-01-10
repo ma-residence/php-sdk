@@ -117,7 +117,7 @@ class OAuth
      */
     public function logout()
     {
-        $this->storage->remove($this->client->getSessionId());
+        $this->storage->remove($this->client->getTokenCacheKey());
 
         $this->logMessage('Logging out');
     }
@@ -128,7 +128,7 @@ class OAuth
     public function getToken()
     {
         if ($this->hasToken()) {
-            return $this->storage->get($this->client->getSessionId());
+            return $this->storage->get($this->client->getTokenCacheKey());
         }
 
         // Force the fact that the token is expired
@@ -145,7 +145,7 @@ class OAuth
      */
     public function hasToken()
     {
-        return $this->storage->has($this->client->getSessionId());
+        return $this->storage->has($this->client->getTokenCacheKey());
     }
 
     /**
@@ -210,7 +210,7 @@ class OAuth
         ], $credentials);
 
         $this->logMessage('Generating new credentials key', [
-            'session_id_name' => $this->client->getSessionId(),
+            'session_id_name' => $this->client->getTokenCacheKey(),
             'credentials' => $credentials,
         ]);
 
@@ -228,7 +228,7 @@ class OAuth
 
         $data = json_decode($response->getContent(), true);
 
-        $isSaved = $this->storage->save($this->client->getSessionId(), [
+        $isSaved = $this->storage->save($this->client->getTokenCacheKey(), [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
@@ -254,7 +254,7 @@ class OAuth
     {
         if (null !== $this->logger) {
             $this->logger->info($message, array_merge($params, [
-                'session_id' => $this->client->getSessionId(),
+                'session_id' => $this->client->getTokenCacheKey(),
                 'token' => $this->getToken(),
             ]));
         }
