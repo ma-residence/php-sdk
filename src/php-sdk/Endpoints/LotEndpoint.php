@@ -131,4 +131,60 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     {
         return $this->request->post('/lots/join', [], $data);
     }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getDirectory($id)
+    {
+        return $this->request->get('/lots/'.$id.'/directory');
+    }
+
+    /**
+     * @param string $id
+     * @param array  $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function postDirectory($id, array $data)
+    {
+        return $this->request->post('/lots/'.$id.'/directory', [], $data);
+    }
+
+    /**
+     * @param string $id
+     * @param string $directoryId
+     * @param array  $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function putDirectory($id, $directoryId, array $data)
+    {
+        return $this->request->put('/lots/'.$id.'/directory/'.$directoryId, [], $data);
+    }
+
+    /**
+     * @param string $id
+     * @param string $directoryId
+     * @param array  $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function patchDirectory($id, $directoryId, array $data)
+    {
+        return $this->request->patch('/lots/'.$id.'/directory/'.$directoryId, [], $data);
+    }
+
+    /**
+     * @param string $id
+     * @param string $directoryId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function deleteDirectory($id, $directoryId)
+    {
+        return $this->request->delete('/lots/'.$id.'/directory/'.$directoryId);
+    }
 }
