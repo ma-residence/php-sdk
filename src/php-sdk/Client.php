@@ -5,6 +5,8 @@ namespace MR\SDK;
 use MR\SDK\Auth\OAuth;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
+use GuzzleHttp\HandlerStack;
+use Psr\Log\LoggerInterface;
 
 class Client
 {
