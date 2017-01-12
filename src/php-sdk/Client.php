@@ -359,6 +359,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\TeamEndpoint
+     */
+    public function teams()
+    {
+        return $this->getEndpoint('teams', Endpoints\TeamEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
