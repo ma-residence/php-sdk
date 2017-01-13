@@ -44,9 +44,9 @@ class Client
      * @param $clientSecret
      * @param $tokenCacheKey
      * @param TokenStorageInterface|null $storage
-     * @param null $logger
-     * @param HandlerStack|null $handlerStack
-     * @param array $options
+     * @param null                       $logger
+     * @param HandlerStack|null          $handlerStack
+     * @param array                      $options
      */
     public function __construct(
         $host,
