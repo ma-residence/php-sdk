@@ -19,4 +19,12 @@ class TeamEndpoint extends Endpoint
     {
         return $this->request->get('/teams/support');
     }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getCommunityManager()
+    {
+        return $this->request->get('/teams/community-manager');
+    }
 }
