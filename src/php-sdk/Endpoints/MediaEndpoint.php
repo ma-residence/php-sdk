@@ -19,9 +19,20 @@ class MediaEndpoint extends Endpoint
      *
      * @return mixed
      */
-    public function post($data)
+    public function post(array $data)
     {
         return $this->request->post('/medias', [], $data);
+    }
+
+    /**
+     * @param string $id
+     * @param array  $data
+     *
+     * @return mixed
+     */
+    public function patch($id, array $data)
+    {
+        return $this->request->patch('/medias/'.$id, [], $data);
     }
 
     /**
