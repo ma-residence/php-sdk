@@ -386,6 +386,10 @@ class Client
             return call_user_func_array([$this, $type], []);
         }
 
+        if (isset($this->cachedEndpoints[$type])) {
+            return $this->cachedEndpoints[$type];
+        }
+
         throw new \InvalidArgumentException("Unknown endpoint type $type");
     }
 
