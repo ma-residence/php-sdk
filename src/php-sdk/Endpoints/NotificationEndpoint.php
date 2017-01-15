@@ -50,6 +50,21 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
+     * @param string $userId
+     * @param int    $page
+     * @param int    $per_page
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getUserFollowersRecipients($userId, $page = 1, $per_page = 100)
+    {
+        return $this->request->get("/notifications/users/$userId/followers/recipients", [
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
+    }
+
+    /**
      * @param string $commentId
      * @param string $type
      * @param int    $page
