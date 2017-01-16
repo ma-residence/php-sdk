@@ -11,7 +11,7 @@ class ContactEndpoint extends Endpoint
      */
     public function get($id)
     {
-        return $this->request->get('/contact/'.$id);
+        return $this->request->get('/contacts/'.$id);
     }
 
     /**
@@ -32,7 +32,7 @@ class ContactEndpoint extends Endpoint
      */
     public function put($id, array $data)
     {
-        return $this->request->put('/contact/'.$id, [], $data);
+        return $this->request->put('/contacts/'.$id, [], $data);
     }
 
     /**
@@ -42,6 +42,6 @@ class ContactEndpoint extends Endpoint
      */
     public function delete($id)
     {
-        return $this->request->delete('/contact/'.$id);
+        return $this->request->delete('/contacts/'.$id);
     }
 }
