@@ -35,6 +35,21 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
+     * @param string $sourceId
+     * @param string $targetId
+     * @param string $roleId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequestRecipients($sourceId, $targetId, $roleId, $page = 1, $per_page = 100)
+    {
+        return $this->request->get("/notifications/joins/$sourceId/$targetId/$roleId/recipients", [
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
+    }
+
+    /**
      * @param string $userId
      * @param int    $page
      * @param int    $per_page
