@@ -149,7 +149,7 @@ class Request
                 $response = $re->getResponse();
                 $body = (string) $response->getBody();
                 throw new SdkRequestException(sprintf(
-                    "Request Error: `%s %s`\n%s",
+                    "Request Error: `%s %s`\nBody: %s",
                     $method,
                     $endpoint,
                     json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)
