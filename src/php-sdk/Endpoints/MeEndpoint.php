@@ -97,9 +97,9 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int   $page
+     * @param int   $per_page
+     * @param array $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -194,5 +194,26 @@ class MeEndpoint extends Endpoint
     public function deleteLendObject($id)
     {
         return $this->request->delete('/me/lend-objects/'.$id);
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequestList($type)
+    {
+        return $this->request->get("/me/join-request/$type");
+    }
+
+    /**
+     * @param string $type
+     * @param string $targetId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequest($type, $targetId)
+    {
+        return $this->request->get("/me/join-request/$type/$targetId");
     }
 }

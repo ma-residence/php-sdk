@@ -132,40 +132,38 @@ class Request
 
         try {
             if (++$bounces > 5) {
-                throw new RequestException("Redirects exceed threshold", $this);
+                throw new RequestException('Redirects exceed threshold', $this);
             }
 
-            $response = $this->httpClient->request($method, $endpoint, [
+            $response = $this->httpClient->request($method, $endpoint, $request = [
                 'query' => $parameters,
                 'headers' => $headers,
                 'json' => compact('data'),
             ] + $options);
+
+            if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
+                return $this->execute('GET', $response->getHeader('location')[0], [], [], [], $bounces++);
+            }
         } catch (RequestException $re) {
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
+                $response = $re->getResponse();
+                $body = (string) $response->getBody();
                 throw new SdkRequestException(sprintf(
                     "Request Error: `%s %s`\nBody: %s",
                     $method,
                     $endpoint,
-                    $re->getResponse()->getBody()
+                    json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)
                 ), 0, $re);
             }
 
             $response = $re->getResponse();
         } finally {
-            $bounces--;
+            --$bounces;
         }
 
         $response = new Response($response);
 
-        if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) &&
-            $response->getInnerResponse()->hasHeader('location')
-        ) {
-            return $this->execute('GET', $response->getHeader('location'), [], [], [], $bounces++);
-        }
-
-        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) &&
-            $errors = $response->getErrors()
-        ) {
+        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) && $errors = $response->getErrors()) {
             foreach ($errors as $error) {
                 if (!isset($error['message'], $error['trace'])) {
                     continue;
@@ -176,7 +174,7 @@ class Request
                     $error['trace'],
                     isset($exception) ? $exception : null
                 ))->setTrace($error['trace']);
-            };
+            }
 
             if (isset($exception)) {
                 throw $exception;

@@ -2,15 +2,16 @@
 
 namespace MR\SDK;
 
-use GuzzleHttp\HandlerStack;
 use MR\SDK\Auth\OAuth;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
+use GuzzleHttp\HandlerStack;
+use Psr\Log\LoggerInterface;
 
 class Client
 {
-    const OPT_FOLLOW_LOCATION = "follow_location";
-    const OPT_ERRMODE_EXCEPTION = "errmode_exception";
+    const OPT_FOLLOW_LOCATION = 'follow_location';
+    const OPT_ERRMODE_EXCEPTION = 'errmode_exception';
 
     /**
      * @var Request
@@ -28,31 +29,41 @@ class Client
     private $cachedEndpoints = [];
 
     /**
-     * @var array
+     * @var LoggerInterface
      */
-    private $handlerStack = [];
+    private $logger;
 
     /**
-     * @param string                $host
-     * @param string                $clientId
-     * @param string                $clientSecret
-     * @param HandlerStack          $handlerStack
-     * @param TokenStorageInterface $storage
+     * @var string
+     */
+    private $tokenCacheKey;
+
+    /**
+     * @param $host
+     * @param $clientId
+     * @param $clientSecret
+     * @param $tokenCacheKey
+     * @param TokenStorageInterface|null $storage
+     * @param null                       $logger
+     * @param HandlerStack|null          $handlerStack
+     * @param array                      $options
      */
     public function __construct(
         $host,
         $clientId,
         $clientSecret,
+        $tokenCacheKey,
         TokenStorageInterface $storage = null,
+        $logger = null,
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
+        $this->logger = $logger;
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
-        foreach ($options as $option => $value) {
-            $this->setOption($option, $value);
-        }
+        $this->tokenCacheKey = $tokenCacheKey;
+        $this->options = $options;
     }
 
     /**
@@ -344,6 +355,22 @@ class Client
     }
 
     /**
+     * @return Endpoints\InvitationEndpoint
+     */
+    public function invitations()
+    {
+        return $this->getEndpoint('invitations', Endpoints\InvitationEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\TeamEndpoint
+     */
+    public function teams()
+    {
+        return $this->getEndpoint('teams', Endpoints\TeamEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\TransactionEndpoint
@@ -357,6 +384,10 @@ class Client
         $type = sprintf('%ss', $type);
         if (method_exists($this, $type)) {
             return call_user_func_array([$this, $type], []);
+        }
+
+        if (isset($this->cachedEndpoints[$type])) {
+            return $this->cachedEndpoints[$type];
         }
 
         throw new \InvalidArgumentException("Unknown endpoint type $type");
@@ -394,6 +425,22 @@ class Client
     }
 
     /**
+     * @return string
+     */
+    public function getTokenCacheKey()
+    {
+        return $this->tokenCacheKey;
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
      * @param string $option
      * @param mixed  $value
      *
@@ -407,7 +454,7 @@ class Client
     }
 
     /**
-     * @param  string $option
+     * @param string $option
      *
      * @return mixed
      */
@@ -417,8 +464,8 @@ class Client
     }
 
     /**
-     * @param  array   $options
-     * @param  callable $fn
+     * @param array    $options
+     * @param callable $fn
      *
      * @return mixed
      */

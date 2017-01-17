@@ -57,7 +57,7 @@ class Response
     }
 
     /**
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed|null
      */

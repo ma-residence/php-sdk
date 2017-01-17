@@ -120,10 +120,10 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param string   $id
-     * @param int      $page
-     * @param int      $per_page
-     * @param array    $extra_params
+     * @param string $id
+     * @param int    $page
+     * @param int    $per_page
+     * @param array  $extra_params
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -136,6 +136,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param string $id
      * @param string $type
      *
      * @return \MR\SDK\Transport\Response
@@ -146,10 +147,45 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param string $id
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowers($id)
     {
-        return $this->request->get("users/$id/followers");
+        return $this->request->get("/users/$id/followers");
+    }
+
+    /**
+     * @param string $id
+     * @param string $type
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequestList($id, $type)
+    {
+        return $this->request->get("/users/$id/join-request/$type");
+    }
+
+    /**
+     * @param string $id
+     * @param string $type
+     * @param string $targetId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getJoinRequest($id, $type, $targetId)
+    {
+        return $this->request->get("/users/$id/join-request/$type/$targetId");
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getDevices($id)
+    {
+        return $this->request->get("/users/$id/devices");
     }
 }

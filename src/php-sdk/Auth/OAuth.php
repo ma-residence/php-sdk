@@ -2,7 +2,6 @@
 
 namespace MR\SDK\Auth;
 
-use Monolog\Logger;
 use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
 use MR\SDK\TokenStorage\InMemoryTokenStorage;
@@ -28,11 +27,6 @@ class OAuth
     private $clientSecret;
 
     /**
-     * @var string
-     */
-    private $credentialsKey;
-
-    /**
      * @var Client
      */
     private $client;
@@ -43,7 +37,7 @@ class OAuth
     private $storage;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -60,7 +54,7 @@ class OAuth
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->storage = $storage ?: new InMemoryTokenStorage();
-        $this->logger = array_key_exists('logger', $options) ? $options['logger'] : null;
+        $this->logger = $client->getLogger();
     }
 
     /**
@@ -123,26 +117,9 @@ class OAuth
      */
     public function logout()
     {
+        $this->storage->remove($this->client->getTokenCacheKey());
+
         $this->logMessage('Logging out');
-
-        $this->storage->remove($this->credentialsKey);
-        $this->credentialsKey = null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCredentialsKey()
-    {
-        return $this->credentialsKey;
-    }
-
-    /**
-     * @param string $credentialsKey
-     */
-    public function setCredentialsKey($credentialsKey)
-    {
-        $this->credentialsKey = $credentialsKey;
     }
 
     /**
@@ -151,10 +128,16 @@ class OAuth
     public function getToken()
     {
         if ($this->hasToken()) {
-            return $this->storage->get($this->credentialsKey);
+            return $this->storage->get($this->client->getTokenCacheKey());
         }
 
-        return null;
+        // Force the fact that the token is expired
+        return [
+            'access_token' => null,
+            'refresh_token' => null,
+            'expires_at' => time() - 10000,
+            'expires_in' => -10000,
+        ];
     }
 
     /**
@@ -162,7 +145,7 @@ class OAuth
      */
     public function hasToken()
     {
-        return $this->credentialsKey !== null && $this->storage->has($this->credentialsKey);
+        return $this->storage->has($this->client->getTokenCacheKey());
     }
 
     /**
@@ -185,7 +168,7 @@ class OAuth
                     'refresh_token' => $token['refresh_token'],
                 ]);
                 $this->logMessage('Refreshing token', [
-                    'old_token' => $token
+                    'old_token' => $token,
                 ]);
             } else {
                 $this->logMessage('User does not have an refresh token. Logging in ...');
@@ -226,11 +209,9 @@ class OAuth
             'client_secret' => $this->clientSecret,
         ], $credentials);
 
-        $credentialsKey = md5(json_encode($credentials));
-
         $this->logMessage('Generating new credentials key', [
-            'credentials_key_name' => $credentialsKey,
-            'credentials' => $credentials
+            'session_id_name' => $this->client->getTokenCacheKey(),
+            'credentials' => $credentials,
         ]);
 
         $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $credentials, [], [
@@ -239,35 +220,42 @@ class OAuth
 
         if ($response->getStatusCode() !== 200) {
             $this->logMessage('Error when getting token', [
-                'error' => (string)$response->getContent()
+                'error' => (string) $response->getContent(),
             ]);
 
             throw new OAuthException($response);
         }
 
-        $this->credentialsKey = $credentialsKey;
         $data = json_decode($response->getContent(), true);
 
-        $this->storage->save($this->credentialsKey, [
+        $isSaved = $this->storage->save($this->client->getTokenCacheKey(), [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
+            'expires_in' => isset($data['expires_in']) ? $data['expires_in'] : null,
         ]);
 
-        $this->logMessage('Saving access token');
+        $this->logMessage('Saving access token', [
+            'is_saved' => $isSaved,
+            'access_token' => $data['access_token'],
+            'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
+            'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
+            'expires_in' => isset($data['expires_in']) ? $data['expires_in'] : null,
+        ]);
     }
 
     /**
-     * Log message
+     * Log message.
      *
      * @param $message
      * @param $params
      */
-    private function logMessage($message, $params = []) {
+    private function logMessage($message, $params = [])
+    {
         if (null !== $this->logger) {
             $this->logger->info($message, array_merge($params, [
-                'credentials_key' => $this->credentialsKey,
-                'token' => $this->getToken()
+                'session_id' => $this->client->getTokenCacheKey(),
+                'token' => $this->getToken(),
             ]));
         }
     }
