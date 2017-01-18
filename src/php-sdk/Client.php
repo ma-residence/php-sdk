@@ -291,6 +291,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\NewsletterEndpoint
+     */
+    public function newsletters()
+    {
+        return $this->getEndpoint('newsletters', Endpoints\NewsletterEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\DiffusionEndpoint
      */
     public function diffusions()
