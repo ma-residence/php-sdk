@@ -32,7 +32,7 @@ class NewsletterEndpoint extends Endpoint
      */
     public function getNeighbourhoodActivity($zipCode, $frequency, $page = 1, $per_page = 100)
     {
-        return $this->request->get("/newsletters/neighborhood_activity/$zipCode", [
+        return $this->request->get("/newsletters/neighbourhood_activity/$zipCode", [
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $per_page,
