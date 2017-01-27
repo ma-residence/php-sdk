@@ -5,6 +5,22 @@ namespace MR\SDK\Endpoints;
 class PlaceEndpoint extends Endpoint
 {
     /**
+     * @param int   $id
+     * @param int   $page
+     * @param int   $per_page
+     * @param array $extra_params
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function get($id, $page = 1, $per_page = 20, $extra_params = [])
+    {
+        return $this->request->get('/places/'.$id, array_merge([
+            'page' => $page,
+            'per_page' => $per_page,
+        ], $extra_params));
+    }
+
+    /**
      * @param int   $page
      * @param int   $per_page
      * @param array $extra_params
