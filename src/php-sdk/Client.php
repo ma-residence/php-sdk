@@ -380,7 +380,7 @@ class Client
 
     public function blacklists()
     {
-        return $this->getEndpoint('blacklists', Endpoints\BlackList::class);
+        return $this->getEndpoint('blacklists', Endpoints\BlackListEndpoint::class);
     }
 
     /**
