@@ -378,6 +378,11 @@ class Client
         return $this->getEndpoint('teams', Endpoints\TeamEndpoint::class);
     }
 
+    public function blacklists()
+    {
+        return $this->getEndpoint('blacklists', Endpoints\BlackList::class);
+    }
+
     /**
      * @param string $type
      *
