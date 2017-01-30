@@ -90,4 +90,21 @@ class NewsletterEndpoint extends Endpoint
             'per_page' => $per_page,
         ]);
     }
+
+    /**
+     * @param string $lot
+     * @param string $frequency
+     * @param int    $page
+     * @param int    $per_page
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getLendObjectsLotActivity($lot, $frequency, $page = 1, $per_page = 100)
+    {
+        return $this->request->get("/newsletters/lot_activity/lend_objects/$lot", [
+            'frequency' => $frequency,
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
+    }
 }
