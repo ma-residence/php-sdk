@@ -139,7 +139,11 @@ class Response
             return;
         }
 
-        $data = \GuzzleHttp\json_decode($this->content, true);
+        try {
+            $data = \GuzzleHttp\json_decode($this->content, true);
+        } catch (\Exception $e) {
+            return;
+        }
 
         $this->errors = isset($data['errors']) ? $data['errors'] : null;
         $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
