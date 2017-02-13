@@ -110,6 +110,21 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      * @param string $id
      * @param int    $page
      * @param int    $per_page
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getExternals($id, $page, $per_page)
+    {
+        return $this->request->get("/lots/$id/members/externals", [
+            'page' => $page,
+            'per_page' => $per_page,
+        ]);
+    }
+
+    /**
+     * @param string $id
+     * @param int    $page
+     * @param int    $per_page
      * @param array  $extra_params
      *
      * @return \MR\SDK\Transport\Response
@@ -133,9 +148,9 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * @param  strin $id
+     * @param  string $id
      *
-     * @return MR\SDK\Transport\Response
+     * @return \MR\SDK\Transport\Response
      */
     public function membersCategories($id)
     {
@@ -145,7 +160,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     /**
      * @param  string $id
      *
-     * @return MR\SDK\Transport\Response
+     * @return \MR\SDK\Transport\Response
      */
     public function membersLendObjects($id)
     {
