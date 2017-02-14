@@ -141,9 +141,25 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollows($id, $type)
+    public function getFollowsByType($id, $type, $page, $per_page)
     {
-        return $this->request->get("/users/$id/follows/$type");
+        return $this->request->get("/users/$id/follows/$type", [
+            'page' => $page,
+            'per_page' => $per_page
+        ]);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getFollows($id, $page, $per_page)
+    {
+        return $this->request->get("/users/$id/follows", [
+            'page' => $page,
+            'per_page' => $per_page
+        ]);
     }
 
     /**
