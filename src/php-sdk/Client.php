@@ -390,17 +390,48 @@ class Client
      */
     public function endpoints($type)
     {
+        // check if methods exist
         if (method_exists($this, $type)) {
             return call_user_func_array([$this, $type], []);
         }
 
-        $type = sprintf('%ss', $type);
-        if (method_exists($this, $type)) {
-            return call_user_func_array([$this, $type], []);
-        }
-
+        // check in cache
         if (isset($this->cachedEndpoints[$type])) {
             return $this->cachedEndpoints[$type];
+        }
+
+        $toCamelCase  = function ($name) {
+            return lcfirst(preg_replace_callback('/(^|_|\.)+(.)/', function ($match) {
+                return ('.' === $match[1] ? '_' : '').strtoupper($match[2]);
+            }, $name));
+        };
+
+        // check if camel case method exists
+        $typeCamelCase = $toCamelCase($type);
+        if (method_exists($this, $typeCamelCase)) {
+            return call_user_func_array([$this, $typeCamelCase], []);
+        }
+
+        // if not check plural form
+        if (substr($type, -1) != 's') {
+            $typePlural = sprintf('%ss', $type);
+        } else {
+            $typePlural = rtrim($type, 's');
+        }
+
+        if (method_exists($this, $typePlural)) {
+            return call_user_func_array([$this, $typePlural], []);
+        }
+
+        // check in cache
+        if (isset($this->cachedEndpoints[$typePlural])) {
+            return $this->cachedEndpoints[$typePlural];
+        }
+
+        // check if camel case method exists
+        $typePluralCamelCase = $toCamelCase($typePlural);
+        if (method_exists($this, $typePluralCamelCase)) {
+            return call_user_func_array([$this, $typePluralCamelCase], []);
         }
 
         throw new \InvalidArgumentException("Unknown endpoint type $type");
