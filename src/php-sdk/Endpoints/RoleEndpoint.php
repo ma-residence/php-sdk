@@ -5,14 +5,17 @@ namespace MR\SDK\Endpoints;
 class RoleEndpoint extends Endpoint
 {
     /**
-     * @param string $type
+     * @param null  $type
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function all($type = null)
+    public function all($type = null, $extraParams = [])
     {
-        $params = $type ? ['type' => $type] : [];
+        if ($type) {
+            $extraParams['type'] = $type;
+        }
 
-        return $this->request->get('/roles', $params);
+        return $this->request->get('/roles', $extraParams);
     }
 }

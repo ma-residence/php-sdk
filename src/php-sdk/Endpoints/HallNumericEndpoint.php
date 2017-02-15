@@ -5,17 +5,18 @@ namespace MR\SDK\Endpoints;
 class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
 {
     /**
-     * @param int $page
-     * @param int $per_page
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function all($page = 1, $per_page = 20)
+    public function all($page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/hall-numerics', [
+        return $this->request->get('/hall-numerics', array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
@@ -73,32 +74,32 @@ class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getLotActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getLotActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/hall-numerics/$id/lot/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPlaceActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getPlaceActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/hall-numerics/$id/place/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 }

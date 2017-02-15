@@ -6,16 +6,16 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 {
     /**
      * @param int $page
-     * @param int $per_page
-     *
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function all($page = 1, $per_page = 20)
+    public function all($page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/users', [
+        return $this->request->get('/users', array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
@@ -95,113 +95,146 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param string $id
-     * @param string $type
-     * @param string $targetId
-     *
+     * @param $id
+     * @param $type
+     * @param $targetId
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getMemberOf($id, $type, $targetId)
+    public function getMemberOf($id, $type, $targetId, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/member-of/$type/$targetId");
+        return $this->request->get("/users/$id/member-of/$type/$targetId", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
      * @param $id
-     * @param $type
-     *
+     * @param null $type
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getRecommendations($id, $type = null)
+    public function getRecommendations($id, $type = null, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/recommendations",
-            ['type' => $type]
-        );
+        return $this->request->get("/users/$id/recommendations", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+            'type' => $type,
+        ], $extraParams));
     }
 
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     * @param string $type
-     *
+     * @param $id
+     * @param $type
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollowsByType($id, $type, $page, $per_page)
+    public function getFollowsByType($id, $type, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/follows/$type", [
+        return $this->request->get("/users/$id/follows/$type", array_merge([
             'page' => $page,
-            'per_page' => $per_page
-        ]);
+            'per_page' => $perPage
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     *
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollows($id, $page, $per_page)
+    public function getFollows($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/follows", [
+        return $this->request->get("/users/$id/follows", array_merge([
             'page' => $page,
-            'per_page' => $per_page
-        ]);
+            'per_page' => $perPage
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     *
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollowers($id)
+    public function getFollowers($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/followers");
+        return $this->request->get("/users/$id/followers", array_merge([
+            'page' => $page,
+            'per_page' => $perPage
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     * @param string $type
-     *
+     * @param $id
+     * @param $type
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getJoinRequestList($id, $type)
+    public function getJoinRequestList($id, $type, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/join-request/$type");
+        return $this->request->get("/users/$id/join-request/$type", array_merge([
+            'page' => $page,
+            'per_page' => $perPage
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     * @param string $type
-     * @param string $targetId
-     *
+     * @param $id
+     * @param $type
+     * @param $targetId
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getJoinRequest($id, $type, $targetId)
+    public function getJoinRequest($id, $type, $targetId, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/join-request/$type/$targetId");
+        return $this->request->get("/users/$id/join-request/$type/$targetId", array_merge([
+            'page' => $page,
+            'per_page' => $perPage
+        ], $extraParams));
     }
 
     /**
-     * @param string $id
-     *
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getDevices($id)
+    public function getDevices($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/devices");
+        return $this->request->get("/users/$id/devices", array_merge([
+            'page' => $page,
+            'per_page' => $perPage
+        ], $extraParams));
     }
 }

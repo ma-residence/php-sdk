@@ -5,26 +5,28 @@ namespace MR\SDK\Endpoints;
 class TopicEndpoint extends Endpoint
 {
     /**
+     * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
-    public function get()
+    public function get($extraParams = [])
     {
-        return $this->request->get('/topics');
+        return $this->request->get('/topics', $extraParams);
     }
 
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/topics/$id/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 }

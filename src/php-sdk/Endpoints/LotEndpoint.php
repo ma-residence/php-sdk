@@ -6,11 +6,11 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
 {
     /**
      * @param int $page
-     * @param int $per_page
-     *
+     * @param int $perPage
+     * @param array $extraParams
      * @throws \Exception
      */
-    public function all($page = 1, $per_page = 20)
+    public function all($page = 1, $perPage = 20, $extraParams = [])
     {
         throw new \Exception('Not Implemented Yet');
     }
@@ -92,49 +92,34 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $per_page
-     *
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($id, $page, $per_page)
+    public function getMembers($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/lots/$id/members", [
+        return $this->request->get("/lots/$id/members", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getExternals($id, $page, $per_page)
-    {
-        return $this->request->get("/lots/$id/members/externals", [
-            'page' => $page,
-            'per_page' => $per_page,
-        ]);
-    }
-
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/lots/$id/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
@@ -145,6 +130,16 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     public function join(array $data)
     {
         return $this->request->post('/lots/join', [], $data);
+    }
+
+    /**
+     * @param  string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function membersExternals($id)
+    {
+        return $this->request->get("/lots/{$id}/members/externals");
     }
 
     /**
