@@ -106,7 +106,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
         return $this->request->get("/groups/$id/members", array_merge([
             'page' => $page,
             'per_page' => $perPage,
-        ], $extraParams);
+        ], $extraParams));
     }
 
     /**
