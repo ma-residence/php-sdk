@@ -98,35 +98,48 @@ class MeEndpoint extends Endpoint
 
     /**
      * @param int   $page
-     * @param int   $per_page
-     * @param array $extra_params
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getActivity($page = 1, $per_page = 20, $extra_params = [])
+    public function getActivity($page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get('/me/activity', array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $type
+     * @param $type
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollows($type)
+    public function getFollows($type, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/me/follows/'.$type);
+        return $this->request->get('/me/follows/'.$type, array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollowers()
+    public function getFollowers($page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/me/followers');
+        return $this->request->get('/me/followers', array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
@@ -151,15 +164,20 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param null $type
+     * @param null  $type
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getRecommendations($type = null)
+    public function getRecommendations($type = null, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/me/recommendations',
-            ['type' => $type]
-        );
+        return $this->request->get('/me/recommendations', array_merge([
+            'type' => $type,
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**

@@ -5,106 +5,111 @@ namespace MR\SDK\Endpoints;
 class NewsletterEndpoint extends Endpoint
 {
     /**
-     * @param string $type
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
+     * @param $type
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getNewsletterRecipients($type, $frequency, $page = 1, $per_page = 100)
+    public function getNewsletterRecipients($type, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/recipients", [
+        return $this->request->get('/newsletters/recipients', array_merge([
             'newsletter' => $type,
             'frequency' => $frequency,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $zipCode
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
+     * @param $zipCode
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublicationsNeighbourhoodActivity($zipCode, $frequency, $page = 1, $per_page = 100)
+    public function getPublicationsNeighbourhoodActivity($zipCode, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/neighbourhood_activity/publications/$zipCode", [
+        return $this->request->get("/newsletters/neighbourhood_activity/publications/$zipCode", array_merge([
             'frequency' => $frequency,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $lot
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
+     * @param $lot
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublicationsLotActivity($lot, $frequency, $page = 1, $per_page = 100)
+    public function getPublicationsLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/lot_activity/publications/$lot", [
+        return $this->request->get("/newsletters/lot_activity/publications/$lot", array_merge([
             'frequency' => $frequency,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
-    }
-
-
-    /**
-     * @param string $zipCode
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getNeighboursNeighbourhoodActivity($zipCode, $frequency, $page = 1, $per_page = 100)
-    {
-        return $this->request->get("/newsletters/neighbourhood_activity/neighbours/$zipCode", [
-            'frequency' => $frequency,
-            'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $lot
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
+     * @param $zipCode
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getNeighboursLotActivity($lot, $frequency, $page = 1, $per_page = 100)
+    public function getNeighboursNeighbourhoodActivity($zipCode, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/lot_activity/neighbours/$lot", [
+        return $this->request->get("/newsletters/neighbourhood_activity/neighbours/$zipCode", array_merge([
             'frequency' => $frequency,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
-     * @param string $lot
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $per_page
+     * @param $lot
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getLendObjectsLotActivity($lot, $frequency, $page = 1, $per_page = 100)
+    public function getNeighboursLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/lot_activity/lend_objects/$lot", [
+        return $this->request->get("/newsletters/lot_activity/neighbours/$lot", array_merge([
             'frequency' => $frequency,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param $lot
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getLendObjectsLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    {
+        return $this->request->get("/newsletters/lot_activity/lend_objects/$lot", array_merge([
+            'frequency' => $frequency,
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 }

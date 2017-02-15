@@ -6,16 +6,16 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
 {
     /**
      * @param int $page
-     * @param int $per_page
-     *
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function all($page = 1, $per_page = 20)
+    public function all($page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/associations', [
+        return $this->request->get('/associations', array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
@@ -95,58 +95,63 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
     }
 
     /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $per_page
-     *
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($id, $page, $per_page)
+    public function getMembers($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/associations/$id/members", [
+        return $this->request->get("/associations/$id/members", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
-    }
-
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $per_page
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFollowers($id, $page, $per_page)
-    {
-        return $this->request->get("/associations/$id/followers", [
-            'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
      * @param $id
-     *
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
      * @return \MR\SDK\Transport\Response
      */
-    public function getRecommendations($id)
+    public function getFollowers($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/associations/$id/recommendations");
+        return $this->request->get("/associations/$id/followers", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param $id
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getRecommendations($id, int $page = 1, int $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/associations/$id/recommendations", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
      * @param string $id
      * @param int    $page
-     * @param int    $per_page
-     * @param array  $extra_params
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getActivity($id, $page = 1, $per_page = 20, $extra_params = [])
+    public function getActivity($id, $page = 1, $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/associations/$id/activity", array_merge([
             'page' => $page,
-            'per_page' => $per_page,
-        ], $extra_params));
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 }

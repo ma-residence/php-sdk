@@ -11,19 +11,20 @@ class CategoryEndpoint extends Endpoint
     const TYPE_ASSOCIATION = 'association';
 
     /**
-     * @param string $type
-     * @param int    $page
-     * @param int    $per_page
+     * @param null  $type
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function all($type = null, $page = 1, $per_page = 20)
+    public function all($type = null, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/categories', [
+        return $this->request->get('/categories', array_merge([
             'type' => $type,
             'page' => $page,
-            'per_page' => $per_page,
-        ]);
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
