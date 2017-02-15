@@ -95,6 +95,18 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param  string $id
+     * @return MR\SDK\Transport\Response
+     */
+    public function getLots($id, $page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/users/$id/member-of/lot", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
      * @param $id
      * @param $type
      * @param $targetId
