@@ -107,6 +107,18 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param  string $id
+     * @return MR\SDK\Transport\Response
+     */
+    public function getGroups($id, $page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/users/$id/member-of/group", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
      * @param $id
      * @param $type
      * @param $targetId
