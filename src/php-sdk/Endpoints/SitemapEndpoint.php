@@ -5,39 +5,32 @@ namespace MR\SDK\Endpoints;
 class SitemapEndpoint extends Endpoint
 {
     /**
-     * @param int $page
-     * @param int $perPage
-     * @param array $extraParams
+     * @param null $types
+     * @param null $scrollId
+     *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublications(int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getPublications($types = null, $scrollId = null)
     {
-        return $this->getAll('/sitemap/publications', int $page = 1, int $perPage = 20, $extraParams);
+        if (null === $scrollId) {
+            return $this->request->get('/sitemap/publications', ['initial' => 1, 'types' => $types]);
+        }
+
+        return $this->request->get('/sitemap/publications', ['scroll_id' => $scrollId, 'types' => $types]);
     }
 
     /**
-     * @param int $page
-     * @param int $perPage
-     * @param array $extraParams
+     * @param null $types
+     * @param null $scrollId
+     *
      * @return \MR\SDK\Transport\Response
      */
-    public function getProfiles(int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getProfiles($types = null, $scrollId = null)
     {
-        return $this->getAll('/sitemap/profiles', int $page = 1, int $perPage = 20, $extraParams);
-    }
+        if (null === $scrollId) {
+            return $this->request->get('/sitemap/profiles', ['initial' => 1, 'types' => $types]);
+        }
 
-    /**
-     * @param $path
-     * @param int $page
-     * @param int $perPage
-     * @param array $extraParams
-     * @return \MR\SDK\Transport\Response
-     */
-    private function getAll($path, $page = 1, $perPage = 100, $extraParams = [])
-    {
-        return $this->request->get($path, array_merge([
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
+        return $this->request->get('/sitemap/profiles', ['scroll_id' => $scrollId, 'types' => $types]);
     }
 }
