@@ -17,7 +17,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put(array $data)
+    public function put(array $data = [])
     {
         return $this->request->put('/me', [], $data);
     }
@@ -27,17 +27,19 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patch(array $data)
+    public function patch(array $data = [])
     {
         return $this->request->patch('/me', [], $data);
     }
 
     /**
+     * @param array $data
+     *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete()
+    public function delete(array $data = [])
     {
-        return $this->request->delete('/me');
+        return $this->request->delete('/me', [], $data);
     }
 
     /**
@@ -78,12 +80,13 @@ class MeEndpoint extends Endpoint
 
     /**
      * @param string $emailId
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function deleteEmail($emailId)
+    public function deleteEmail($emailId, array $data = [])
     {
-        return $this->request->delete('/me/emails/'.$emailId);
+        return $this->request->delete('/me/emails/'.$emailId, [], $data);
     }
 
     /**
@@ -199,19 +202,20 @@ class MeEndpoint extends Endpoint
     /**
      * @return \MR\SDK\Transport\Response
      */
-    public function postLendObject(array $data)
+    public function postLendObject(array $data = [])
     {
         return $this->request->post('/me/lend-objects', [], $data);
     }
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function deleteLendObject($id)
+    public function deleteLendObject($id, array $data = [])
     {
-        return $this->request->delete('/me/lend-objects/'.$id);
+        return $this->request->delete('/me/lend-objects/'.$id, [], $data);
     }
 
     /**

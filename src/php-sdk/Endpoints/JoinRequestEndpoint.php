@@ -9,7 +9,7 @@ class JoinRequestEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/join-requests', [], $data);
     }
@@ -19,7 +19,7 @@ class JoinRequestEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function accept(array $data)
+    public function accept(array $data = [])
     {
         return $this->request->put('/join-requests/accept', [], $data);
     }
@@ -29,7 +29,7 @@ class JoinRequestEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function decline(array $data)
+    public function decline(array $data = [])
     {
         return $this->request->put('/join-requests/decline', [], $data);
     }
@@ -39,7 +39,7 @@ class JoinRequestEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete(array $data)
+    public function delete(array $data = [])
     {
         return $this->request->delete('/join-requests', [], $data);
     }

@@ -24,7 +24,7 @@ interface ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data);
+    public function post(array $data = []);
 
     /**
      * @param string $id
@@ -32,7 +32,7 @@ interface ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data);
+    public function put($id, array $data = []);
 
     /**
      * @param string $id
@@ -40,12 +40,13 @@ interface ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patch($id, array $data);
+    public function patch($id, array $data = []);
 
     /**
      * @param string $id
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id);
+    public function delete($id, array $data = []);
 }

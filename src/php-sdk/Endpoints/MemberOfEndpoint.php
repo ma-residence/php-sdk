@@ -9,7 +9,7 @@ class MemberOfEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/members', [], $data);
     }
@@ -19,7 +19,7 @@ class MemberOfEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put(array $data)
+    public function put(array $data = [])
     {
         return $this->request->put('/members', [], $data);
     }
@@ -29,7 +29,7 @@ class MemberOfEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete(array $data)
+    public function delete(array $data = [])
     {
         return $this->request->delete('/members', [], $data);
     }

@@ -30,7 +30,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/lots', [], $data);
     }
@@ -41,7 +41,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data)
+    public function put($id, array $data = [])
     {
         return $this->request->put('/lots/'.$id, [], $data);
     }
@@ -52,19 +52,20 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patch($id, array $data)
+    public function patch($id, array $data = [])
     {
         return $this->request->patch('/lots/'.$id, [], $data);
     }
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete($id, array $data = [])
     {
-        return $this->request->delete('/lots/'.$id);
+        return $this->request->delete('/lots/'.$id, [], $data);
     }
 
     /**
@@ -127,7 +128,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function join(array $data)
+    public function join(array $data = [])
     {
         return $this->request->post('/lots/join', [], $data);
     }
@@ -178,7 +179,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postDirectory($id, array $data)
+    public function postDirectory($id, array $data = [])
     {
         return $this->request->post('/lots/'.$id.'/directory', [], $data);
     }
@@ -190,7 +191,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function putDirectory($id, $directoryId, array $data)
+    public function putDirectory($id, $directoryId, array $data = [])
     {
         return $this->request->put('/lots/'.$id.'/directory/'.$directoryId, [], $data);
     }
@@ -202,7 +203,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patchDirectory($id, $directoryId, array $data)
+    public function patchDirectory($id, $directoryId, array $data = [])
     {
         return $this->request->patch('/lots/'.$id.'/directory/'.$directoryId, [], $data);
     }
@@ -210,11 +211,12 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     /**
      * @param string $id
      * @param string $directoryId
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function deleteDirectory($id, $directoryId)
+    public function deleteDirectory($id, $directoryId, array $data = [])
     {
-        return $this->request->delete('/lots/'.$id.'/directory/'.$directoryId);
+        return $this->request->delete('/lots/'.$id.'/directory/'.$directoryId, [], $data);
     }
 }

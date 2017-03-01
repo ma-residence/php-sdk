@@ -26,11 +26,12 @@ class InvitationEndpoint extends Endpoint
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete($id, array $data = [])
     {
-        return $this->request->delete('/invitations/'.$id);
+        return $this->request->delete('/invitations/'.$id, [], $data);
     }
 }

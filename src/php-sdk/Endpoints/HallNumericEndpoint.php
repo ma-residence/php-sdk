@@ -34,7 +34,7 @@ class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/hall-numerics', [], $data);
     }
@@ -45,7 +45,7 @@ class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data)
+    public function put($id, array $data = [])
     {
         return $this->request->put('/hall-numerics/'.$id, [], $data);
     }
@@ -56,19 +56,20 @@ class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patch($id, array $data)
+    public function patch($id, array $data = [])
     {
         return $this->request->patch('/hall-numerics/'.$id, [], $data);
     }
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete($id, array $data = [])
     {
-        return $this->request->delete('/hall-numerics/'.$id);
+        return $this->request->delete('/hall-numerics/'.$id, [], $data);
     }
 
     /**

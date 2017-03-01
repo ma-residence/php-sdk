@@ -33,7 +33,7 @@ class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInter
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/real-estate-players', [], $data);
     }
@@ -44,7 +44,7 @@ class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInter
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data)
+    public function put($id, array $data = [])
     {
         return $this->request->put('/real-estate-players/'.$id, [], $data);
     }
@@ -55,19 +55,20 @@ class RealEstatePlayerEndpoint extends Endpoint implements ResourceEndpointInter
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function patch($id, array $data)
+    public function patch($id, array $data = [])
     {
         return $this->request->patch('/real-estate-players/'.$id, [], $data);
     }
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete($id, array $data = [])
     {
-        return $this->request->delete('/real-estate-players/'.$id);
+        return $this->request->delete('/real-estate-players/'.$id, [], $data);
     }
 
     /**

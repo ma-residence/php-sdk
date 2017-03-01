@@ -9,7 +9,7 @@ class ForgotPasswordEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postRequest(array $data)
+    public function postRequest(array $data = [])
     {
         return $this->request->post('/forgot-password/request', [], $data);
     }
@@ -20,7 +20,7 @@ class ForgotPasswordEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getReset($token, array $data)
+    public function getReset($token, array $data = [])
     {
         return $this->request->get('/forgot-password/reset/'.$token, [], $data);
     }
@@ -31,7 +31,7 @@ class ForgotPasswordEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function postReset($token, array $data)
+    public function postReset($token, array $data = [])
     {
         return $this->request->post('/forgot-password/reset/'.$token, [], $data);
     }

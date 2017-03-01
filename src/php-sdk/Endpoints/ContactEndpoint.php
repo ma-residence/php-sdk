@@ -19,7 +19,7 @@ class ContactEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function post(array $data)
+    public function post(array $data = [])
     {
         return $this->request->post('/contacts', [], $data);
     }
@@ -30,18 +30,19 @@ class ContactEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function put($id, array $data)
+    public function put($id, array $data = [])
     {
         return $this->request->put('/contacts/'.$id, [], $data);
     }
 
     /**
      * @param string $id
+     * @param array $data
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function delete($id)
+    public function delete($id, array $data = [])
     {
-        return $this->request->delete('/contacts/'.$id);
+        return $this->request->delete('/contacts/'.$id, [], $data);
     }
 }
