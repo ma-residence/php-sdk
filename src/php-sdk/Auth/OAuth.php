@@ -214,8 +214,9 @@ class OAuth
             'credentials' => $credentials,
         ]);
 
-        $response = $this->client->request()->execute('GET', self::TOKEN_ENDPOINT, $credentials, [], [
+        $response = $this->client->request()->execute('POST', self::TOKEN_ENDPOINT, [], $credentials, [
             'anonymous' => true,
+            'form-data' => true,
         ]);
 
         if ($response->getStatusCode() !== 200) {

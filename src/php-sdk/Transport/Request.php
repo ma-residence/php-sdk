@@ -103,6 +103,7 @@ class Request
      * @param array  $parameters
      * @param array  $data
      * @param array  $options
+     * @param int    $bounces
      *
      * @return Response
      */
@@ -135,11 +136,18 @@ class Request
                 throw new RequestException('Redirects exceed threshold', $this);
             }
 
-            $response = $this->httpClient->request($method, $endpoint, $request = [
+            $request = array_merge([
                 'query' => $parameters,
                 'headers' => $headers,
-                'json' => compact('data'),
-            ] + $options);
+            ], $options);
+
+            if (isset($options['form-data'])) {
+                $request['form_params'] = $data;
+            } else {
+                $request['json'] = compact('data');
+            }
+
+            $response = $this->httpClient->request($method, $endpoint, $request);
 
             if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
                 return $this->execute('GET', $response->getHeader('location')[0], [], [], [], $bounces++);
