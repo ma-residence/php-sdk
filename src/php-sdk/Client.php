@@ -363,6 +363,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\CustomerEndpoint
+     */
+    public function customers()
+    {
+        return $this->getEndpoint('customers', Endpoints\CustomerEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\InvitationEndpoint
      */
     public function invitations()
