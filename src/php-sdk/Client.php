@@ -243,6 +243,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\AlertEndpoint
+     */
+    public function alerts()
+    {
+        return $this->getEndpoint('alerts', Endpoints\AlertEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\RecommendationEndpoint
      */
     public function recommendations()
