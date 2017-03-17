@@ -155,4 +155,20 @@ class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, Se
             'per_page' => $perPage,
         ], $extraParams));
     }
+
+    /**
+     * @param string $id
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getCustomers($id, $page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/city-halls/$id/customers", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
 }
