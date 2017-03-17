@@ -87,6 +87,21 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getCustomers($page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get('/places/customers', array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
      * @param string $query
      * @param int    $page
      * @param int    $perPage
