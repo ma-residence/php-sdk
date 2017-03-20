@@ -399,6 +399,11 @@ class Client
         return $this->getEndpoint('blacklists', Endpoints\BlackListEndpoint::class);
     }
 
+    public function moderation()
+    {
+        return $this->getEndpoint('moderation', Endpoints\ModerationEndPoint::class);
+    }
+
     /**
      * @param string $type
      *
