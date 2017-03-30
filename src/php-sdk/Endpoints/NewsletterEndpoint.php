@@ -148,4 +148,22 @@ class NewsletterEndpoint extends Endpoint
             'per_page' => $perPage,
         ], $extraParams));
     }
+
+    /**
+     * @param $group
+     * @param $frequency
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getPublicationsGroupActivity($group, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    {
+        return $this->request->get("/newsletters/community_activity/publications/$group", array_merge([
+            'frequency' => $frequency,
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
 }
