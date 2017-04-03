@@ -134,6 +134,16 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
+     * @param array $data
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function joinWithoutRole(array $data = [])
+    {
+        return $this->request->post('/lots/join-without-role', [], $data);
+    }
+
+    /**
      * @param  string $id
      *
      * @return \MR\SDK\Transport\Response
