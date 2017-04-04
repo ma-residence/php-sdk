@@ -9,7 +9,7 @@ class TopicEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function get($extraParams = [])
+    public function all($extraParams = [])
     {
         return $this->request->get('/topics', $extraParams);
     }
@@ -29,4 +29,15 @@ class TopicEndpoint extends Endpoint
             'per_page' => $perPage,
         ], $extraParams));
     }
+
+    /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function get($id)
+    {
+        return $this->request->get('/topic/'.$id);
+    }
+
 }
