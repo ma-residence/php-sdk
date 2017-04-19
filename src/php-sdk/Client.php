@@ -235,6 +235,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\PollEndpoint
+     */
+    public function polls()
+    {
+        return $this->getEndpoint('polls', Endpoints\PollEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\NewsEndpoint
      */
     public function news()
