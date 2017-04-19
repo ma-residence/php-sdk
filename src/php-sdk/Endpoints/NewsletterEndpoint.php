@@ -24,17 +24,20 @@ class NewsletterEndpoint extends Endpoint
     }
 
     /**
-     * @param $zipCode
-     * @param $frequency
+     * @param string $postalCode
+     * @param string $locality
+     * @param string $frequency
      * @param int   $page
      * @param int   $perPage
      * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublicationsNeighbourhoodActivity($zipCode, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/neighbourhood_activity/publications/$zipCode", array_merge([
+        return $this->request->get("/newsletters/neighbourhood_activity/publications", array_merge([
+            'postal_code' => $postalCode,
+            'locality' => $locality,
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
@@ -60,17 +63,20 @@ class NewsletterEndpoint extends Endpoint
     }
 
     /**
-     * @param $zipCode
-     * @param $frequency
+     * @param string $postalCode
+     * @param string $locality
+     * @param string $frequency
      * @param int   $page
      * @param int   $perPage
      * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getNeighboursNeighbourhoodActivity($zipCode, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getNeighboursNeighbourhoodActivity($postalCode, $locality, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/newsletters/neighbourhood_activity/neighbours/$zipCode", array_merge([
+        return $this->request->get("/newsletters/neighbourhood_activity/neighbours", array_merge([
+            'postal_code' => $postalCode,
+            'locality' => $locality,
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
