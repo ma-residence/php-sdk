@@ -6,6 +6,7 @@ use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
 use MR\SDK\TokenStorage\InMemoryTokenStorage;
 use MR\SDK\TokenStorage\TokenStorageInterface;
+use Psr\Log\LoggerInterface;
 
 class OAuth
 {
@@ -196,8 +197,6 @@ class OAuth
     /**
      * @param string $grant
      * @param array  $credentials
-     *
-     * @return array
      *
      * @throws OAuthException
      */

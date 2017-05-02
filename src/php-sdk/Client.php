@@ -415,7 +415,7 @@ class Client
     /**
      * @param string $type
      *
-     * @return Endpoints\TransactionEndpoint
+     * @return Endpoints\Endpoint
      */
     public function endpoints($type)
     {
@@ -541,9 +541,13 @@ class Client
      * @param callable $fn
      *
      * @return mixed
+     *
+     * @throws \Exception
      */
     public function withOptions(array $options, callable $fn)
     {
+        $result = null;
+
         try {
             $previous = [];
             foreach ($options as $key => $value) {

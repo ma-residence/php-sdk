@@ -2,24 +2,58 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class NewsletterEndpoint extends Endpoint
 {
     /**
-     * @param $type
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
+     * @param string $type
+     * @param string $frequency
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
      *
-     * @return \MR\SDK\Transport\Response
+     * @return Response
      */
-    public function getNewsletterRecipients($type, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getNewsletterRecipients($type, $frequency, $page = 1, $perPage = 100, array $extraParams = [])
     {
         return $this->request->get('/newsletters/recipients', array_merge([
             'newsletter' => $type,
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param string $frequency
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
+     *
+     * @return Response
+     */
+    public function getNewsletterBuildingRecipients($frequency, $page = 1, $perPage = 100, array $extraParams = [])
+    {
+        return $this->request->get("/newsletters/building/$frequency/recipients", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param string $frequency
+     * @param string $scrollId
+     * @param int    $size
+     * @param array  $extraParams
+     *
+     * @return Response
+     */
+    public function getNewsletterNeighbourhoodRecipients($frequency, $scrollId = '', $size = 100, array $extraParams = [])
+    {
+        return $this->request->get("/newsletters/neighbourhood/$frequency/recipients", array_merge([
+            'scroll_id' => $scrollId,
+            'scroll_size' => $size,
         ], $extraParams));
     }
 
