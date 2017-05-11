@@ -43,17 +43,17 @@ class NewsletterEndpoint extends Endpoint
 
     /**
      * @param string $frequency
-     * @param string $scrollId
-     * @param int    $size
+     * @param int    $page
+     * @param int    $perPage
      * @param array  $extraParams
      *
      * @return Response
      */
-    public function getNewsletterNeighbourhoodRecipients($frequency, $scrollId = '', $size = 100, array $extraParams = [])
+    public function getNewsletterNeighbourhoodRecipients($frequency, $page = 1, $perPage = 100, array $extraParams = [])
     {
         return $this->request->get("/newsletters/neighbourhood/$frequency/recipients", array_merge([
-            'scroll_id' => $scrollId,
-            'scroll_size' => $size,
+            'page' => $page,
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
