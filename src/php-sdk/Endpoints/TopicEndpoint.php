@@ -39,5 +39,4 @@ class TopicEndpoint extends Endpoint
     {
         return $this->request->get('/topic/'.$id);
     }
-
 }

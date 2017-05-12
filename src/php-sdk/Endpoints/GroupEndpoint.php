@@ -5,9 +5,10 @@ namespace MR\SDK\Endpoints;
 class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function all($page = 1, $perPage = 20, $extraParams = [])
@@ -62,7 +63,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -97,9 +98,10 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getMembers($id, int $page = 1, int $perPage = 20, $extraParams = [])
@@ -112,9 +114,10 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowers($id, int $page = 1, int $perPage = 20, $extraParams = [])
@@ -127,9 +130,10 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getRecommendations($id, int $page = 1, int $perPage = 20, $extraParams = [])
@@ -158,9 +162,10 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getJoinRequests($id, int $page = 1, int $perPage = 20, $extraParams = [])

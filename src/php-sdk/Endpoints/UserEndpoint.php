@@ -5,9 +5,10 @@ namespace MR\SDK\Endpoints;
 class UserEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function all($page = 1, $perPage = 20, $extraParams = [])
@@ -62,7 +63,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -96,7 +97,8 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param  string $id
+     * @param string $id
+     *
      * @return MR\SDK\Transport\Response
      */
     public function getLots($id, $page = 1, $perPage = 20, $extraParams = [])
@@ -108,7 +110,8 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param  string $id
+     * @param string $id
+     *
      * @return MR\SDK\Transport\Response
      */
     public function getGroups($id, $page = 1, $perPage = 20, $extraParams = [])
@@ -123,9 +126,10 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      * @param $id
      * @param $type
      * @param $targetId
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getMemberOf($id, $type, $targetId, $page = 1, $perPage = 20, $extraParams = [])
@@ -138,10 +142,11 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
 
     /**
      * @param $id
-     * @param null $type
-     * @param int $page
-     * @param int $perPage
+     * @param null  $type
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getRecommendations($id, $type = null, $page = 1, $perPage = 20, $extraParams = [])
@@ -172,62 +177,66 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     /**
      * @param $id
      * @param $type
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowsByType($id, $type, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/follows/$type", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollows($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/follows", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getFollowers($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/followers", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
     /**
      * @param $id
      * @param $type
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getJoinRequestList($id, $type, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/join-request/$type", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
@@ -235,31 +244,33 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      * @param $id
      * @param $type
      * @param $targetId
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getJoinRequest($id, $type, $targetId, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/join-request/$type/$targetId", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getDevices($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/devices", array_merge([
             'page' => $page,
-            'per_page' => $perPage
+            'per_page' => $perPage,
         ], $extraParams));
     }
 }
