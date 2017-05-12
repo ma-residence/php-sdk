@@ -429,7 +429,7 @@ class Client
             return $this->cachedEndpoints[$type];
         }
 
-        $toCamelCase  = function ($name) {
+        $toCamelCase = function ($name) {
             return lcfirst(preg_replace_callback('/(^|_|\.)+(.)/', function ($match) {
                 return ('.' === $match[1] ? '_' : '').strtoupper($match[2]);
             }, $name));

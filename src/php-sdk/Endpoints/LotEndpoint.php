@@ -5,9 +5,10 @@ namespace MR\SDK\Endpoints;
 class LotEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     /**
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @throws \Exception
      */
     public function all($page = 1, $perPage = 20, $extraParams = [])
@@ -59,7 +60,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -94,9 +95,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
 
     /**
      * @param $id
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
+     *
      * @return \MR\SDK\Transport\Response
      */
     public function getMembers($id, int $page = 1, int $perPage = 20, $extraParams = [])
@@ -144,7 +146,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * @param  string $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -154,7 +156,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * @param  string $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -164,7 +166,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * @param  string $id
+     * @param string $id
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -221,7 +223,7 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     /**
      * @param string $id
      * @param string $directoryId
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */

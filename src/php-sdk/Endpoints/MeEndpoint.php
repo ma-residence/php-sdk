@@ -80,7 +80,7 @@ class MeEndpoint extends Endpoint
 
     /**
      * @param string $emailId
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -209,7 +209,7 @@ class MeEndpoint extends Endpoint
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */

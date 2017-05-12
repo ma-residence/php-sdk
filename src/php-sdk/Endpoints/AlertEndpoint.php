@@ -48,7 +48,7 @@ class AlertEndpoint extends Endpoint
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array  $data
      *
      * @return \MR\SDK\Transport\Response
      */

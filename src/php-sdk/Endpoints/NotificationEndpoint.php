@@ -73,16 +73,30 @@ class NotificationEndpoint extends Endpoint
     }
 
     /**
-     * @param $userId
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
+     * @param string $userId
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
     public function getUserFollowersRecipients($userId, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get("/notifications/users/$userId/followers/recipients", array_merge([
+        return $this->getEntityFollowersRecipients($userId, 'user', $page, $perPage, $extraParams);
+    }
+
+    /**
+     * @param string $id
+     * @param string $modelType
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getEntityFollowersRecipients($id, $modelType, $page = 1, $perPage = 100, $extraParams = [])
+    {
+        return $this->request->get(sprintf('/notifications/%ss/%s/followers/recipients', $modelType, $id), array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
