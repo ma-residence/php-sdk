@@ -33,4 +33,15 @@ class SitemapEndpoint extends Endpoint
 
         return $this->request->get('/sitemap/profiles', ['scroll_id' => $scrollId, 'types' => $types]);
     }
+
+    /**
+     * @param null $interval
+     * @param null $maxResult
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getTopics($interval = null, $maxResult = null)
+    {
+        return $this->request->get('/sitemap/topics', ['interval' => $interval, 'max_result' => $maxResult]);
+    }
 }
