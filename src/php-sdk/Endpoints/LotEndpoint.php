@@ -13,7 +13,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
      */
     public function all($page = 1, $perPage = 20, $extraParams = [])
     {
-        throw new \Exception('Not Implemented Yet');
+        return $this->request->get('/lots', array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
     }
 
     /**
