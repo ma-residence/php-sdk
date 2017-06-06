@@ -11,4 +11,12 @@ class LendObjectEndpoint extends Endpoint
     {
         return $this->request->get('/lend-objects', []);
     }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function delete($id)
+    {
+        return $this->request->delete("/lend-objects/{$id}", []);
+    }
 }
