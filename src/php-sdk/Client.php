@@ -421,6 +421,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\CardEndpoint
+     */
+    public function card()
+    {
+        return $this->getEndpoint('card', Endpoints\CardEndPoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\Endpoint
