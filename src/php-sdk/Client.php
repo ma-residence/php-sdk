@@ -115,6 +115,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\MarketEndpoint
+     */
+    public function markets()
+    {
+        return $this->getEndpoint('markets', Endpoints\MarketEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\ShopEndpoint
      */
     public function shops()
