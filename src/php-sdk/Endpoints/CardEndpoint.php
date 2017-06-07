@@ -4,7 +4,7 @@ namespace MR\SDK\Endpoints;
 
 use RuntimeException;
 
-class CategoryEndpoint extends Endpoint
+class CardEndpoint extends Endpoint
 {
     /**
      * @param null  $type
