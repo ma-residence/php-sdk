@@ -425,7 +425,7 @@ class Client
      */
     public function card()
     {
-        return $this->getEndpoint('card', Endpoints\CardEndPoint::class);
+        return $this->getEndpoint('card', Endpoints\CardEndpoint::class);
     }
 
     /**
