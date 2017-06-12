@@ -30,16 +30,6 @@ class MarketEndpoint extends Endpoint implements ResourceEndpointInterface, Sett
     }
 
     /**
-     * @param string $dayName
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getOpened($dayName)
-    {
-        return $this->request->get('/markets/opened?day='.$dayName);
-    }
-
-    /**
      * @param array $data
      *
      * @return \MR\SDK\Transport\Response

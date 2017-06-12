@@ -202,4 +202,12 @@ class NotificationEndpoint extends Endpoint
             'per_page' => $perPage,
         ], $extraParams));
     }
+
+    /**
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getOpenTomorrow()
+    {
+        return $this->request->get('/markets/open-tomorrow');
+    }
 }
