@@ -37,6 +37,6 @@ class TopicEndpoint extends Endpoint
      */
     public function get($id)
     {
-        return $this->request->get('/topic/'.$id);
+        return $this->request->get('/topics/'.$id);
     }
 }

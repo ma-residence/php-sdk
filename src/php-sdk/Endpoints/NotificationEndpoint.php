@@ -96,7 +96,8 @@ class NotificationEndpoint extends Endpoint
      */
     public function getEntityFollowersRecipients($id, $modelType, $page = 1, $perPage = 100, $extraParams = [])
     {
-        return $this->request->get(sprintf('/notifications/%ss/%s/followers/recipients', $modelType, $id), array_merge([
+        $routeType = sprintf('%ss', str_replace('_', '-', $modelType));
+        return $this->request->get(sprintf('/notifications/%s/%s/followers/recipients', $routeType, $id), array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
