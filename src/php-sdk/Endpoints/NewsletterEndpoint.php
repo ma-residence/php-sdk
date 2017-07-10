@@ -61,20 +61,18 @@ class NewsletterEndpoint extends Endpoint
      * @param string $postalCode
      * @param string $locality
      * @param string $frequency
-     * @param string $receiverId
      * @param int    $page
      * @param int    $perPage
      * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $frequency, $receiverId, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $frequency, $page = 1, $perPage = 100, $extraParams = [])
     {
         return $this->request->get('/newsletters/neighbourhood_activity/publications', array_merge([
             'postal_code' => $postalCode,
             'locality' => $locality,
             'frequency' => $frequency,
-            'receiver_id' => $receiverId,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
