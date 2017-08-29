@@ -429,6 +429,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\BookmarkEndpoint
+     */
+    public function bookmarks()
+    {
+        return $this->getEndpoint('bookmarks', Endpoints\BookmarkEndpoint::class);
+    }
+
+    /**
      * @param string $type
      *
      * @return Endpoints\Endpoint
