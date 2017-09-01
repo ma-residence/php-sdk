@@ -243,6 +243,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\CivicActionEndpoint
+     */
+    public function civicActions()
+    {
+        return $this->getEndpoint('civic_actions', Endpoints\CivicActionEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\PollEndpoint
      */
     public function polls()
