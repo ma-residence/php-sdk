@@ -66,11 +66,11 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
-     * @param $placeId
-     * @param null  $radius
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
+     * @param string   $placeId
+     * @param null|int $radius
+     * @param int      $page
+     * @param int      $perPage
+     * @param array    $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -131,5 +131,16 @@ class PlaceEndpoint extends Endpoint
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
+    }
+
+    /**
+     * @param string $placeId
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getTown($placeId, $extraParams = [])
+    {
+        return $this->request->get('/places/'.$placeId.'/town', $extraParams);
     }
 }
