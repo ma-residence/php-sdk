@@ -143,4 +143,23 @@ class PlaceEndpoint extends Endpoint
     {
         return $this->request->get('/places/'.$placeId.'/town', $extraParams);
     }
+
+    /**
+      * @param  string  $locality
+      * @param  string  $postalCode
+      * @param  integer $page
+      * @param  integer $perPage
+      * @param  array   $extraParams
+      *
+      * @return \MR\SDK\Transport\Response
+      */
+    public function getTownPublications($locality, $postalCode, $page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get('/places/town/publications', array_merge([
+            'locality' => $locality,
+            'postalCode' => $postalCode,
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
 }
