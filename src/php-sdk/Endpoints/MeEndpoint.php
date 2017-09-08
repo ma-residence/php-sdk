@@ -167,6 +167,21 @@ class MeEndpoint extends Endpoint
     }
 
     /**
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getBookmarks($page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/me/bookmarks", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
      * @param null  $type
      * @param int   $page
      * @param int   $perPage
