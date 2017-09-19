@@ -13,4 +13,9 @@ class ProfileEndpoint extends Endpoint
     {
         return $this->request->get('/profiles/'.$id);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'profiles';
+    }
 }

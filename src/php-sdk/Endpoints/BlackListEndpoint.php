@@ -12,7 +12,7 @@ class BlackListEndpoint extends Endpoint
      */
     public function post($source, $target)
     {
-        return $this->request->post('/blacklists', [], compact('source', 'target'));
+        return $this->request->post("/{$this::getBaseUri()}", [], compact('source', 'target'));
     }
 
     /**
@@ -23,6 +23,11 @@ class BlackListEndpoint extends Endpoint
      */
     public function delete($source, $target)
     {
-        return $this->request->delete('/blacklists', [], compact('source', 'target'));
+        return $this->request->delete("/{$this::getBaseUri()}", [], compact('source', 'target'));
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'blacklists';
     }
 }

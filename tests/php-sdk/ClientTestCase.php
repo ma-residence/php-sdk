@@ -30,6 +30,29 @@ class ClientTestCase extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->mrClient->auth()->hasToken());
         $this->assertTrue($this->mrClient->auth()->checkLifetime());
         $this->assertEquals(200, $this->mrClient->me()->get()->getStatusCode());
+
+        $this->mrClient->associations();
+        $this->mrClient->users();
+        $this->mrClient->request();
+        $this->mrClient->roles();
+        $this->mrClient->places();
+        $this->mrClient->markets();
+        $this->mrClient->recommendations();
+        $this->mrClient->categories();
+        $this->mrClient->profiles();
+        $this->mrClient->invitations();
+        $this->mrClient->shares();
+        $this->mrClient->lots();
+        $this->mrClient->publications();
+        $this->mrClient->groups();
+        $this->mrClient->members();
+        $this->mrClient->comments();
+        $this->mrClient->serviceWorkflows();
+        $this->mrClient->services();
+        $this->mrClient->news();
+        $this->mrClient->me();
+        $this->mrClient->alerts();
+        $this->mrClient->cityHalls();
     }
 
     public function tearDown()

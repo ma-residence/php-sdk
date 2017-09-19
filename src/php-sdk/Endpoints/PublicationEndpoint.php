@@ -13,4 +13,9 @@ class PublicationEndpoint extends Endpoint
     {
         return $this->request->get('/publications/'.$id);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'publications';
+    }
 }

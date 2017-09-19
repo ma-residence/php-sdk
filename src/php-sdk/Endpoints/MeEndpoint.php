@@ -146,14 +146,6 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getSettings()
-    {
-        return $this->request->get('/me/settings');
-    }
-
-    /**
      * @param string $key
      * @param string $value
      *
@@ -233,24 +225,8 @@ class MeEndpoint extends Endpoint
         return $this->request->delete('/me/lend-objects/'.$id, [], $data);
     }
 
-    /**
-     * @param string $type
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getJoinRequestList($type)
+    public static function getBaseUri(): string
     {
-        return $this->request->get("/me/join-request/$type");
-    }
-
-    /**
-     * @param string $type
-     * @param string $targetId
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getJoinRequest($type, $targetId)
-    {
-        return $this->request->get("/me/join-request/$type/$targetId");
+        return 'me';
     }
 }

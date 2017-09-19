@@ -43,4 +43,9 @@ class JoinRequestEndpoint extends Endpoint
     {
         return $this->request->delete('/join-requests', [], $data);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'join-requests';
+    }
 }

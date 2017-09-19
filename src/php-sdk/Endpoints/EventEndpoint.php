@@ -2,58 +2,12 @@
 
 namespace MR\SDK\Endpoints;
 
-class EventEndpoint extends Endpoint
+class EventEndpoint extends Endpoint implements ResourceEndpointInterface
 {
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id)
-    {
-        return $this->request->get('/events/'.$id);
-    }
+    use Traits\ResourceTrait;
 
-    /**
-     * @param array $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function post(array $data = [])
+    public static function getBaseUri(): string
     {
-        return $this->request->post('/events', [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function put($id, array $data = [])
-    {
-        return $this->request->put('/events/'.$id, [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function patch($id, array $data = [])
-    {
-        return $this->request->patch('/events/'.$id, [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($id, array $data = [])
-    {
-        return $this->request->delete('/events/'.$id, [], $data);
+        return 'events';
     }
 }

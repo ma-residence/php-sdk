@@ -18,4 +18,9 @@ class RoleEndpoint extends Endpoint
 
         return $this->request->get('/roles', $extraParams);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'roles';
+    }
 }

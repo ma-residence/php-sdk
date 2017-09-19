@@ -11,7 +11,7 @@ class InvitationEndpoint extends Endpoint
      */
     public function get($id)
     {
-        return $this->request->get('/invitations/'.$id);
+        return $this->request->get("/{$this::getBaseUri()}/$id");
     }
 
     /**
@@ -21,7 +21,7 @@ class InvitationEndpoint extends Endpoint
      */
     public function post($data)
     {
-        return $this->request->post('/invitations', [], $data);
+        return $this->request->post("/{$this::getBaseUri()}", [], $data);
     }
 
     /**
@@ -32,6 +32,11 @@ class InvitationEndpoint extends Endpoint
      */
     public function delete($id, array $data = [])
     {
-        return $this->request->delete('/invitations/'.$id, [], $data);
+        return $this->request->delete("/{$this::getBaseUri()}/$id", [], $data);
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'invitations';
     }
 }

@@ -206,4 +206,9 @@ class NewsletterEndpoint extends Endpoint
             'per_page' => $perPage,
         ], $extraParams));
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'newsletters';
+    }
 }

@@ -27,4 +27,9 @@ class TeamEndpoint extends Endpoint
     {
         return $this->request->get('/teams/community-manager');
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'teams';
+    }
 }

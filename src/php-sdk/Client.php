@@ -67,381 +67,395 @@ class Client
     }
 
     /**
-     * @return Endpoints\MeEndpoint
+     * @return Endpoints\MeEndpoint|Endpoints\Endpoint
      */
     public function me()
     {
-        return $this->getEndpoint('me', Endpoints\MeEndpoint::class);
+        return $this->getEndpoint(Endpoints\MeEndpoint::class);
     }
 
     /**
-     * @return Endpoints\UserEndpoint
+     * @return Endpoints\UserEndpoint|Endpoints\Endpoint
      */
     public function users()
     {
-        return $this->getEndpoint('users', Endpoints\UserEndpoint::class);
+        return $this->getEndpoint(Endpoints\UserEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ForgotPasswordEndPoint
+     * @return Endpoints\ForgotPasswordEndPoint|Endpoints\Endpoint
      */
     public function forgetPassword()
     {
-        return $this->getEndpoint('forget_password', Endpoints\ForgotPasswordEndpoint::class);
+        return $this->getEndpoint(Endpoints\ForgotPasswordEndpoint::class);
     }
 
     /**
-     * @return Endpoints\GroupEndpoint
+     * @return Endpoints\GroupEndpoint|Endpoints\Endpoint
      */
     public function groups()
     {
-        return $this->getEndpoint('groups', Endpoints\GroupEndpoint::class);
+        return $this->getEndpoint(Endpoints\GroupEndpoint::class);
     }
 
     /**
-     * @return Endpoints\AssociationEndpoint
+     * @return Endpoints\AssociationEndpoint|Endpoints\Endpoint
      */
     public function associations()
     {
-        return $this->getEndpoint('associations', Endpoints\AssociationEndpoint::class);
+        return $this->getEndpoint(Endpoints\AssociationEndpoint::class);
     }
 
     /**
-     * @return Endpoints\HallNumericEndpoint
+     * @return Endpoints\HallNumericEndpoint|Endpoints\Endpoint
      */
     public function hallNumerics()
     {
-        return $this->getEndpoint('hall_numerics', Endpoints\HallNumericEndpoint::class);
+        return $this->getEndpoint(Endpoints\HallNumericEndpoint::class);
     }
 
     /**
-     * @return Endpoints\MarketEndpoint
+     * @return Endpoints\MarketEndpoint|Endpoints\Endpoint
      */
     public function markets()
     {
-        return $this->getEndpoint('markets', Endpoints\MarketEndpoint::class);
+        return $this->getEndpoint(Endpoints\MarketEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ShopEndpoint
+     * @return Endpoints\ShopEndpoint|Endpoints\Endpoint
      */
     public function shops()
     {
-        return $this->getEndpoint('shops', Endpoints\ShopEndpoint::class);
+        return $this->getEndpoint(Endpoints\ShopEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CityHallEndpoint
+     * @return Endpoints\CityHallEndpoint|Endpoints\Endpoint
      */
     public function cityHalls()
     {
-        return $this->getEndpoint('city_halls', Endpoints\CityHallEndpoint::class);
+        return $this->getEndpoint(Endpoints\CityHallEndpoint::class);
     }
 
     /**
-     * @return Endpoints\RealEstatePlayerEndpoint
+     * @return Endpoints\RealEstatePlayerEndpoint|Endpoints\Endpoint
      */
     public function realEstatePlayers()
     {
-        return $this->getEndpoint('real_estate_players', Endpoints\RealEstatePlayerEndpoint::class);
+        return $this->getEndpoint(Endpoints\RealEstatePlayerEndpoint::class);
     }
 
     /**
-     * @return Endpoints\LotEndpoint
+     * @return Endpoints\LotEndpoint|Endpoints\Endpoint
      */
     public function lots()
     {
-        return $this->getEndpoint('lots', Endpoints\LotEndpoint::class);
+        return $this->getEndpoint(Endpoints\LotEndpoint::class);
     }
 
     /**
-     * @return Endpoints\PlaceEndpoint
+     * @return Endpoints\PlaceEndpoint|Endpoints\Endpoint
      */
     public function places()
     {
-        return $this->getEndpoint('places', Endpoints\PlaceEndpoint::class);
+        return $this->getEndpoint(Endpoints\PlaceEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CategoryEndpoint
+     * @return Endpoints\CategoryEndpoint|Endpoints\Endpoint
      */
     public function categories()
     {
-        return $this->getEndpoint('categories', Endpoints\CategoryEndpoint::class);
+        return $this->getEndpoint(Endpoints\CategoryEndpoint::class);
     }
 
     /**
-     * @return Endpoints\RoleEndpoint
+     * @return Endpoints\RoleEndpoint|Endpoints\Endpoint
      */
     public function roles()
     {
-        return $this->getEndpoint('roles', Endpoints\RoleEndpoint::class);
+        return $this->getEndpoint(Endpoints\RoleEndpoint::class);
     }
 
     /**
-     * @return Endpoints\MemberOfEndpoint
+     * @return Endpoints\MemberOfEndpoint|Endpoints\Endpoint
      */
     public function members()
     {
-        return $this->getEndpoint('members', Endpoints\MemberOfEndpoint::class);
+        return $this->getEndpoint(Endpoints\MemberOfEndpoint::class);
     }
 
     /**
-     * @return Endpoints\TopicEndpoint
+     * @return Endpoints\TopicEndpoint|Endpoints\Endpoint
      */
     public function topics()
     {
-        return $this->getEndpoint('topics', Endpoints\TopicEndpoint::class);
+        return $this->getEndpoint(Endpoints\TopicEndpoint::class);
     }
 
     /**
-     * @return Endpoints\LikeEndpoint
+     * @return Endpoints\LikeEndpoint|Endpoints\Endpoint
      */
     public function likes()
     {
-        return $this->getEndpoint('likes', Endpoints\LikeEndpoint::class);
+        return $this->getEndpoint(Endpoints\LikeEndpoint::class);
     }
 
     /**
-     * @return Endpoints\FollowEndpoint
+     * @return Endpoints\FollowEndpoint|Endpoints\Endpoint
      */
     public function follows()
     {
-        return $this->getEndpoint('follows', Endpoints\FollowEndpoint::class);
+        return $this->getEndpoint(Endpoints\FollowEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ParticipateEndpoint
+     * @return Endpoints\ParticipateEndpoint|Endpoints\Endpoint
      */
     public function participates()
     {
-        return $this->getEndpoint('participates', Endpoints\ParticipateEndpoint::class);
+        return $this->getEndpoint(Endpoints\ParticipateEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CommentEndpoint
+     * @return Endpoints\CommentEndpoint|Endpoints\Endpoint
      */
     public function comments()
     {
-        return $this->getEndpoint('comments', Endpoints\CommentEndpoint::class);
+        return $this->getEndpoint(Endpoints\CommentEndpoint::class);
     }
 
     /**
-     * @return Endpoints\DonationEndpoint
+     * @return Endpoints\DonationEndpoint|Endpoints\Endpoint
      */
     public function donations()
     {
-        return $this->getEndpoint('donations', Endpoints\DonationEndpoint::class);
+        return $this->getEndpoint(Endpoints\DonationEndpoint::class);
     }
 
     /**
-     * @return Endpoints\EventEndpoint
+     * @return Endpoints\EventEndpoint|Endpoints\Endpoint
      */
     public function events()
     {
-        return $this->getEndpoint('events', Endpoints\EventEndpoint::class);
+        return $this->getEndpoint(Endpoints\EventEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CivicActionEndpoint
+     * @return Endpoints\CivicActionEndpoint|Endpoints\Endpoint
      */
     public function civicActions()
     {
-        return $this->getEndpoint('civic_actions', Endpoints\CivicActionEndpoint::class);
+        return $this->getEndpoint(Endpoints\CivicActionEndpoint::class);
     }
 
     /**
-     * @return Endpoints\PollEndpoint
+     * @return Endpoints\PollEndpoint|Endpoints\Endpoint
      */
     public function polls()
     {
-        return $this->getEndpoint('polls', Endpoints\PollEndpoint::class);
+        return $this->getEndpoint(Endpoints\PollEndpoint::class);
     }
 
     /**
-     * @return Endpoints\NewsEndpoint
+     * @return Endpoints\NewsEndpoint|Endpoints\Endpoint
      */
     public function news()
     {
-        return $this->getEndpoint('news', Endpoints\NewsEndpoint::class);
+        return $this->getEndpoint(Endpoints\NewsEndpoint::class);
     }
 
     /**
-     * @return Endpoints\AlertEndpoint
+     * @return Endpoints\AlertEndpoint|Endpoints\Endpoint
      */
     public function alerts()
     {
-        return $this->getEndpoint('alerts', Endpoints\AlertEndpoint::class);
+        return $this->getEndpoint(Endpoints\AlertEndpoint::class);
     }
 
     /**
-     * @return Endpoints\RecommendationEndpoint
+     * @return Endpoints\RecommendationEndpoint|Endpoints\Endpoint
      */
     public function recommendations()
     {
-        return $this->getEndpoint('recommendations', Endpoints\RecommendationEndpoint::class);
+        return $this->getEndpoint(Endpoints\RecommendationEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ShareEndpoint
+     * @return Endpoints\ShareEndpoint|Endpoints\Endpoint
      */
     public function shares()
     {
-        return $this->getEndpoint('shares', Endpoints\ShareEndpoint::class);
+        return $this->getEndpoint(Endpoints\ShareEndpoint::class);
     }
 
     /**
-     * @return Endpoints\TradeEndpoint
+     * @return Endpoints\TradeEndpoint|Endpoints\Endpoint
      */
     public function trades()
     {
-        return $this->getEndpoint('trades', Endpoints\TradeEndpoint::class);
+        return $this->getEndpoint(Endpoints\TradeEndpoint::class);
     }
 
     /**
-     * @return Endpoints\TransactionEndpoint
+     * @return Endpoints\TransactionEndpoint|Endpoints\Endpoint
      */
     public function transactions()
     {
-        return $this->getEndpoint('transactions', Endpoints\TransactionEndpoint::class);
+        return $this->getEndpoint(Endpoints\TransactionEndpoint::class);
     }
 
     /**
-     * @return Endpoints\MediaEndpoint
+     * @return Endpoints\ServiceEndpoint|Endpoints\Endpoint
+     */
+    public function services()
+    {
+        return $this->getEndpoint(Endpoints\ServiceEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\ServiceEndpoint|Endpoints\Endpoint
+     */
+    public function serviceWorkflows()
+    {
+        return $this->getEndpoint(Endpoints\ServiceWorkflow::class);
+    }
+
+    /**
+     * @return Endpoints\MediaEndpoint|Endpoints\Endpoint
      */
     public function medias()
     {
-        return $this->getEndpoint('medias', Endpoints\MediaEndpoint::class);
+        return $this->getEndpoint(Endpoints\MediaEndpoint::class);
     }
 
     /**
-     * @return Endpoints\NotificationEndpoint
-     */
-    public function notifications()
-    {
-        return $this->getEndpoint('notifications', Endpoints\NotificationEndpoint::class);
-    }
-
-    /**
-     * @return Endpoints\NewsletterEndpoint
+     * @return Endpoints\NewsletterEndpoint|Endpoints\Endpoint
      */
     public function newsletters()
     {
-        return $this->getEndpoint('newsletters', Endpoints\NewsletterEndpoint::class);
+        return $this->getEndpoint(Endpoints\NewsletterEndpoint::class);
     }
 
     /**
-     * @return Endpoints\DiffusionEndpoint
+     * @return Endpoints\DiffusionEndpoint|Endpoints\Endpoint
      */
     public function diffusions()
     {
-        return $this->getEndpoint('diffusions', Endpoints\DiffusionEndpoint::class);
+        return $this->getEndpoint(Endpoints\DiffusionEndpoint::class);
     }
 
     /**
-     * @return Endpoints\WidgetEndpoint
+     * @return Endpoints\WidgetEndpoint|Endpoints\Endpoint
      */
     public function widgets()
     {
-        return $this->getEndpoint('widgets', Endpoints\WidgetEndpoint::class);
+        return $this->getEndpoint(Endpoints\WidgetEndpoint::class);
     }
 
     /**
-     * @return Endpoints\PublicationEndpoint
+     * @return Endpoints\PublicationEndpoint|Endpoints\Endpoint
      */
     public function publications()
     {
-        return $this->getEndpoint('publications', Endpoints\PublicationEndpoint::class);
+        return $this->getEndpoint(Endpoints\PublicationEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ProfileEndpoint
+     * @return Endpoints\ProfileEndpoint|Endpoints\Endpoint
      */
     public function profiles()
     {
-        return $this->getEndpoint('profiles', Endpoints\ProfileEndpoint::class);
+        return $this->getEndpoint(Endpoints\ProfileEndpoint::class);
     }
 
     /**
-     * @return Endpoints\SitemapEndpoint
+     * @return Endpoints\SitemapEndpoint|Endpoints\Endpoint
      */
     public function sitemap()
     {
-        return $this->getEndpoint('sitemap', Endpoints\SitemapEndpoint::class);
+        return $this->getEndpoint(Endpoints\SitemapEndpoint::class);
     }
 
     /**
-     * @return Endpoints\LendObjectEndpoint
+     * @return Endpoints\LendObjectEndpoint|Endpoints\Endpoint
      */
     public function lendObjects()
     {
-        return $this->getEndpoint('lend_objects', Endpoints\LendObjectEndpoint::class);
+        return $this->getEndpoint(Endpoints\LendObjectEndpoint::class);
     }
 
     /**
-     * @return Endpoints\JoinRequestEndpoint
+     * @return Endpoints\JoinRequestEndpoint|Endpoints\Endpoint
      */
     public function joinRequests()
     {
-        return $this->getEndpoint('join_requests', Endpoints\JoinRequestEndpoint::class);
+        return $this->getEndpoint(Endpoints\JoinRequestEndpoint::class);
     }
 
     /**
-     * @return Endpoints\ContactEndpoint
+     * @return Endpoints\ContactEndpoint|Endpoints\Endpoint
      */
     public function contacts()
     {
-        return $this->getEndpoint('contacts', Endpoints\ContactEndpoint::class);
+        return $this->getEndpoint(Endpoints\ContactEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CustomerEndpoint
+     * @return Endpoints\CustomerEndpoint|Endpoints\Endpoint
      */
     public function customers()
     {
-        return $this->getEndpoint('customers', Endpoints\CustomerEndpoint::class);
+        return $this->getEndpoint(Endpoints\CustomerEndpoint::class);
     }
 
     /**
-     * @return Endpoints\InvitationEndpoint
+     * @return Endpoints\InvitationEndpoint|Endpoints\Endpoint
      */
     public function invitations()
     {
-        return $this->getEndpoint('invitations', Endpoints\InvitationEndpoint::class);
+        return $this->getEndpoint(Endpoints\InvitationEndpoint::class);
     }
 
     /**
-     * @return Endpoints\TeamEndpoint
+     * @return Endpoints\TeamEndpoint|Endpoints\Endpoint
      */
     public function teams()
     {
-        return $this->getEndpoint('teams', Endpoints\TeamEndpoint::class);
-    }
-
-    public function blacklists()
-    {
-        return $this->getEndpoint('blacklists', Endpoints\BlackListEndpoint::class);
-    }
-
-    public function moderation()
-    {
-        return $this->getEndpoint('moderation', Endpoints\ModerationEndPoint::class);
+        return $this->getEndpoint(Endpoints\TeamEndpoint::class);
     }
 
     /**
-     * @return Endpoints\CardEndpoint
+     * @return Endpoints\BlackListEndpoint|Endpoints\Endpoint
+     */
+    public function blacklists()
+    {
+        return $this->getEndpoint(Endpoints\BlackListEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\ModerationEndPoint|Endpoints\Endpoint
+     */
+    public function moderation()
+    {
+        return $this->getEndpoint(Endpoints\ModerationEndPoint::class);
+    }
+
+    /**
+     * @return Endpoints\CardEndpoint|Endpoints\Endpoint
      */
     public function card()
     {
-        return $this->getEndpoint('card', Endpoints\CardEndpoint::class);
+        return $this->getEndpoint(Endpoints\CardEndpoint::class);
     }
 
     /**
-     * @return Endpoints\BookmarkEndpoint
+     * @return Endpoints\BookmarkEndpoint|Endpoints\Endpoint
      */
     public function bookmarks()
     {
-        return $this->getEndpoint('bookmarks', Endpoints\BookmarkEndpoint::class);
+        return $this->getEndpoint(Endpoints\BookmarkEndpoint::class);
     }
 
     /**
@@ -498,14 +512,9 @@ class Client
         throw new \InvalidArgumentException("Unknown endpoint type $type");
     }
 
-    /**
-     * @param string $endpoint
-     * @param string $class
-     *
-     * @return Endpoints\Endpoint
-     */
-    private function getEndpoint($endpoint, $class)
+    private function getEndpoint(string $class): Endpoints\Endpoint
     {
+        $endpoint = $class::getBaseUri();
         if (!isset($this->cachedEndpoints[$endpoint])) {
             $this->cachedEndpoints[$endpoint] = new $class($this->request);
         }

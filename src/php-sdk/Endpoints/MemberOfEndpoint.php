@@ -33,4 +33,9 @@ class MemberOfEndpoint extends Endpoint
     {
         return $this->request->delete('/members', [], $data);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'members';
+    }
 }

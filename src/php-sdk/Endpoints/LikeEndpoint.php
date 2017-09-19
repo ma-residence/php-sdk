@@ -23,4 +23,9 @@ class LikeEndpoint extends Endpoint
     {
         return $this->request->delete('/likes', [], $data);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'likes';
+    }
 }

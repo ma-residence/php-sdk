@@ -44,4 +44,9 @@ class SitemapEndpoint extends Endpoint
     {
         return $this->request->get('/sitemap/topics', ['interval' => $interval, 'max_result' => $maxResult]);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'sitemap';
+    }
 }

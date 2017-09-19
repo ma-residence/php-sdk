@@ -2,14 +2,12 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Endpoints\Traits\EndpointTrait;
 use MR\SDK\Transport\Request;
 
 abstract class Endpoint
 {
-    /**
-     * @var Request
-     */
-    protected $request;
+    use EndpointTrait;
 
     /**
      * @param Request $request
