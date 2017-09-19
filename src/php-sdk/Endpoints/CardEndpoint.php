@@ -27,6 +27,11 @@ class CardEndpoint extends Endpoint
      */
     public function delete($id, array $data = [])
     {
-        return $this->request->delete("/cards/{$id}", [], $data);
+        return $this->request->delete("/{$this::getBaseUri()}/{$id}", [], $data);
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'cards';
     }
 }

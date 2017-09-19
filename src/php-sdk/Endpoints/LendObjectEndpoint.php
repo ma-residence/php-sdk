@@ -19,4 +19,9 @@ class LendObjectEndpoint extends Endpoint
     {
         return $this->request->delete("/lend-objects/{$id}", []);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'lend-objects';
+    }
 }

@@ -11,7 +11,7 @@ class FollowEndpoint extends Endpoint
      */
     public function post(array $data = [])
     {
-        return $this->request->post('/follows', [], $data);
+        return $this->request->post("/{$this::getBaseUri()}", [], $data);
     }
 
     /**
@@ -21,6 +21,11 @@ class FollowEndpoint extends Endpoint
      */
     public function delete(array $data = [])
     {
-        return $this->request->delete('/follows', [], $data);
+        return $this->request->delete("/{$this::getBaseUri()}", [], $data);
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'follows';
     }
 }

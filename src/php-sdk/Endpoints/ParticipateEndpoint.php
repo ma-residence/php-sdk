@@ -33,4 +33,9 @@ class ParticipateEndpoint extends Endpoint
     {
         return $this->request->delete('/participates', [], $data);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'participates';
+    }
 }

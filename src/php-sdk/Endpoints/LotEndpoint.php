@@ -4,129 +4,11 @@ namespace MR\SDK\Endpoints;
 
 class LotEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @throws \Exception
-     */
-    public function all($page = 1, $perPage = 20, $extraParams = [])
-    {
-        return $this->request->get('/lots', array_merge([
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id)
-    {
-        return $this->request->get('/lots/'.$id);
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function post(array $data = [])
-    {
-        return $this->request->post('/lots', [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function put($id, array $data = [])
-    {
-        return $this->request->put('/lots/'.$id, [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function patch($id, array $data = [])
-    {
-        return $this->request->patch('/lots/'.$id, [], $data);
-    }
-
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($id, array $data = [])
-    {
-        return $this->request->delete('/lots/'.$id, [], $data);
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getSettings($id)
-    {
-        return $this->request->get('/lots/'.$id.'/settings');
-    }
-
-    /**
-     * @param string $id
-     * @param string $key
-     * @param string $value
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function putSettings($id, $key, $value)
-    {
-        return $this->request->put("/lots/$id/settings/$key", [], [
-            'value' => $value,
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getMembers($id, int $page = 1, int $perPage = 20, $extraParams = [])
-    {
-        return $this->request->get("/lots/$id/members", array_merge([
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
-    }
-
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getActivity($id, $page = 1, $perPage = 20, $extraParams = [])
-    {
-        return $this->request->get("/lots/$id/activity", array_merge([
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
-    }
+    use Traits\ListTrait;
+    use Traits\ResourceTrait;
+    use Traits\SettingsTrait;
+    use Traits\ActivityTrait;
+    use Traits\MembersTrait;
 
     /**
      * @param array $data
@@ -233,5 +115,10 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     public function deleteDirectory($id, $directoryId, array $data = [])
     {
         return $this->request->delete('/lots/'.$id.'/directory/'.$directoryId, [], $data);
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'lots';
     }
 }

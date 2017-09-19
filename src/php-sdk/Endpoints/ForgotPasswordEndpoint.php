@@ -11,7 +11,7 @@ class ForgotPasswordEndpoint extends Endpoint
      */
     public function postRequest(array $data = [])
     {
-        return $this->request->post('/forgot-password/request', [], $data);
+        return $this->request->post("/{$this::getBaseUri()}/request", [], $data);
     }
 
     /**
@@ -22,7 +22,7 @@ class ForgotPasswordEndpoint extends Endpoint
      */
     public function getReset($token, array $data = [])
     {
-        return $this->request->get('/forgot-password/reset/'.$token, [], $data);
+        return $this->request->get("/{$this::getBaseUri()}/reset/$token", [], $data);
     }
 
     /**
@@ -33,6 +33,11 @@ class ForgotPasswordEndpoint extends Endpoint
      */
     public function postReset($token, array $data = [])
     {
-        return $this->request->post('/forgot-password/reset/'.$token, [], $data);
+        return $this->request->post("/{$this::getBaseUri()}/reset/$token", [], $data);
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'forgot-password';
     }
 }

@@ -12,7 +12,7 @@ class BookmarkEndpoint extends Endpoint
      */
     public function post($source, $target)
     {
-        return $this->request->post('/bookmarks', [], compact('source', 'target'));
+        return $this->request->post("/{$this::getBaseUri()}", [], compact('source', 'target'));
     }
 
     /**
@@ -23,6 +23,11 @@ class BookmarkEndpoint extends Endpoint
      */
     public function delete($source, $target)
     {
-        return $this->request->delete('/bookmarks', [], compact('source', 'target'));
+        return $this->request->delete("/{$this::getBaseUri()}", [], compact('source', 'target'));
+    }
+
+    public static function getBaseUri(): string
+    {
+        return 'bookmarks';
     }
 }

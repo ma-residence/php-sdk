@@ -13,4 +13,9 @@ class DiffusionEndpoint extends Endpoint
     {
         return $this->request->get('/diffusions/'.$id);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'diffusions';
+    }
 }

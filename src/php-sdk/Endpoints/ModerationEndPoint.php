@@ -8,4 +8,9 @@ class ModerationEndPoint extends Endpoint
     {
         return $this->request->patch('/moderation/'.$type, [], $data);
     }
+
+    public static function getBaseUri(): string
+    {
+        return 'moderation';
+    }
 }
