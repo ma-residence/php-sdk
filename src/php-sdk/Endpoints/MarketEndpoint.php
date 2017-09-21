@@ -7,7 +7,6 @@ class MarketEndpoint extends Endpoint implements ResourceEndpointInterface, Sett
     use Traits\ListTrait;
     use Traits\ResourceTrait;
     use Traits\SettingsTrait;
-    use Traits\MembersTrait;
     use Traits\FollowersTrait;
     use Traits\RecommendationsTrait;
     use Traits\ActivityTrait;
