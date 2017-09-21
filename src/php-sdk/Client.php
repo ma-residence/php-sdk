@@ -443,6 +443,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\NotificationEndpoint|Endpoints\Endpoint
+     */
+    public function notifications()
+    {
+        return $this->getEndpoint(Endpoints\NotificationEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\CardEndpoint|Endpoints\Endpoint
      */
     public function card()
