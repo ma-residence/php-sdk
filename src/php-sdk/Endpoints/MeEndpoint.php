@@ -207,6 +207,17 @@ class MeEndpoint extends Endpoint
     }
 
     /**
+     * @param $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function deleteDevice($id)
+    {
+        return $this->request->delete("/me/devices/$id");
+    }
+
+
+    /**
      * @return \MR\SDK\Transport\Response
      */
     public function postLendObject(array $data = [])
