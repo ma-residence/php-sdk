@@ -11,5 +11,5 @@ trait EndpointTrait
      */
     protected $request;
 
-    public abstract static function getBaseUri(): string;
+    abstract public static function getBaseUri(): string;
 }
