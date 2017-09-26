@@ -9,7 +9,6 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     use Traits\ListTrait;
     use Traits\ResourceTrait;
     use Traits\SettingsTrait;
-    use Traits\RecommendationsTrait;
     use Traits\ActivityTrait;
     use Traits\FollowersTrait;
 
@@ -85,6 +84,24 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         return $this->request->get("/users/$id/devices", array_merge([
             'page' => $page,
             'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param $id
+     * @param null  $type
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+    */
+    public function getRecommendations($id, $type = null, $page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/users/$id/recommendations", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+            'type' => $type,
         ], $extraParams));
     }
 
