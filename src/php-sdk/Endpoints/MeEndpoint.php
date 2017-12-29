@@ -159,15 +159,15 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
     public function getBookmarks($page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/me/bookmarks", array_merge([
+        return $this->request->get('/me/bookmarks', array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
@@ -215,7 +215,6 @@ class MeEndpoint extends Endpoint
     {
         return $this->request->delete("/me/devices/$id");
     }
-
 
     /**
      * @return \MR\SDK\Transport\Response

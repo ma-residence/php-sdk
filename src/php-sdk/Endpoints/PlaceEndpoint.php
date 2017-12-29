@@ -135,7 +135,7 @@ class PlaceEndpoint extends Endpoint
 
     /**
      * @param string $placeId
-     * @param array $extraParams
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
@@ -145,21 +145,36 @@ class PlaceEndpoint extends Endpoint
     }
 
     /**
-      * @param  string  $locality
-      * @param  string  $postalCode
-      * @param  integer $page
-      * @param  integer $perPage
-      * @param  array   $extraParams
-      *
-      * @return \MR\SDK\Transport\Response
-      */
-    public function getTownPublications($locality, $postalCode, $page = 1, $perPage = 20, $extraParams = [])
+     * @param string $longitude
+     * @param string $latitude
+     * @param string $placeType
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getNeighbourhoodPublications(string $longitude, string $latitude, string $placeType, $page = 1, $perPage = 20, $extraParams = [])
     {
-        return $this->request->get('/places/town/publications', array_merge([
-            'locality' => $locality,
-            'postalCode' => $postalCode,
+        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/publications', array_merge([
+            'place_type' => $placeType,
             'page' => $page,
             'per_page' => $perPage,
+        ], $extraParams));
+    }
+
+    /**
+     * @param string $longitude
+     * @param string $latitude
+     * @param string $placeType
+     * @param array  $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getNeighbourhoodCounters(string $longitude, string $latitude, string $placeType, $extraParams = [])
+    {
+        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/counters', array_merge([
+            'place_type' => $placeType,
         ], $extraParams));
     }
 

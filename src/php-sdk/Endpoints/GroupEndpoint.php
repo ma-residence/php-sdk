@@ -12,7 +12,6 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
     use Traits\RecommendationsTrait;
     use Traits\ActivityTrait;
 
-
     public static function getBaseUri(): string
     {
         return 'groups';
