@@ -16,7 +16,7 @@ class CardEndpoint extends Endpoint
      */
     public function all($type = null, $page = 1, $perPage = 20, $extraParams = [])
     {
-        throw new RuntimeException("Not implemented");
+        throw new RuntimeException('Not implemented');
     }
 
     /**
