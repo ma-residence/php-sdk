@@ -49,16 +49,16 @@ class Client
      * @param array                      $options
      */
     public function __construct(
-        string $host,
-        string $clientId,
-        string $clientSecret,
-        string $tokenCacheKey,
+        $host,
+        $clientId,
+        $clientSecret,
+        $tokenCacheKey,
         TokenStorageInterface $storage = null,
-        LoggerInterface $logger = null,
+        $logger = null,
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
-        $this->logger = $logger ?: new NullLogger();
+        $this->logger = $logger;
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
