@@ -178,6 +178,21 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
+    /**
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getServices($page = 1, $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get('/places/services', array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
     public static function getBaseUri(): string
     {
         return 'place';
