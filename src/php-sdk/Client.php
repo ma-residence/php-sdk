@@ -283,6 +283,23 @@ class Client
     }
 
     /**
+     * @return Endpoints\UserEndpoint|Endpoints\Endpoint
+     */
+    public function userServices()
+    {
+        return $this->getEndpoint(Endpoints\UserEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\MeEndpoint|Endpoints\Endpoint
+     */
+    public function meServices()
+    {
+        return $this->getEndpoint(Endpoints\MeEndpoint::class);
+    }
+
+
+    /**
      * @return Endpoints\ShareEndpoint|Endpoints\Endpoint
      */
     public function shares()
