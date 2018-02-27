@@ -89,14 +89,14 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
-     * @param $id
-     * @param int $page
-     * @param int $perPage
-     * @param array $extraParams
+     * @param string $id
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getServices($id, int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getServices(string $id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
         return $this->request->get("/users/$id/services", array_merge([
             'page' => $page,

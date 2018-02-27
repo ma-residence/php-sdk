@@ -236,8 +236,8 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param int $page
-     * @param int $perPage
+     * @param int   $page
+     * @param int   $perPage
      * @param array $extraParams
      *
      * @return \MR\SDK\Transport\Response
