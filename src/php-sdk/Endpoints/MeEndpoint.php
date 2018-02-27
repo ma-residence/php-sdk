@@ -235,6 +235,21 @@ class MeEndpoint extends Endpoint
         return $this->request->delete('/me/lend-objects/'.$id, [], $data);
     }
 
+    /**
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getServices(int $page = 1, int $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/me/services", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
     public static function getBaseUri(): string
     {
         return 'me';
