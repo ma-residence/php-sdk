@@ -117,6 +117,24 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
         return $this->request->delete('/lots/'.$id.'/directory/'.$directoryId, [], $data);
     }
 
+    /**
+     * Get all services of the neighbors
+     *
+     * @param string $lotId
+     * @param int $page
+     * @param int $perPage
+     * @param array $extraParams
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getAllServices(string $lotId, int $page = 1, int $perPage = 20, $extraParams = [])
+    {
+        return $this->request->get("/lots/$lotId/services", array_merge([
+            'page' => $page,
+            'per_page' => $perPage,
+        ], $extraParams));
+    }
+
     public static function getBaseUri(): string
     {
         return 'lots';
