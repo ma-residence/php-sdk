@@ -339,14 +339,6 @@ class Client
     }
 
     /**
-     * @return Endpoints\DiffusionEndpoint|Endpoints\Endpoint
-     */
-    public function diffusions()
-    {
-        return $this->getEndpoint(Endpoints\DiffusionEndpoint::class);
-    }
-
-    /**
      * @return Endpoints\WidgetEndpoint|Endpoints\Endpoint
      */
     public function widgets()
