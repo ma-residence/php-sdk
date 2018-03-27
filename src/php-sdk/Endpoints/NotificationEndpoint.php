@@ -21,6 +21,14 @@ class NotificationEndpoint extends Endpoint
         ], $extraParams));
     }
 
+    public function getRecipientsFromMedia(string $mediaId, int $page = 1, int $perPage = 100, array $extraParams = []): Response
+    {
+        return $this->request->get("/notifications/media/$mediaId/recipients", array_merge([
+             'page' => $page,
+             'per_page' => $perPage,
+        ], $extraParams));
+    }
+
     public static function getBaseUri(): string
     {
         return 'notifications';
