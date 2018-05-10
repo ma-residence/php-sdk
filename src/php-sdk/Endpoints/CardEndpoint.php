@@ -7,6 +7,16 @@ use RuntimeException;
 class CardEndpoint extends Endpoint
 {
     /**
+     * @param string $id
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function get($id)
+    {
+        return $this->request->get("/{$this::getBaseUri()}/$id");
+    }
+
+    /**
      * @param null  $type
      * @param int   $page
      * @param int   $perPage
