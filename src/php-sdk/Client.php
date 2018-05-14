@@ -49,16 +49,16 @@ class Client
      * @param array                      $options
      */
     public function __construct(
-        $host,
-        $clientId,
-        $clientSecret,
-        $tokenCacheKey,
+        string $host,
+        string $clientId,
+        string $clientSecret,
+        string $tokenCacheKey,
         TokenStorageInterface $storage = null,
-        $logger = null,
+        LoggerInterface $logger = null,
         HandlerStack $handlerStack = null,
         array $options = []
     ) {
-        $this->logger = $logger;
+        $this->logger = $logger ?: new NullLogger();
         $this->auth = new OAuth($this, $clientId, $clientSecret, $storage, $options);
         $this->request = new Request($this, $host, $handlerStack);
 
@@ -224,6 +224,14 @@ class Client
     public function comments()
     {
         return $this->getEndpoint(Endpoints\CommentEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\DemandEndpoint|Endpoints\Endpoint
+     */
+    public function demands()
+    {
+        return $this->getEndpoint(Endpoints\DemandEndpoint::class);
     }
 
     /**
