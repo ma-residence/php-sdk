@@ -31,7 +31,7 @@ class NotificationEndpoint extends Endpoint
 
     public function getTopicsRecipients(array $topics, string $placeId, int $page = 1, int $perPage = 100, array $extraParams = []): Response
     {
-        return $this->request->get("/notifications/topics/recipients", array_merge([
+        return $this->request->get('/notifications/topics/recipients', array_merge([
              'topics' => $topics,
              'place_id' => $placeId,
              'page' => $page,

@@ -15,7 +15,7 @@ class CardEndpoint extends Endpoint
     {
         return $this->request->get("/{$this::getBaseUri()}/$id");
     }
-    
+
     /**
      * @param null  $type
      * @param int   $page
