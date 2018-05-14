@@ -244,7 +244,7 @@ class MeEndpoint extends Endpoint
      */
     public function getServices(int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/me/services", array_merge([
+        return $this->request->get('/me/services', array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));

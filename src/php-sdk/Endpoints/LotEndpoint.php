@@ -118,12 +118,12 @@ class LotEndpoint extends Endpoint implements ResourceEndpointInterface, Setting
     }
 
     /**
-     * Get all services of the neighbors
+     * Get all services of the neighbors.
      *
      * @param string $lotId
-     * @param int $page
-     * @param int $perPage
-     * @param array $extraParams
+     * @param int    $page
+     * @param int    $perPage
+     * @param array  $extraParams
      *
      * @return \MR\SDK\Transport\Response
      */
