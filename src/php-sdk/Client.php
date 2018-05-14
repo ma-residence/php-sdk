@@ -227,6 +227,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\DemandEndpoint|Endpoints\Endpoint
+     */
+    public function demands()
+    {
+        return $this->getEndpoint(Endpoints\DemandEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\DonationEndpoint|Endpoints\Endpoint
      */
     public function donations()
