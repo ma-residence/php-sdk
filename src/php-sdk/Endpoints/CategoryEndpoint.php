@@ -6,6 +6,8 @@ use MR\SDK\Transport\Response;
 
 class CategoryEndpoint extends Endpoint
 {
+    use Traits\MembersTrait;
+
     const TYPE_INTEREST = 'interest';
     const TYPE_SERVICE = 'service';
     const TYPE_GOOD = 'good';
