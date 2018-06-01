@@ -7,6 +7,7 @@ use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
 use GuzzleHttp\HandlerStack;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 class Client
 {
