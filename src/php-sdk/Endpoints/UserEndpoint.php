@@ -129,15 +129,4 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     {
         return $this->request->get("/{$this::getBaseUri()}/$userId/member-of/$type");
     }
-
-    /**
-     * @param string $associationId
-     * @param string $invitationToken
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function acceptAssociationInvitation(string $associationId, string $invitationToken)
-    {
-        return $this->request->put("/association/$associationId/invitations/$invitationToken/accept", [], []);
-    }
 }

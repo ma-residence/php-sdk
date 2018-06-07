@@ -16,4 +16,15 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
     {
         return 'associations';
     }
+
+    /**
+     * @param string $associationId
+     * @param string $invitationToken
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function acceptAssociationInvitation(string $associationId, string $invitationToken)
+    {
+        return $this->request->put("/{$this::getBaseUri()}/$associationId/invitations/$invitationToken/accept", [], []);
+    }
 }
