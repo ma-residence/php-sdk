@@ -39,7 +39,7 @@ class NotificationEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    public function getCustomerPublicationAndCategoriesRecipients(string $publicationId , int $page = 1, int $perPage = 100, array $extraParams = [])
+    public function getCustomerPublicationAndCategoriesRecipients(string $publicationId, int $page = 1, int $perPage = 100, array $extraParams = [])
     {
         return $this->request->get("/notifications/customers/publications/{$publicationId}/recipients", array_merge([
              'page' => $page,
