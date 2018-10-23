@@ -66,12 +66,11 @@ class NewsletterEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $page = 1, $perPage = 100, $extraParams = [])
     {
         return $this->request->get('/newsletters/neighbourhood_activity/publications', array_merge([
             'postal_code' => $postalCode,
             'locality' => $locality,
-            'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
@@ -105,12 +104,11 @@ class NewsletterEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getNeighboursNeighbourhoodActivity($postalCode, $locality, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getNeighboursNeighbourhoodActivity($postalCode, $locality, $page = 1, $perPage = 100, $extraParams = [])
     {
         return $this->request->get('/newsletters/neighbourhood_activity/neighbours', array_merge([
             'postal_code' => $postalCode,
             'locality' => $locality,
-            'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
