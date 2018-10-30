@@ -253,7 +253,7 @@ class OAuth
     private function logMessage($message, $params = [])
     {
         if (null !== $this->logger) {
-            $this->logger->info($message, array_merge($params, [
+            $this->logger->debug($message, array_merge($params, [
                 'session_id' => $this->client->getTokenCacheKey(),
                 'token' => $this->getToken(),
             ]));
