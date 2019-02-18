@@ -156,6 +156,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\MitrustEndpoint|Endpoints\Endpoint
+     */
+    public function mitrusts()
+    {
+        return $this->getEndpoint(Endpoints\MitrustEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\PlaceEndpoint|Endpoints\Endpoint
      */
     public function places()

@@ -67,7 +67,7 @@ class PlaceEndpoint extends Endpoint
 
     /**
      * @param string   $placeId
-     * @param null|int $radius
+     * @param int|null $radius
      * @param int      $page
      * @param int      $perPage
      * @param array    $extraParams
