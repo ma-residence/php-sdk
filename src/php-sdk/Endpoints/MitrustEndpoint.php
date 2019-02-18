@@ -2,7 +2,9 @@
 
 namespace MR\SDK\Endpoints;
 
-class MitrustEndpoint extends Endpoint implements ResourceEndpointInterface
+use MR\SDK\Transport\Response;
+
+class MitrustEndpoint extends Endpoint
 {
     public static function getBaseUri(): string
     {
