@@ -150,7 +150,7 @@ class OAuth
     }
 
     /**
-     * @return null|string
+     * @return string|null
      *
      * @throws \OAuthException
      */
