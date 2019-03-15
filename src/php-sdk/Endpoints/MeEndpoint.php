@@ -250,6 +250,16 @@ class MeEndpoint extends Endpoint
         ], $extraParams));
     }
 
+    /**
+     * @param string $authorizationCode
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function certifyAddress(string $authorizationCode)
+    {
+        return $this->request->put("/{$this::getBaseUri()}/address/certify/{$authorizationCode}");
+    }
+
     public static function getBaseUri(): string
     {
         return 'me';
