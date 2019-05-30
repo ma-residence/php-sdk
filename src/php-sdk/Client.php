@@ -262,17 +262,9 @@ class Client
     /**
      * @return Endpoints\PushEndpoint|Endpoints\Endpoint
      */
-    public function pushes()
+    public function pushs()
     {
         return $this->getEndpoint(Endpoints\PushEndpoint::class);
-    }
-
-    /**
-     * @return Endpoints\CivicActionEndpoint|Endpoints\Endpoint
-     */
-    public function civicActions()
-    {
-        return $this->getEndpoint(Endpoints\CivicActionEndpoint::class);
     }
 
     /**
