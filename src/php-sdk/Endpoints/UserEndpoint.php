@@ -82,7 +82,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function getDevices($id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/devices", array_merge([
+        return $this->request->get("/{$this::getBaseUri()}/$id/devices", array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
@@ -98,17 +98,11 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function getServices(string $id, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        return $this->request->get("/users/$id/services", array_merge([
+        return $this->request->get("/{$this::getBaseUri()}/$id/services", array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
-
-    public static function getBaseUri(): string
-    {
-        return 'users';
-    }
-
     /**
      * @param string $email
      *
@@ -116,7 +110,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
      */
     public function getByEmail(string $email)
     {
-        return $this->request->get("/users/email/$email");
+        return $this->request->get("/{$this::getBaseUri()}/email/$email");
     }
 
     /**
@@ -128,5 +122,14 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     public function getMemberOfByType(string $userId, string $type)
     {
         return $this->request->get("/{$this::getBaseUri()}/$userId/member-of/$type");
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getBaseUri(): string
+    {
+        return 'users';
     }
 }
