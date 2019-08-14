@@ -2,10 +2,10 @@
 
 namespace MR\SDK;
 
+use GuzzleHttp\HandlerStack;
 use MR\SDK\Auth\OAuth;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use MR\SDK\Transport\Request;
-use GuzzleHttp\HandlerStack;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -465,6 +465,14 @@ class Client
     public function bookmarks()
     {
         return $this->getEndpoint(Endpoints\BookmarkEndpoint::class);
+    }
+
+    /**
+     * @return Endpoints\NewFeatureEndpoint|Endpoints\Endpoint
+     */
+    public function newFeatures()
+    {
+        return $this->getEndpoint(Endpoints\NewFeatureEndpoint::class);
     }
 
     /**

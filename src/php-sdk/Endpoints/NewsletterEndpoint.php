@@ -42,15 +42,15 @@ class NewsletterEndpoint extends Endpoint
     }
 
     /**
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $extraParams
      *
      * @return Response
      */
     public function getNewsletterNeighbourhoodRecipients($page = 1, $perPage = 100, array $extraParams = [])
     {
-        return $this->request->get("/newsletters/neighbourhood/recipients", array_merge([
+        return $this->request->get('/newsletters/neighbourhood/recipients', array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
