@@ -18,7 +18,7 @@ class NewFeatureEndpoint extends Endpoint
      */
     public function getRecipients(string $feature, int $page = 1, int $perPage = 20, $extraParams = [])
     {
-        $this->request->get("/{$this::getBaseUri()}/$feature/recipients", array_merge([
+        return $this->request->get("/{$this::getBaseUri()}/$feature/recipients", array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
