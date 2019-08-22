@@ -29,6 +29,6 @@ class NewFeatureEndpoint extends Endpoint
      */
     public static function getBaseUri(): string
     {
-        return 'new_feature';
+        return 'new-feature';
     }
 }
