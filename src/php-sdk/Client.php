@@ -468,11 +468,11 @@ class Client
     }
 
     /**
-     * @return Endpoints\NewFeatureEndpoint|Endpoints\Endpoint
+     * @return Endpoints\FeatureEndpoint|Endpoints\Endpoint
      */
-    public function newFeatures()
+    public function features()
     {
-        return $this->getEndpoint(Endpoints\NewFeatureEndpoint::class);
+        return $this->getEndpoint(Endpoints\FeatureEndpoint::class);
     }
 
     /**

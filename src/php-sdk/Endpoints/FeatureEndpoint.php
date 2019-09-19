@@ -4,8 +4,9 @@ namespace MR\SDK\Endpoints;
 
 use MR\SDK\Endpoints\Traits\ListTrait;
 
-class NewFeatureEndpoint extends Endpoint
+class FeatureEndpoint extends Endpoint
 {
+    use Traits\ResourceTrait;
     use ListTrait;
 
     /**
@@ -29,6 +30,6 @@ class NewFeatureEndpoint extends Endpoint
      */
     public static function getBaseUri(): string
     {
-        return 'new-feature';
+        return 'features';
     }
 }
