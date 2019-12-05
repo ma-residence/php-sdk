@@ -156,12 +156,7 @@ class Request
             if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
                 $response = $re->getResponse();
                 $body = (string) $response->getBody();
-                throw new SdkRequestException(sprintf(
-                    "Request Error: `%s %s`\nBody: %s",
-                    $method,
-                    $endpoint,
-                    json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)
-                ), 0, $re);
+                throw new SdkRequestException(sprintf("Request Error: `%s %s`\nBody: %s", $method, $endpoint, json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)), 0, $re);
             }
 
             $response = $re->getResponse();

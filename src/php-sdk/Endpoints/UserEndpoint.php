@@ -103,6 +103,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
             'per_page' => $perPage,
         ], $extraParams));
     }
+
     /**
      * @param string $email
      *
@@ -123,7 +124,6 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     {
         return $this->request->get("/{$this::getBaseUri()}/$userId/member-of/$type");
     }
-
 
     /**
      * @return string
