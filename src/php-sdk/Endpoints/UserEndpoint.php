@@ -115,6 +115,16 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
     }
 
     /**
+     * @param string $emailId
+     *
+     * @return \MR\SDK\Transport\Response
+     */
+    public function getByEmailId(string $emailId)
+    {
+        return $this->request->get("/{$this::getBaseUri()}/email/id/$emailId");
+    }
+
+    /**
      * @param string $userId
      * @param string $type
      *
