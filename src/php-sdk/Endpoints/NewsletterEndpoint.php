@@ -6,16 +6,7 @@ use MR\SDK\Transport\Response;
 
 class NewsletterEndpoint extends Endpoint
 {
-    /**
-     * @param string $type
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return Response
-     */
-    public function getNewsletterRecipients($type, $frequency, $page = 1, $perPage = 100, array $extraParams = [])
+    public function getNewsletterRecipients(string $type, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get('/newsletters/recipients', array_merge([
             'newsletter' => $type,
@@ -25,15 +16,7 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return Response
-     */
-    public function getNewsletterBuildingRecipients($frequency, $page = 1, $perPage = 100, array $extraParams = [])
+    public function getNewsletterBuildingRecipients(string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get("/newsletters/building/$frequency/recipients", array_merge([
             'page' => $page,
@@ -41,14 +24,7 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return Response
-     */
-    public function getNewsletterNeighbourhoodRecipients($page = 1, $perPage = 100, array $extraParams = [])
+    public function getNewsletterNeighbourhoodRecipients(int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get('/newsletters/neighbourhood/recipients', array_merge([
             'page' => $page,
@@ -56,17 +32,7 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param string $postalCode
-     * @param string $locality
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getPublicationsNeighbourhoodActivity($postalCode, $locality, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsNeighbourhoodActivity(string $postalCode, string $locality, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get('/newsletters/neighbourhood_activity/publications', array_merge([
             'postal_code' => $postalCode,
@@ -76,35 +42,16 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param $lot
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getPublicationsLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/publications/$lot", array_merge([
+        return $this->request->get("/newsletters/lot_activity/publications/$lotId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param string $postalCode
-     * @param string $locality
-     * @param string $frequency
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getNeighboursNeighbourhoodActivity($postalCode, $locality, $page = 1, $perPage = 100, $extraParams = [])
+    public function getNeighboursNeighbourhoodActivity(string $postalCode, string $locality, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get('/newsletters/neighbourhood_activity/neighbours', array_merge([
             'postal_code' => $postalCode,
@@ -114,70 +61,34 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param $lot
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getNeighboursLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getNeighboursLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/neighbours/$lot", array_merge([
+        return $this->request->get("/newsletters/lot_activity/neighbours/$lotId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param $lot
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getLendObjectsLotActivity($lot, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getLendObjectsLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/lend_objects/$lot", array_merge([
+        return $this->request->get("/newsletters/lot_activity/lend_objects/$lotId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param $zipCode
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFavoriteTopicsActivity($zipCode, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getFavoriteTopicsActivity(string $postalCode, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/topics_activity/$zipCode", array_merge([
+        return $this->request->get("/newsletters/topics_activity/$postalCode", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param $userId
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFavoritesActivity($userId, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getFavoritesActivity(string $userId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get("/newsletters/favorites_activity/$userId", array_merge([
             'frequency' => $frequency,
@@ -186,22 +97,18 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param $group
-     * @param $frequency
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getPublicationsGroupActivity($group, $frequency, $page = 1, $perPage = 100, $extraParams = [])
+    public function getPublicationsGroupActivity(string $groupId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/community_activity/publications/$group", array_merge([
+        return $this->request->get("/newsletters/community_activity/publications/$groupId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
+    }
+
+    public function getLocalityCounters(array $extraParams = []) : Response
+    {
+        return $this->request->get("/newsletters/locality/counters", array_merge([], $extraParams));
     }
 
     public static function getBaseUri(): string
