@@ -276,6 +276,14 @@ class Client
     }
 
     /**
+     * @return Endpoints\HelpEndpoint|Endpoints\Endpoint
+     */
+    public function help()
+    {
+        return $this->getEndpoint(Endpoints\HelpEndpoint::class);
+    }
+
+    /**
      * @return Endpoints\AlertEndpoint|Endpoints\Endpoint
      */
     public function alerts()
