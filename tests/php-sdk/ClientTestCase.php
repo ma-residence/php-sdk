@@ -50,6 +50,7 @@ class ClientTestCase extends \PHPUnit_Framework_TestCase
         $this->mrClient->serviceWorkflows();
         $this->mrClient->services();
         $this->mrClient->news();
+        $this->mrClient->help();
         $this->mrClient->me();
         $this->mrClient->alerts();
         $this->mrClient->cityHalls();
