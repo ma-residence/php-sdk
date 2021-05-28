@@ -47,6 +47,11 @@ class NotificationEndpoint extends Endpoint
         ], $extraParams));
     }
 
+    public function getProfile(string $id): Response
+    {
+        return $this->request->get("/notifications/profiles/{$id}");
+    }
+
     public static function getBaseUri(): string
     {
         return 'notifications';
