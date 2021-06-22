@@ -2,6 +2,8 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class PlaceEndpoint extends Endpoint
 {
     /**
@@ -191,6 +193,11 @@ class PlaceEndpoint extends Endpoint
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
+    }
+
+    public function getUsersByPlaceId(string $placeId, array $parameters): Response
+    {
+        return $this->request->get('/places/'.$placeId.'/users',$parameters);
     }
 
     public static function getBaseUri(): string

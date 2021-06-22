@@ -52,6 +52,11 @@ class NotificationEndpoint extends Endpoint
         return $this->request->get("/notifications/profiles/{$id}");
     }
 
+    public function getRecipientsByDistricts(array $parameters): Response
+    {
+        return $this->request->get('/notifications/districts/recipients', $parameters);
+    }
+
     public static function getBaseUri(): string
     {
         return 'notifications';
