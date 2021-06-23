@@ -93,12 +93,9 @@ class PlaceEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getMembers($page = 1, $perPage = 20, $extraParams = [])
+    public function getMembers($parameters)
     {
-        return $this->request->get('/places/members', array_merge([
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
+        return $this->request->get('/places/members', $parameters);
     }
 
     /**
