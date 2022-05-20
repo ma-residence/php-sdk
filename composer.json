@@ -3,7 +3,7 @@
     "type": "library",
     "require": {
         "php": "7.*",
-        "guzzlehttp/guzzle": "6.4.*",
+        "guzzlehttp/guzzle": "7.4.*",
         "symfony/cache": "4.4.*"
     },
     "require-dev": {
