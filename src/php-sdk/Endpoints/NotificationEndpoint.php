@@ -8,8 +8,9 @@ class NotificationEndpoint extends Endpoint
 {
     public function getRecipients(array $ids = [], string $senderUserId): Response
     {
-        return $this->request->get('/notifications/recipients/'.$senderUserId, [
+        return $this->request->get('/notifications/recipients', [
             'ids' => $ids,
+            'sender_id' => $senderUserId,
         ]);
     }
 
