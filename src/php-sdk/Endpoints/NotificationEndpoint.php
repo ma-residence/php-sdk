@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class NotificationEndpoint extends Endpoint
 {
-    public function getRecipients(array $ids = [], string $senderUserId): Response
+    public function getRecipients(string $senderUserId, array $ids = []): Response
     {
         return $this->request->get('/notifications/recipients', [
             'ids' => $ids,
