@@ -6,23 +6,14 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class CacheTokenStorage implements TokenStorageInterface
 {
-    /**
-     * @var CacheItemPoolInterface
-     */
-    private $cache;
+    private CacheItemPoolInterface $cache;
 
-    /**
-     * @param CacheItemPoolInterface $cache
-     */
     public function __construct(CacheItemPoolInterface $cache)
     {
         $this->cache = $cache;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function save($key, array $token)
+    public function save(string $key, array $token): bool
     {
         $item = $this->cache->getItem($key);
         $item->set(serialize($token));
@@ -31,28 +22,19 @@ class CacheTokenStorage implements TokenStorageInterface
         return $this->cache->save($item);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key)
+    public function get(string $key): ? array
     {
         $item = $this->cache->getItem($key);
 
-        return $item->isHit() ? unserialize($item->get()) : false;
+        return $item->isHit() ? unserialize($item->get()) : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
+    public function has(string $key): bool
     {
         return $this->cache->getItem($key)->isHit();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key)
+    public function remove(string $key):bool
     {
         return $this->cache->deleteItem($key);
     }
