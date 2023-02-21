@@ -4,7 +4,9 @@
     "require": {
         "php": "8.*",
         "guzzlehttp/guzzle": "7.5.*",
-        "symfony/cache": "4.4.*"
+        "symfony/cache": "4.4.*",
+        "predis/predis": "2.*",
+        "snc/redis-bundle": "4.6.*"
     },
     "require-dev": {
         "phpunit/phpunit": "10.*"
@@ -19,9 +21,9 @@
             "Tests\\MR\\SDK\\": "tests/php-sdk"
         }
     },
-    "extra" : {
-        "branch-alias" : {
-            "dev-master" : "master-dev"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master-dev"
         }
     }
 }
