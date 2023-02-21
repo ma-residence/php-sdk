@@ -2,9 +2,11 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class ModerationEndPoint extends Endpoint
 {
-    public function patch($type, $data)
+    public function patch(string $type, array $data) : Response
     {
         return $this->request->patch('/moderation/'.$type, [], $data);
     }

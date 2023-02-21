@@ -2,24 +2,16 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class LikeEndpoint extends Endpoint
 {
-    /**
-     * @param array $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function post(array $data = [])
+    public function post(array $data = []) : Response
     {
         return $this->request->post('/likes', [], $data);
     }
 
-    /**
-     * @param array $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete(array $data = [])
+    public function delete(array $data = []) : Response
     {
         return $this->request->delete('/likes', [], $data);
     }

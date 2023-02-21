@@ -6,30 +6,15 @@ use MR\SDK\Transport\Response;
 
 class PlaceEndpoint extends Endpoint
 {
-    /**
-     * @param int   $id
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id, $page = 1, $perPage = 20, $extraParams = [])
+    public function get(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
-        return $this->request->get('/places/'.$id, array_merge([
+        return $this->request->get('/places/' . $id, array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getActivity($page = 1, $perPage = 20, $extraParams = [])
+    public function getActivity(int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/activity', array_merge([
             'page' => $page,
@@ -37,14 +22,7 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getEvents($page = 1, $perPage = 20, $extraParams = [])
+    public function getEvents(int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/events', array_merge([
             'page' => $page,
@@ -52,14 +30,7 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getCivicActions($page = 1, $perPage = 20, $extraParams = [])
+    public function getCivicActions(int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/civic-actions', array_merge([
             'page' => $page,
@@ -67,47 +38,24 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param string   $placeId
-     * @param int|null $radius
-     * @param int      $page
-     * @param int      $perPage
-     * @param array    $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getMap($placeId, $radius = null, $page = 1, $perPage = 20, $extraParams = [])
+    public function getMap($placeId, $radius = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         if ($radius) {
             $extraParams['radius'] = $radius;
         }
 
-        return $this->request->get('/places/'.$placeId.'/map', array_merge([
+        return $this->request->get('/places/' . $placeId . '/map', array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getMembers($parameters)
+    public function getMembers($parameters): Response
     {
         return $this->request->get('/places/members', $parameters);
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getCustomers($page = 1, $perPage = 20, $extraParams = [])
+    public function getCustomers(int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/customers', array_merge([
             'page' => $page,
@@ -115,15 +63,7 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param string $query
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function search($query, $page = 1, $perPage = 20, $extraParams = [])
+    public function search(string $query, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/search', array_merge([
             'query' => $query,
@@ -132,59 +72,34 @@ class PlaceEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param string $placeId
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getTown($placeId, $extraParams = [])
+    public function getTown(string $placeId, array $extraParams = []): Response
     {
-        return $this->request->get('/places/'.$placeId.'/town', $extraParams);
+        return $this->request->get('/places/' . $placeId . '/town', $extraParams);
     }
 
-    /**
-     * @param string $longitude
-     * @param string $latitude
-     * @param string $placeType
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getNeighbourhoodPublications(string $longitude, string $latitude, string $placeType, $page = 1, $perPage = 20, $extraParams = [])
-    {
-        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/publications', array_merge([
+    public function getNeighbourhoodPublications(
+        string $longitude,
+        string $latitude,
+        string $placeType,
+        int $page = 1,
+        int $perPage = 20,
+        array $extraParams = []
+    ): Response {
+        return $this->request->get('/places/lng/' . $longitude . '/lat/' . $latitude . '/publications', array_merge([
             'place_type' => $placeType,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param string $longitude
-     * @param string $latitude
-     * @param string $placeType
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getNeighbourhoodCounters(string $longitude, string $latitude, string $placeType, $extraParams = [])
+    public function getNeighbourhoodCounters(string $longitude, string $latitude, string $placeType, array $extraParams = []) : Response
     {
-        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/counters', array_merge([
+        return $this->request->get('/places/lng/' . $longitude . '/lat/' . $latitude . '/counters', array_merge([
             'place_type' => $placeType,
         ], $extraParams));
     }
 
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getServices($page = 1, $perPage = 20, $extraParams = [])
+    public function getServices(int $page = 1, int $perPage = 20, array $extraParams = []) : Response
     {
         return $this->request->get('/places/services', array_merge([
             'page' => $page,
@@ -194,7 +109,7 @@ class PlaceEndpoint extends Endpoint
 
     public function getUsersByPlaceId(string $placeId, array $parameters): Response
     {
-        return $this->request->get('/places/'.$placeId.'/users',$parameters);
+        return $this->request->get('/places/' . $placeId . '/users', $parameters);
     }
 
     public static function getBaseUri(): string

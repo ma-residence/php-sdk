@@ -140,22 +140,6 @@ class Client
     }
 
     /**
-     * @return Endpoints\RealEstatePlayerEndpoint|Endpoints\Endpoint
-     */
-    public function realEstatePlayers()
-    {
-        return $this->getEndpoint(Endpoints\RealEstatePlayerEndpoint::class);
-    }
-
-    /**
-     * @return Endpoints\LotEndpoint|Endpoints\Endpoint
-     */
-    public function lots()
-    {
-        return $this->getEndpoint(Endpoints\LotEndpoint::class);
-    }
-
-    /**
      * @return Endpoints\PlaceEndpoint|Endpoints\Endpoint
      */
     public function places()

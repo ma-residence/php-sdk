@@ -2,36 +2,21 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class ForgotPasswordEndpoint extends Endpoint
 {
-    /**
-     * @param array $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function postRequest(array $data = [])
+    public function postRequest(array $data = []) : Response
     {
         return $this->request->post("/{$this::getBaseUri()}/request", [], $data);
     }
 
-    /**
-     * @param string $token
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getReset($token, array $data = [])
+    public function getReset($token, array $data = []): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/reset/$token", [], $data);
     }
 
-    /**
-     * @param string $token
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function postReset($token, array $data = [])
+    public function postReset(string $token, array $data = []) : Response
     {
         return $this->request->post("/{$this::getBaseUri()}/reset/$token", [], $data);
     }

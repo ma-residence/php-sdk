@@ -2,14 +2,9 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 interface SettingsEndpointInterface
 {
-    /**
-     * @param string $id
-     * @param string $key
-     * @param string $value
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function putSettings($id, $key, $value);
+    public function putSettings(string $id, string $key, string $value): Response;
 }

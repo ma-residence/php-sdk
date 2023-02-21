@@ -9,9 +9,6 @@ abstract class Endpoint
 {
     use EndpointTrait;
 
-    /**
-     * @param Request $request
-     */
     public function __construct(Request $request)
     {
         $this->request = $request;

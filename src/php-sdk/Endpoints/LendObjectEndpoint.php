@@ -2,20 +2,16 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class LendObjectEndpoint extends Endpoint
 {
-    /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function all()
+    public function all() : Response
     {
         return $this->request->get('/lend-objects', []);
     }
 
-    /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($id)
+    public function delete(string $id): Response
     {
         return $this->request->delete("/lend-objects/{$id}", []);
     }

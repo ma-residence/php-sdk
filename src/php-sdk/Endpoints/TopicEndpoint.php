@@ -11,7 +11,7 @@ class TopicEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function all($extraParams = [])
+    public function all(array $extraParams = [])
     {
         return $this->request->get('/topics', $extraParams);
     }

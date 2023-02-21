@@ -6,10 +6,7 @@ use MR\SDK\Transport\Request;
 
 trait EndpointTrait
 {
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected Request $request;
 
     abstract public static function getBaseUri(): string;
 }

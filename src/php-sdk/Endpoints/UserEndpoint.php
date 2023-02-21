@@ -21,11 +21,6 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    public function getLots(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
-    {
-        return $this->listMemberOf($id, 'lot', $page, $perPage, $extraParams);
-    }
-
     public function getGroups(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->listMemberOf($id, 'group', $page, $perPage, $extraParams);
@@ -39,16 +34,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    /**
-     * @param $id
-     * @param $type
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFollowsByType($id, $type, int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getFollowsByType(string $id, string $type, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/users/$id/follows/$type", array_merge([
             'page' => $page,
@@ -56,15 +42,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    /**
-     * @param $id
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getFollows($id, int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getFollows(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/users/$id/follows", array_merge([
             'page' => $page,
@@ -72,15 +50,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    /**
-     * @param $id
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getDevices($id, int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getDevices(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$id/devices", array_merge([
             'page' => $page,
@@ -88,15 +58,7 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getServices(string $id, int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getServices(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$id/services", array_merge([
             'page' => $page,
@@ -104,40 +66,21 @@ class UserEndpoint extends Endpoint implements ResourceEndpointInterface, Settin
         ], $extraParams));
     }
 
-    /**
-     * @param string $email
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getByEmail(string $email)
+    public function getByEmail(string $email): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/email/$email");
     }
 
-    /**
-     * @param string $emailId
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getByEmailId(string $emailId)
+    public function getByEmailId(string $emailId): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/email/id/$emailId");
     }
 
-    /**
-     * @param string $userId
-     * @param string $type
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getMemberOfByType(string $userId, string $type)
+    public function getMemberOfByType(string $userId, string $type): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$userId/member-of/$type");
     }
 
-    /**
-     * @return string
-     */
     public static function getBaseUri(): string
     {
         return 'users';
