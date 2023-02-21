@@ -24,7 +24,7 @@ class ClientTestCase extends TestCase
     {
         $this->mrClient->auth()->loginWithCredentials('user.a@ma-residence.fr', 'password');
 
-        self::assert NotNull($this->mrClient->auth()->getAccessToken());
+        self::assertNotNull($this->mrClient->auth()->getAccessToken());
         self::assertTrue($this->mrClient->auth()->hasToken());
         self::assertTrue($this->mrClient->auth()->checkLifetime());
         self::assertEquals(200, $this->mrClient->me()->get()->getStatusCode());

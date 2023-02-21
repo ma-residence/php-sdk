@@ -2,68 +2,37 @@
 
 namespace MR\SDK\Transport;
 
+use GuzzleHttp\Psr7\Response as Psr7Response;
+use GuzzleHttp\Utils;
+
 class Response
 {
-    /**
-     * @var array
-     */
-    private $data;
+    private array $data;
+    private string $content;
+    private array $errors;
+    private array $metadata;
 
-    /**
-     * @var string
-     */
-    private $content;
+    private Psr7Response $response;
 
-    /**
-     * @var array
-     */
-    private $errors;
-
-    /**
-     * @var array
-     */
-    private $metadata;
-
-    /**
-     * @var \GuzzleHttp\Psr7\Response
-     */
-    private $response;
-
-    /**
-     * @param \GuzzleHttp\Psr7\Response $response
-     */
-    public function __construct(\GuzzleHttp\Psr7\Response $response)
+    public function __construct(Response $response)
     {
         $this->response = $response;
         $this->decodeContent();
     }
 
-    /**
-     * @return \GuzzleHttp\Psr7\Response
-     */
-    public function getInnerResponse()
+    public function getInnerResponse(): Psr7Response
     {
         return $this->response;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return array|null
-     */
-    public function getData($key = null)
+    public function getData(?string $key = null): ?array
     {
         return $key ? $this->get("data.{$key}") : $this->data;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed|null
-     */
-    public function get($key)
+    public function get(string $key)
     {
-        if (false === strpos($key, '.')) {
+        if (!strpos($key, '.')) {
             return isset($this->data[$key]) ? $this->data[$key] : null;
         }
 
@@ -79,55 +48,37 @@ class Response
         return $current;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getErrors()
+    public function getErrors(): ?array
     {
         return $this->errors;
     }
 
-    /**
-     * @return array
-     */
-    public function getMetadata()
+    public function getMetadata(): array
     {
         return $this->metadata;
     }
 
-    /**
-     * @return int
-     */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->response->getStatusCode();
     }
 
-    /**
-     * @return string
-     */
-    public function getLocation()
+    public function getLocation(): string
     {
         return $this->response->getHeaderLine('location');
     }
 
-    /**
-     * @return bool
-     */
-    public function isPaginate()
+    public function isPaginate(): bool
     {
         return $this->response->getStatusCode() === 206;
     }
 
-    private function decodeContent()
+    private function decodeContent(): void
     {
         $this->content = trim((string) $this->response->getBody());
 
@@ -140,7 +91,7 @@ class Response
         }
 
         try {
-            $data = \GuzzleHttp\json_decode($this->content, true);
+            $data = Utils::jsonDecode($this->content, true);
         } catch (\Exception $e) {
             return;
         }
@@ -150,7 +101,7 @@ class Response
         $this->data = isset($data['data']) ? $data['data'] : null;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->response->getBody();
     }
