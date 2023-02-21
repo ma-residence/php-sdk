@@ -19,23 +19,16 @@ jobs:
   unit:
     runs-on: ubuntu-22.04
     steps:
-      - name: Configure cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.composer/cache
-          key: composer-cache
+      -   name: Setup PHP with PECL extension
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.1'
 
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Add PHP configuration
-        run: cp ./config/api.ini /usr/local/etc/php/conf.d/api.ini
-
-      - name: Configure composer
-        run: gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.NEW_SECRET_PASS }}" --output $COMPOSER_HOME/auth.json .github/composer.auth.json.gpg
-
-      - name: Install
-        run: make install APP_ENV=test FIXTURE_GROUP=test
+      - name: Run composer
+        run: make composer/install
 
       - name: Run tests
         run: make phpunit/all

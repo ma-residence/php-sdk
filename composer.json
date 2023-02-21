@@ -9,7 +9,12 @@
         "snc/redis-bundle": "4.6.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "10.*"
+        "phpunit/phpunit": "8.*",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/dom-crawler": "4.4.*",
+        "symfony/var-dumper": "4.4.*",
+        "symfony/var-exporter": "4.4.*",
+        "symfony/dotenv": "^6.2"
     },
     "autoload": {
         "psr-4": {
@@ -18,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\MR\\SDK\\": "tests/php-sdk"
+            "Tests\\MR\\SDK\\": "tests"
         }
     },
     "extra": {

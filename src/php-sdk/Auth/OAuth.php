@@ -34,14 +34,14 @@ class OAuth
     /**
      * @throws OAuthException
      */
-    public function loginWithCredentials(string $email, string $password): void
+    public function loginWithCredentials(string $email, string $password): bool
     {
         $this->logMessage('Logging in with credentials', [
             'grant_type' => self::GRANT_PASSWORD,
             'username' => $email,
         ]);
 
-        $this->requestAccessToken(self::GRANT_PASSWORD, [
+        return $this->requestAccessToken(self::GRANT_PASSWORD, [
             'username' => $email,
             'password' => $password,
         ]);
@@ -50,7 +50,7 @@ class OAuth
     /**
      * @throws OAuthException
      */
-    public function loginWithExternalToken(string $type, string $token): void
+    public function loginWithExternalToken(string $type, string $token): bool
     {
         $this->logMessage('Logging in with external token', [
             'grant_type' => self::GRANT_EXTERNAL,
@@ -58,19 +58,19 @@ class OAuth
             'token' => $token,
         ]);
 
-        $this->requestAccessToken(self::GRANT_EXTERNAL, [
+        return $this->requestAccessToken(self::GRANT_EXTERNAL, [
             'type' => $type,
             'token' => $token,
         ]);
     }
 
-    public function login()
+    public function login(): bool
     {
         $this->logMessage('Logging in as client', [
             'grant_type' => self::GRANT_CLIENT_CREDENTIALS,
         ]);
 
-        $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
+        return $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
     public function logout()
@@ -103,7 +103,7 @@ class OAuth
     /**
      * @throws \OAuthException
      */
-    public function getAccessToken(): string
+    public function getAccessToken(): ?string
     {
         if (!$this->hasToken()) {
             $this->logMessage('User does not have an token. Logging in ...');
@@ -120,7 +120,10 @@ class OAuth
         $token = $this->getToken();
         if ($token['refresh_token']) {
             $this->logMessage('Refreshing token', ['old_token' => $token]);
-            $this->requestAccessToken(self::GRANT_REFRESH, ['refresh_token' => $token['refresh_token']]);
+            $isSaved = $this->requestAccessToken(self::GRANT_REFRESH, ['refresh_token' => $token['refresh_token']]);
+            if (!$isSaved) {
+                return null;
+            }
 
             return $this->getToken()['access_token'];
         }
@@ -146,7 +149,7 @@ class OAuth
     /**
      * @throws OAuthException
      */
-    private function requestAccessToken(string $grant, array $credentials = []): void
+    private function requestAccessToken(string $grant, array $credentials = []): bool
     {
         $credentials = array_merge([
             'grant_type' => $grant,
@@ -185,6 +188,8 @@ class OAuth
             'expires_at' => isset($data['expires_in']) ? time() + $data['expires_in'] : null,
             'expires_in' => isset($data['expires_in']) ? $data['expires_in'] : null,
         ]);
+
+        return $isSaved;
     }
 
     private function logMessage(string $message, $params = []): void
