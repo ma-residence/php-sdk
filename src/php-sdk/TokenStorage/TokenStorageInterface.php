@@ -4,38 +4,11 @@ namespace MR\SDK\TokenStorage;
 
 interface TokenStorageInterface
 {
-    /**
-     * Save token to storage.
-     *
-     * @param string $key
-     * @param array  $token
-     *
-     * @return bool
-     */
-    public function save($key, array $token);
+    public function get(string $key): ?array;
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function has($key);
+    public function save(string $key, array $token): bool;
 
-    /**
-     * Get token from storage.
-     *
-     * @param string $key
-     *
-     * @return array|false
-     */
-    public function get($key);
+    public function has(string $key): bool;
 
-    /**
-     * Remove token from storage.
-     *
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function remove($key);
+    public function remove(string $key): bool;
 }

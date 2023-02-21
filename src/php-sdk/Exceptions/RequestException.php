@@ -6,14 +6,14 @@ use RuntimeException;
 
 class RequestException extends RuntimeException
 {
-    private $trace = [];
+    private array $trace = [];
 
-    public function getExtTrace()
+    public function getExtTrace(): array
     {
         return $this->trace;
     }
 
-    public function setExtTrace(array $trace)
+    public function setExtTrace(array $trace): self
     {
         $this->trace = $trace;
 
