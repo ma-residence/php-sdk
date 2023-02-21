@@ -2,15 +2,11 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class RoleEndpoint extends Endpoint
 {
-    /**
-     * @param null  $type
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function all($type = null, $extraParams = [])
+    public function all(?string $type = null, array $extraParams = []) : Response
     {
         if ($type) {
             $extraParams['type'] = $type;

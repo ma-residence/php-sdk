@@ -2,14 +2,11 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class ProfileEndpoint extends Endpoint
 {
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id)
+    public function get(string $id) : Response
     {
         return $this->request->get('/profiles/'.$id);
     }

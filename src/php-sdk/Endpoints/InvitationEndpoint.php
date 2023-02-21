@@ -2,35 +2,21 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class InvitationEndpoint extends Endpoint
 {
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id)
+    public function get(string $id) : Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$id");
     }
 
-    /**
-     * @param array $data
-     *
-     * @return mixed
-     */
-    public function post($data)
+    public function post(array $data): Response
     {
         return $this->request->post("/{$this::getBaseUri()}", [], $data);
     }
 
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($id, array $data = [])
+    public function delete(string $id, array $data = []) : Response
     {
         return $this->request->delete("/{$this::getBaseUri()}/$id", [], $data);
     }

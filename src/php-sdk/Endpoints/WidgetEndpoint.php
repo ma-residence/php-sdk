@@ -2,17 +2,11 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class WidgetEndpoint extends Endpoint
 {
-    /**
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $zipCodes
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function all($page = 1, $perPage = 20, array $zipCodes = [], $extraParams = [])
+    public function all(int $page = 1, int $perPage = 20, array $zipCodes = [], array $extraParams = []): Response
     {
         return $this->request->get('/widgets/activity', array_merge([
             'page' => $page,
@@ -21,15 +15,7 @@ class WidgetEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    /**
-     * @param int    $page
-     * @param int    $perPage
-     * @param string $place
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function allFromPlace($page = 1, $perPage = 20, $place, $extraParams = [])
+    public function allFromPlace(int $page = 1, int $perPage = 20, $place, array $extraParams = []) : Response
     {
         return $this->request->get('/widgets/activity/'.$place, array_merge([
             'page' => $page,

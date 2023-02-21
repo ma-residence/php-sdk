@@ -2,36 +2,22 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class HallNumericEndpoint extends Endpoint implements ResourceEndpointInterface
 {
     use Traits\ListTrait;
     use Traits\ResourceTrait;
 
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getLotActivity($id, $page = 1, $perPage = 20, $extraParams = [])
+    public function getGroupActivity(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
-        return $this->request->get("/{$this::getBaseUri()}/$id/lot/activity", array_merge([
+        return $this->request->get("/{$this::getBaseUri()}/$id/group/activity", array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getPlaceActivity($id, $page = 1, $perPage = 20, $extraParams = [])
+    public function getPlaceActivity(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$id/place/activity", array_merge([
             'page' => $page,

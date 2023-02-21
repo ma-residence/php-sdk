@@ -106,7 +106,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getActivity($page = 1, $perPage = 20, $extraParams = [])
+    public function getActivity($page = 1, $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/activity', array_merge([
             'page' => $page,
@@ -122,7 +122,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollows($type, $page = 1, $perPage = 20, $extraParams = [])
+    public function getFollows($type, $page = 1, $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/follows/'.$type, array_merge([
             'page' => $page,
@@ -137,7 +137,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getFollowers($page = 1, $perPage = 20, $extraParams = [])
+    public function getFollowers($page = 1, $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/followers', array_merge([
             'page' => $page,
@@ -165,7 +165,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getBookmarks($page = 1, $perPage = 20, $extraParams = [])
+    public function getBookmarks($page = 1, $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/bookmarks', array_merge([
             'page' => $page,
@@ -181,7 +181,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getRecommendations($type = null, $page = 1, $perPage = 20, $extraParams = [])
+    public function getRecommendations($type = null, $page = 1, $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/recommendations', array_merge([
             'type' => $type,
@@ -242,7 +242,7 @@ class MeEndpoint extends Endpoint
      *
      * @return \MR\SDK\Transport\Response
      */
-    public function getServices(int $page = 1, int $perPage = 20, $extraParams = [])
+    public function getServices(int $page = 1, int $perPage = 20, array $extraParams = [])
     {
         return $this->request->get('/me/services', array_merge([
             'page' => $page,

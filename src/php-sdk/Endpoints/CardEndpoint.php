@@ -2,40 +2,22 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
 use RuntimeException;
 
 class CardEndpoint extends Endpoint
 {
-    /**
-     * @param string $id
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function get($id)
+    public function get(string $id): Response
     {
         return $this->request->get("/{$this::getBaseUri()}/$id");
     }
 
-    /**
-     * @param null  $type
-     * @param int   $page
-     * @param int   $perPage
-     * @param array $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function all($type = null, $page = 1, $perPage = 20, $extraParams = [])
+    public function all(?string $type = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         throw new RuntimeException('Not implemented');
     }
 
-    /**
-     * @param string $id
-     * @param array  $data
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($id, array $data = [])
+    public function delete(string $id, array $data = []) : Response
     {
         return $this->request->delete("/{$this::getBaseUri()}/{$id}", [], $data);
     }

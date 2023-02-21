@@ -2,26 +2,16 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class BlackListEndpoint extends Endpoint
 {
-    /**
-     * @param string $source
-     * @param string $target
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function post($source, $target)
+    public function post(string $source, string $target) : Response
     {
         return $this->request->post("/{$this::getBaseUri()}", [], compact('source', 'target'));
     }
 
-    /**
-     * @param string $source
-     * @param string $target
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function delete($source, $target)
+    public function delete(string $source, string $target) : Response
     {
         return $this->request->delete("/{$this::getBaseUri()}", [], compact('source', 'target'));
     }

@@ -2,6 +2,8 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     use Traits\ListTrait;
@@ -17,13 +19,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
         return 'associations';
     }
 
-    /**
-     * @param string $associationId
-     * @param string $invitationToken
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function acceptAssociationInvitation(string $associationId, string $invitationToken)
+    public function acceptAssociationInvitation(string $associationId, string $invitationToken) : Response
     {
         return $this->request->put("/{$this::getBaseUri()}/$associationId/invitations/$invitationToken/accept", [], []);
     }

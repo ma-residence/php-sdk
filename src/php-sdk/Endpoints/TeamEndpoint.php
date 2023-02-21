@@ -2,28 +2,21 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class TeamEndpoint extends Endpoint
 {
-    /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getTech()
+    public function getTech() : Response
     {
         return $this->request->get('/teams/tech');
     }
 
-    /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getSupport()
+    public function getSupport() : Response
     {
         return $this->request->get('/teams/support');
     }
 
-    /**
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getCommunityManager()
+    public function getCommunityManager() : Response
     {
         return $this->request->get('/teams/community-manager');
     }

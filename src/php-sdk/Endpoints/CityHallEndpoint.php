@@ -2,6 +2,8 @@
 
 namespace MR\SDK\Endpoints;
 
+use MR\SDK\Transport\Response;
+
 class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, SettingsEndpointInterface
 {
     use Traits\ListTrait;
@@ -12,15 +14,7 @@ class CityHallEndpoint extends Endpoint implements ResourceEndpointInterface, Se
     use Traits\SettingsTrait;
     use Traits\RecommendationsTrait;
 
-    /**
-     * @param string $id
-     * @param int    $page
-     * @param int    $perPage
-     * @param array  $extraParams
-     *
-     * @return \MR\SDK\Transport\Response
-     */
-    public function getCustomers($id, $page = 1, $perPage = 20, $extraParams = [])
+    public function getCustomers(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/city-halls/$id/customers", array_merge([
             'page' => $page,

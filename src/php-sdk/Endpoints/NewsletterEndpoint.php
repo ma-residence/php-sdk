@@ -42,9 +42,9 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    public function getPublicationsLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
+    public function getPublicationsGroupActivity(string $groupId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/publications/$lotId", array_merge([
+        return $this->request->get("/newsletters/group_activity/publications/$groupId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
@@ -61,18 +61,18 @@ class NewsletterEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    public function getNeighboursLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
+    public function getNeighboursGroupActivity(string $groupId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/neighbours/$lotId", array_merge([
+        return $this->request->get("/newsletters/group_activity/neighbours/$groupId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    public function getLendObjectsLotActivity(string $lotId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
+    public function getLendObjectsGroupActivity(string $groupId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
-        return $this->request->get("/newsletters/lot_activity/lend_objects/$lotId", array_merge([
+        return $this->request->get("/newsletters/group_activity/lend_objects/$groupId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
@@ -91,15 +91,6 @@ class NewsletterEndpoint extends Endpoint
     public function getFavoritesActivity(string $userId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
     {
         return $this->request->get("/newsletters/favorites_activity/$userId", array_merge([
-            'frequency' => $frequency,
-            'page' => $page,
-            'per_page' => $perPage,
-        ], $extraParams));
-    }
-
-    public function getPublicationsGroupActivity(string $groupId, string $frequency, int $page = 1, int $perPage = 100, array $extraParams = []) : Response
-    {
-        return $this->request->get("/newsletters/community_activity/publications/$groupId", array_merge([
             'frequency' => $frequency,
             'page' => $page,
             'per_page' => $perPage,
