@@ -8,7 +8,7 @@ class PlaceEndpoint extends Endpoint
 {
     public function get(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
-        return $this->request->get('/places/' . $id, array_merge([
+        return $this->request->get('/places/'.$id, array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
@@ -44,7 +44,7 @@ class PlaceEndpoint extends Endpoint
             $extraParams['radius'] = $radius;
         }
 
-        return $this->request->get('/places/' . $placeId . '/map', array_merge([
+        return $this->request->get('/places/'.$placeId.'/map', array_merge([
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
@@ -74,7 +74,7 @@ class PlaceEndpoint extends Endpoint
 
     public function getTown(string $placeId, array $extraParams = []): Response
     {
-        return $this->request->get('/places/' . $placeId . '/town', $extraParams);
+        return $this->request->get('/places/'.$placeId.'/town', $extraParams);
     }
 
     public function getNeighbourhoodPublications(
@@ -85,21 +85,21 @@ class PlaceEndpoint extends Endpoint
         int $perPage = 20,
         array $extraParams = []
     ): Response {
-        return $this->request->get('/places/lng/' . $longitude . '/lat/' . $latitude . '/publications', array_merge([
+        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/publications', array_merge([
             'place_type' => $placeType,
             'page' => $page,
             'per_page' => $perPage,
         ], $extraParams));
     }
 
-    public function getNeighbourhoodCounters(string $longitude, string $latitude, string $placeType, array $extraParams = []) : Response
+    public function getNeighbourhoodCounters(string $longitude, string $latitude, string $placeType, array $extraParams = []): Response
     {
-        return $this->request->get('/places/lng/' . $longitude . '/lat/' . $latitude . '/counters', array_merge([
+        return $this->request->get('/places/lng/'.$longitude.'/lat/'.$latitude.'/counters', array_merge([
             'place_type' => $placeType,
         ], $extraParams));
     }
 
-    public function getServices(int $page = 1, int $perPage = 20, array $extraParams = []) : Response
+    public function getServices(int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get('/places/services', array_merge([
             'page' => $page,
@@ -109,7 +109,7 @@ class PlaceEndpoint extends Endpoint
 
     public function getUsersByPlaceId(string $placeId, array $parameters): Response
     {
-        return $this->request->get('/places/' . $placeId . '/users', $parameters);
+        return $this->request->get('/places/'.$placeId.'/users', $parameters);
     }
 
     public static function getBaseUri(): string

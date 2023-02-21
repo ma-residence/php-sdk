@@ -11,12 +11,12 @@ class MemberOfEndpoint extends Endpoint
         return $this->request->post('/members', [], $data);
     }
 
-    public function put(array $data = []) : Response
+    public function put(array $data = []): Response
     {
         return $this->request->put('/members', [], $data);
     }
 
-    public function delete(array $data = []) : Response
+    public function delete(array $data = []): Response
     {
         return $this->request->delete('/members', [], $data);
     }

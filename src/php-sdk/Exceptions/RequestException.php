@@ -2,9 +2,7 @@
 
 namespace MR\SDK\Exceptions;
 
-use RuntimeException;
-
-class RequestException extends RuntimeException
+class RequestException extends \RuntimeException
 {
     private array $trace = [];
 

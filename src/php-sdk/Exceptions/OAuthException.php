@@ -14,7 +14,7 @@ class OAuthException extends \Exception
         $this->response = $response;
     }
 
-    public function getResponse() : Response
+    public function getResponse(): Response
     {
         return $this->response;
     }

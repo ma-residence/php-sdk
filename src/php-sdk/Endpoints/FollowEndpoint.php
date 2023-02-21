@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class FollowEndpoint extends Endpoint
 {
-    public function post(array $data = []) : Response
+    public function post(array $data = []): Response
     {
         return $this->request->post("/{$this::getBaseUri()}", [], $data);
     }

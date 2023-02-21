@@ -11,12 +11,12 @@ class FileTokenStorage implements TokenStorageInterface
         $this->path = $path;
     }
 
-    public function save(string $key, array $token) : bool
+    public function save(string $key, array $token): bool
     {
-        return file_put_contents("{$this->path}/{$key}", json_encode($token, JSON_PRETTY_PRINT), LOCK_EX) !== false;
+        return false !== file_put_contents("{$this->path}/{$key}", json_encode($token, JSON_PRETTY_PRINT), LOCK_EX);
     }
 
-    public function has($key) : bool
+    public function has($key): bool
     {
         return file_exists("{$this->path}/{$key}");
     }

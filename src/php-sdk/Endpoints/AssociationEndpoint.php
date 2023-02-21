@@ -19,7 +19,7 @@ class AssociationEndpoint extends Endpoint implements ResourceEndpointInterface,
         return 'associations';
     }
 
-    public function acceptAssociationInvitation(string $associationId, string $invitationToken) : Response
+    public function acceptAssociationInvitation(string $associationId, string $invitationToken): Response
     {
         return $this->request->put("/{$this::getBaseUri()}/$associationId/invitations/$invitationToken/accept", [], []);
     }

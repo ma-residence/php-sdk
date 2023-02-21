@@ -14,7 +14,7 @@ class GroupEndpoint extends Endpoint implements ResourceEndpointInterface, Setti
     use Traits\RecommendationsTrait;
     use Traits\ActivityTrait;
 
-    public function getMembersCustomers(string $id, int $page = 1, int $perPage = 20, array $extraParams = []) : Response
+    public function getMembersCustomers(string $id, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         return $this->request->get("/groups/$id/members/customers", array_merge([
             'page' => $page,

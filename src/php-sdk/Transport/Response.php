@@ -75,7 +75,7 @@ class Response
 
     public function isPaginate(): bool
     {
-        return $this->response->getStatusCode() === 206;
+        return 206 === $this->response->getStatusCode();
     }
 
     private function decodeContent(): void

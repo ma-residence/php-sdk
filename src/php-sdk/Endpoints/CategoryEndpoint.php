@@ -6,11 +6,11 @@ use MR\SDK\Transport\Response;
 
 class CategoryEndpoint extends Endpoint
 {
-    const TYPE_INTEREST = 'interest';
-    const TYPE_SERVICE = 'service';
-    const TYPE_GOOD = 'good';
-    const TYPE_BADGE = 'badge';
-    const TYPE_ASSOCIATION = 'association';
+    public const TYPE_INTEREST = 'interest';
+    public const TYPE_SERVICE = 'service';
+    public const TYPE_GOOD = 'good';
+    public const TYPE_BADGE = 'badge';
+    public const TYPE_ASSOCIATION = 'association';
 
     public function all(string $type = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
