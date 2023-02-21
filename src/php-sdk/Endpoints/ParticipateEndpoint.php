@@ -6,17 +6,17 @@ use MR\SDK\Transport\Response;
 
 class ParticipateEndpoint extends Endpoint
 {
-    public function post(array $data = []) : Response
+    public function post(array $data = []): Response
     {
         return $this->request->post('/participates', [], $data);
     }
 
-    public function put(array $data = [])  : Response
+    public function put(array $data = []): Response
     {
         return $this->request->put('/participates', [], $data);
     }
 
-    public function delete(array $data = []) : Response
+    public function delete(array $data = []): Response
     {
         return $this->request->delete('/participates', [], $data);
     }

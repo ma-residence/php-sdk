@@ -22,7 +22,7 @@ class CacheTokenStorage implements TokenStorageInterface
         return $this->cache->save($item);
     }
 
-    public function get(string $key): ? array
+    public function get(string $key): ?array
     {
         $item = $this->cache->getItem($key);
 
@@ -34,7 +34,7 @@ class CacheTokenStorage implements TokenStorageInterface
         return $this->cache->getItem($key)->isHit();
     }
 
-    public function remove(string $key):bool
+    public function remove(string $key): bool
     {
         return $this->cache->deleteItem($key);
     }

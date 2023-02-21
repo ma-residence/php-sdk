@@ -11,7 +11,7 @@ trait SettingsTrait
     /**
      * @deprecated
      */
-    public function putSettings(string $id,  string $key, string $value): Response
+    public function putSettings(string $id, string $key, string $value): Response
     {
         return $this->setSettings($id, $key, $value);
     }

@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class ForgotPasswordEndpoint extends Endpoint
 {
-    public function postRequest(array $data = []) : Response
+    public function postRequest(array $data = []): Response
     {
         return $this->request->post("/{$this::getBaseUri()}/request", [], $data);
     }
@@ -16,7 +16,7 @@ class ForgotPasswordEndpoint extends Endpoint
         return $this->request->get("/{$this::getBaseUri()}/reset/$token", [], $data);
     }
 
-    public function postReset(string $token, array $data = []) : Response
+    public function postReset(string $token, array $data = []): Response
     {
         return $this->request->post("/{$this::getBaseUri()}/reset/$token", [], $data);
     }

@@ -3,7 +3,6 @@
 namespace MR\SDK\Endpoints;
 
 use MR\SDK\Transport\Response;
-use RuntimeException;
 
 class CardEndpoint extends Endpoint
 {
@@ -14,10 +13,10 @@ class CardEndpoint extends Endpoint
 
     public function all(?string $type = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
-        throw new RuntimeException('Not implemented');
+        throw new \RuntimeException('Not implemented');
     }
 
-    public function delete(string $id, array $data = []) : Response
+    public function delete(string $id, array $data = []): Response
     {
         return $this->request->delete("/{$this::getBaseUri()}/{$id}", [], $data);
     }

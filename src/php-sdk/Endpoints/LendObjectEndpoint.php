@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class LendObjectEndpoint extends Endpoint
 {
-    public function all() : Response
+    public function all(): Response
     {
         return $this->request->get('/lend-objects', []);
     }

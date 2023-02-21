@@ -15,7 +15,7 @@ class WidgetEndpoint extends Endpoint
         ], $extraParams));
     }
 
-    public function allFromPlace(int $page = 1, int $perPage = 20, $place, array $extraParams = []) : Response
+    public function allFromPlace(int $page = 1, int $perPage = 20, $place, array $extraParams = []): Response
     {
         return $this->request->get('/widgets/activity/'.$place, array_merge([
             'page' => $page,

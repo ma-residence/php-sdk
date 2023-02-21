@@ -10,11 +10,11 @@ use Psr\Log\LoggerInterface;
 
 class OAuth
 {
-    const TOKEN_ENDPOINT = '/oauth/v2/token';
-    const GRANT_REFRESH = 'refresh_token';
-    const GRANT_PASSWORD = 'password';
-    const GRANT_EXTERNAL = 'urn:external';
-    const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
+    public const TOKEN_ENDPOINT = '/oauth/v2/token';
+    public const GRANT_REFRESH = 'refresh_token';
+    public const GRANT_PASSWORD = 'password';
+    public const GRANT_EXTERNAL = 'urn:external';
+    public const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
 
     private string $clientId;
     private string $clientSecret;
@@ -164,7 +164,7 @@ class OAuth
             'form-data' => true,
         ]);
 
-        if ($response->getStatusCode() !== 200) {
+        if (200 !== $response->getStatusCode()) {
             $this->logMessage('Error when getting token', ['error' => (string) $response->getContent()]);
 
             throw new OAuthException($response);
@@ -187,7 +187,7 @@ class OAuth
         ]);
     }
 
-    private function logMessage(string $message, $params = []) : void
+    private function logMessage(string $message, $params = []): void
     {
         if (!$this->logger) {
             return;

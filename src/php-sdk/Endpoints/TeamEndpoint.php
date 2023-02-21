@@ -6,17 +6,17 @@ use MR\SDK\Transport\Response;
 
 class TeamEndpoint extends Endpoint
 {
-    public function getTech() : Response
+    public function getTech(): Response
     {
         return $this->request->get('/teams/tech');
     }
 
-    public function getSupport() : Response
+    public function getSupport(): Response
     {
         return $this->request->get('/teams/support');
     }
 
-    public function getCommunityManager() : Response
+    public function getCommunityManager(): Response
     {
         return $this->request->get('/teams/community-manager');
     }

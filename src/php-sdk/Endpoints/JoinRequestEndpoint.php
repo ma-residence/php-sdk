@@ -6,12 +6,12 @@ use MR\SDK\Transport\Response;
 
 class JoinRequestEndpoint extends Endpoint
 {
-    public function post(array $data = []) : Response
+    public function post(array $data = []): Response
     {
         return $this->request->post('/join-requests', [], $data);
     }
 
-    public function accept(array $data = []) : Response
+    public function accept(array $data = []): Response
     {
         return $this->request->put('/join-requests/accept', [], $data);
     }

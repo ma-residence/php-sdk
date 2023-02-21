@@ -12,8 +12,8 @@ use Psr\Log\NullLogger;
 
 class Client
 {
-    const OPT_FOLLOW_LOCATION = 'follow_location';
-    const OPT_ERRMODE_EXCEPTION = 'errmode_exception';
+    public const OPT_FOLLOW_LOCATION = 'follow_location';
+    public const OPT_ERRMODE_EXCEPTION = 'errmode_exception';
 
     private Request $request;
     private OAuth $auth;
@@ -310,7 +310,7 @@ class Client
             return call_user_func_array([$this, $typeCamelCase], []);
         }
 
-        $typePlural = (substr($type, -1) != 's') ? sprintf('%ss', $type) : rtrim($type, 's');
+        $typePlural = ('s' != substr($type, -1)) ? sprintf('%ss', $type) : rtrim($type, 's');
         if (method_exists($this, $typePlural)) {
             return call_user_func_array([$this, $typePlural], []);
         }
@@ -337,12 +337,12 @@ class Client
         return $this->cachedEndpoints[$endpoint];
     }
 
-    public function request() : Request
+    public function request(): Request
     {
         return $this->request;
     }
 
-    public function auth() : OAuth
+    public function auth(): OAuth
     {
         return $this->auth;
     }

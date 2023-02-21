@@ -60,7 +60,7 @@ class NotificationEndpoint extends Endpoint
 
     public function getPlaceRecipients(array $parameters): Response
     {
-        return $this->request->get("/notifications/places/recipients", $parameters);
+        return $this->request->get('/notifications/places/recipients', $parameters);
     }
 
     public static function getBaseUri(): string
