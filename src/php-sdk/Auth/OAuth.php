@@ -11,44 +11,17 @@ use Psr\Log\LoggerInterface;
 class OAuth
 {
     const TOKEN_ENDPOINT = '/oauth/v2/token';
-
     const GRANT_REFRESH = 'refresh_token';
     const GRANT_PASSWORD = 'password';
     const GRANT_EXTERNAL = 'urn:external';
     const GRANT_CLIENT_CREDENTIALS = 'client_credentials';
 
-    /**
-     * @var string
-     */
-    private $clientId;
+    private string $clientId;
+    private string $clientSecret;
+    private Client $client;
+    private TokenStorageInterface $storage;
+    private LoggerInterface $logger;
 
-    /**
-     * @var string
-     */
-    private $clientSecret;
-
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $storage;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param Client                $client
-     * @param string                $clientId
-     * @param string                $clientSecret
-     * @param TokenStorageInterface $storage
-     * @param array                 $options
-     */
     public function __construct(Client $client, $clientId, $clientSecret, TokenStorageInterface $storage = null, $options = [])
     {
         $this->client = $client;
@@ -59,14 +32,9 @@ class OAuth
     }
 
     /**
-     * @param $email
-     * @param $password
-     *
-     * @return array
-     *
      * @throws OAuthException
      */
-    public function loginWithCredentials($email, $password)
+    public function loginWithCredentials(string $email, string $password): void
     {
         $this->logMessage('Logging in with credentials', [
             'grant_type' => self::GRANT_PASSWORD,
@@ -80,14 +48,9 @@ class OAuth
     }
 
     /**
-     * @param $type
-     * @param $token
-     *
-     * @return array
-     *
      * @throws OAuthException
      */
-    public function loginWithExternalToken($type, $token)
+    public function loginWithExternalToken(string $type, string $token): void
     {
         $this->logMessage('Logging in with external token', [
             'grant_type' => self::GRANT_EXTERNAL,
@@ -101,9 +64,6 @@ class OAuth
         ]);
     }
 
-    /**
-     * Login as client.
-     */
     public function login()
     {
         $this->logMessage('Logging in as client', [
@@ -113,9 +73,6 @@ class OAuth
         $this->requestAccessToken(self::GRANT_CLIENT_CREDENTIALS);
     }
 
-    /**
-     * Logout.
-     */
     public function logout()
     {
         $this->storage->remove($this->client->getTokenCacheKey());
@@ -123,10 +80,7 @@ class OAuth
         $this->logMessage('Logging out');
     }
 
-    /**
-     * @return array
-     */
-    public function getToken()
+    public function getToken(): array
     {
         if ($this->hasToken()) {
             return $this->storage->get($this->client->getTokenCacheKey());
@@ -141,51 +95,46 @@ class OAuth
         ];
     }
 
-    /**
-     * @return bool
-     */
-    public function hasToken()
+    public function hasToken(): bool
     {
         return $this->storage->has($this->client->getTokenCacheKey());
     }
 
     /**
-     * @return string|null
-     *
      * @throws \OAuthException
      */
-    public function getAccessToken()
+    public function getAccessToken(): string
     {
         if (!$this->hasToken()) {
             $this->logMessage('User does not have an token. Logging in ...');
-
             $this->login();
-        } elseif (!$this->checkLifetime()) {
-            $token = $this->getToken();
-            $this->logMessage('Token has expired');
 
-            if ($token['refresh_token']) {
-                $this->requestAccessToken(self::GRANT_REFRESH, [
-                    'refresh_token' => $token['refresh_token'],
-                ]);
-                $this->logMessage('Refreshing token', [
-                    'old_token' => $token,
-                ]);
-            } else {
-                $this->logMessage('User does not have an refresh token. Logging in ...');
-                $this->login();
-            }
+            return $this->getToken()['access_token'];
         }
+
+        if ($this->checkLifetime()) {
+            return $this->getToken()['access_token'];
+        }
+
+        $this->logMessage('Token has expired');
+        $token = $this->getToken();
+        if ($token['refresh_token']) {
+            $this->logMessage('Refreshing token', ['old_token' => $token]);
+            $this->requestAccessToken(self::GRANT_REFRESH, ['refresh_token' => $token['refresh_token']]);
+
+            return $this->getToken()['access_token'];
+        }
+
+        $this->logMessage('User does not have an refresh token. Logging in...');
+        $this->login();
 
         return $this->getToken()['access_token'];
     }
 
     /**
-     * @return bool
-     *
-     * @throws OAuthException
+     * @throws LogicException
      */
-    public function checkLifetime()
+    public function checkLifetime(): bool
     {
         if (!$this->hasToken()) {
             throw new \LogicException('No token is registered.');
@@ -195,12 +144,9 @@ class OAuth
     }
 
     /**
-     * @param string $grant
-     * @param array  $credentials
-     *
      * @throws OAuthException
      */
-    private function requestAccessToken($grant, array $credentials = [])
+    private function requestAccessToken(string $grant, array $credentials = []): void
     {
         $credentials = array_merge([
             'grant_type' => $grant,
@@ -219,15 +165,12 @@ class OAuth
         ]);
 
         if ($response->getStatusCode() !== 200) {
-            $this->logMessage('Error when getting token', [
-                'error' => (string) $response->getContent(),
-            ]);
+            $this->logMessage('Error when getting token', ['error' => (string) $response->getContent()]);
 
             throw new OAuthException($response);
         }
 
         $data = json_decode($response->getContent(), true);
-
         $isSaved = $this->storage->save($this->client->getTokenCacheKey(), [
             'access_token' => $data['access_token'],
             'refresh_token' => isset($data['refresh_token']) ? $data['refresh_token'] : null,
@@ -244,19 +187,15 @@ class OAuth
         ]);
     }
 
-    /**
-     * Log message.
-     *
-     * @param $message
-     * @param $params
-     */
-    private function logMessage($message, $params = [])
+    private function logMessage(string $message, $params = []) : void
     {
-        if (null !== $this->logger) {
-            $this->logger->debug($message, array_merge($params, [
-                'session_id' => $this->client->getTokenCacheKey(),
-                'token' => $this->getToken(),
-            ]));
+        if (!$this->logger) {
+            return;
         }
+
+        $this->logger->debug($message, array_merge($params, [
+            'session_id' => $this->client->getTokenCacheKey(),
+            'token' => $this->getToken(),
+        ]));
     }
 }

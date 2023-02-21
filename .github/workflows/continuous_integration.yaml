@@ -1,0 +1,41 @@
+name: Continuous Integration API
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout branch ${{ github.event.inputs.branch_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch_name }}
+
+      - name: Check styles
+        run: |
+          ./bin/php-cs-fixer-v3.phar fix src --dry-run --verbose --diff
+          ./bin/php-cs-fixer-v3.phar fix tests --dry-run --verbose --diff
+
+  unit:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Configure cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache
+          key: composer-cache
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Add PHP configuration
+        run: cp ./config/api.ini /usr/local/etc/php/conf.d/api.ini
+
+      - name: Configure composer
+        run: gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.NEW_SECRET_PASS }}" --output $COMPOSER_HOME/auth.json .github/composer.auth.json.gpg
+
+      - name: Install
+        run: make install APP_ENV=test FIXTURE_GROUP=test
+
+      - name: Run tests
+        run: make phpunit/all
