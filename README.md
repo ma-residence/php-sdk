@@ -27,9 +27,9 @@ Edit your `composer.json` :
 }
 ```
 
-And don't forget to run:
+## Composer Update
 
-```make composer/update````
+docker run -it --name docker-php-sdk --rm -v "$PWD/php-sdk:/user/src/php-sdk" -w /user/src/php-sdk composer composer update
 
 ## Usage
 
