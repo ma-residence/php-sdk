@@ -7,14 +7,14 @@ use GuzzleHttp\Utils;
 
 class Response
 {
-    private array $data;
+    private array $data = [];
     private string $content;
-    private array $errors;
-    private array $metadata;
+    private array $errors = [];
+    private array $metadata = [];
 
     private Psr7Response $response;
 
-    public function __construct(Response $response)
+    public function __construct(Psr7Response $response)
     {
         $this->response = $response;
         $this->decodeContent();
@@ -96,9 +96,9 @@ class Response
             return;
         }
 
-        $this->errors = isset($data['errors']) ? $data['errors'] : null;
-        $this->metadata = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->data = isset($data['data']) ? $data['data'] : null;
+        $this->errors = isset($data['errors']) ? $data['errors'] : [];
+        $this->metadata = isset($data['metadata']) ? $data['metadata'] : [];
+        $this->data = isset($data['data']) ? $data['data'] : [];
     }
 
     public function __toString(): string

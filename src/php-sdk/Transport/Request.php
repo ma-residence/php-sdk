@@ -50,10 +50,10 @@ class Request
         return $this->execute('DELETE', $endpoint, $parameters, $data, $options);
     }
 
-    public function execute(string $method, string $endpoint, array $parameters = [], array $data = [], array $options = [], int $bounces = 0): Response
+    public function execute(string $method, string $endpoint, array $queryParams = [], array $data = [], array $options = []): Response
     {
         $headers = [];
-        if (!isset($options['anonymous']) || $options['anonymous']) {
+        if (!isset($options['authentification']) || $options['authentification'] === false) {
             $accessToken = $this->client->auth()->getAccessToken();
             if ($accessToken) {
                 $headers['Authorization'] = "Bearer $accessToken";
@@ -68,53 +68,17 @@ class Request
             $headers['Content-Length'] = $options['contentLength'];
         }
 
+        $request = array_merge(['query' => $queryParams, 'headers' => $headers], $options);
+        if (isset($options['form-data'])) {
+            $request['form_params'] = $data;
+        } else {
+            $request['json'] = compact('data');
+        }
+
         try {
-            if (++$bounces > 5) {
-                throw new RequestException('Redirects exceed threshold', $this);
-            }
-
-            $request = array_merge(['query' => $parameters, 'headers' => $headers], $options);
-            if (isset($options['form-data'])) {
-                $request['form_params'] = $data;
-            } else {
-                $request['json'] = compact('data');
-            }
-
-            $response = $this->httpClient->request($method, $endpoint, $request);
-            if ($this->client->getOption(Client::OPT_FOLLOW_LOCATION) && $response->hasHeader('location')) {
-                return $this->execute('GET', $response->getHeader('location')[0], [], [], [], $bounces++);
-            }
-        } catch (RequestException $re) {
-            if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION)) {
-                $response = $re->getResponse();
-                $body = (string) $response->getBody();
-                throw new SdkRequestException(sprintf("Request Error: `%s %s`\nBody: %s", $method, $endpoint, json_encode(compact('request', 'response', 'body'), JSON_PRETTY_PRINT)), 0, $re);
-            }
-
-            $response = $re->getResponse();
-        } finally {
-            --$bounces;
+            return new Response($this->httpClient->request($method, $endpoint, $request));
+        } catch (RequestException $e) {
+            throw new SdkRequestException($e->getMessage());
         }
-
-        $response = new Response($response);
-        if ($this->client->getOption(Client::OPT_ERRMODE_EXCEPTION) && $errors = $response->getErrors()) {
-            foreach ($errors as $error) {
-                if (!isset($error['message'], $error['trace'])) {
-                    continue;
-                }
-
-                $exception = (new SdkRequestException(
-                    $error['message'],
-                    $error['trace'],
-                    isset($exception) ? $exception : null
-                ))->setTrace($error['trace']);
-            }
-
-            if (isset($exception)) {
-                throw $exception;
-            }
-        }
-
-        return $response;
     }
 }
