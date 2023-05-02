@@ -4,6 +4,7 @@ namespace MR\SDK\Auth;
 
 use MR\SDK\Client;
 use MR\SDK\Exceptions\OAuthException;
+use MR\SDK\Exceptions\RequestException;
 use MR\SDK\TokenStorage\InMemoryTokenStorage;
 use MR\SDK\TokenStorage\TokenStorageInterface;
 use Psr\Log\LoggerInterface;
@@ -119,10 +120,11 @@ class OAuth
         $this->logMessage('Token has expired');
         $token = $this->getToken();
         if ($token['refresh_token']) {
-            $this->logMessage('Refreshing token', ['old_token' => $token]);
+            $this->logMessage('Refreshing token...', ['old_token' => $token]);
             $isSaved = $this->requestAccessToken(self::GRANT_REFRESH, ['refresh_token' => $token['refresh_token']]);
             if (!$isSaved) {
-                return null;
+                $this->logMessage('Error on save access token in storage');
+                throw new RequestException('Error on save access token in storage');
             }
 
             return $this->getToken()['access_token'];
@@ -163,7 +165,7 @@ class OAuth
         ]);
 
         $response = $this->client->request()->execute('POST', self::TOKEN_ENDPOINT, [], $credentials, [
-            'anonymous' => true,
+            'authentification' => true,
             'form-data' => true,
         ]);
 
