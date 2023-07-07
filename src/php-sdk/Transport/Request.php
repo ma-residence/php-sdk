@@ -77,8 +77,15 @@ class Request
 
         try {
             return new Response($this->httpClient->request($method, $endpoint, $request));
-        } catch (RequestException $e) {
-            throw new SdkRequestException($e->getMessage());
+        }  catch (RequestException $e) {
+            if ($e->getCode() >= 400 && $e->getCode() < 500) {
+                $this->client->getLogger()->warning($e->getMessage());
+            }
+            if ($e->getCode() >= 500) {
+                $this->client->getLogger()->error($e->getMessage());
+            }
+
+            return new Response($e->getResponse());
         }
     }
 }
