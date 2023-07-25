@@ -115,7 +115,7 @@ class MeEndpoint extends Endpoint
     }
 
     /**
-     * @param $type
+     * @param       $type
      * @param int   $page
      * @param int   $perPage
      * @param array $extraParams

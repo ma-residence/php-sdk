@@ -11,7 +11,7 @@ class CardEndpoint extends Endpoint
         return $this->request->get("/{$this::getBaseUri()}/$id");
     }
 
-    public function all(?string $type = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
+    public function all(string $type = null, int $page = 1, int $perPage = 20, array $extraParams = []): Response
     {
         throw new \RuntimeException('Not implemented');
     }
