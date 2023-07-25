@@ -25,7 +25,7 @@ class Response
         return $this->response;
     }
 
-    public function getData(?string $key = null): ?array
+    public function getData(string $key = null): ?array
     {
         return $key ? $this->get("data.{$key}") : $this->data;
     }

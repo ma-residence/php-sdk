@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class SitemapEndpoint extends Endpoint
 {
-    public function getPublications(?string $types = null, ?string $scrollId = null): Response
+    public function getPublications(string $types = null, string $scrollId = null): Response
     {
         if (!$scrollId) {
             return $this->request->get('/sitemap/publications', ['initial' => 1, 'types' => $types]);
@@ -15,7 +15,7 @@ class SitemapEndpoint extends Endpoint
         return $this->request->get('/sitemap/publications', ['scroll_id' => $scrollId, 'types' => $types]);
     }
 
-    public function getProfiles(?string $types = null, ?string $scrollId = null): Response
+    public function getProfiles(string $types = null, string $scrollId = null): Response
     {
         if (!$scrollId) {
             return $this->request->get('/sitemap/profiles', ['initial' => 1, 'types' => $types]);
@@ -24,7 +24,7 @@ class SitemapEndpoint extends Endpoint
         return $this->request->get('/sitemap/profiles', ['scroll_id' => $scrollId, 'types' => $types]);
     }
 
-    public function getTopics(?string $interval = null, int $maxResult = null): Response
+    public function getTopics(string $interval = null, int $maxResult = null): Response
     {
         return $this->request->get('/sitemap/topics', ['interval' => $interval, 'max_result' => $maxResult]);
     }

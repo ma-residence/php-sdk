@@ -6,14 +6,13 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use MR\SDK\Client;
-use MR\SDK\Exceptions\RequestException as SdkRequestException;
 
 class Request
 {
     private HttpClient $httpClient;
     private Client $client;
 
-    public function __construct(Client $client, string $host, ?HandlerStack $handlerStack = null)
+    public function __construct(Client $client, string $host, HandlerStack $handlerStack = null)
     {
         $this->client = $client;
 
@@ -53,7 +52,7 @@ class Request
     public function execute(string $method, string $endpoint, array $queryParams = [], array $data = [], array $options = []): Response
     {
         $headers = [];
-        if (!isset($options['authentification']) || $options['authentification'] === false) {
+        if (!isset($options['authentification']) || false === $options['authentification']) {
             $accessToken = $this->client->auth()->getAccessToken();
             if ($accessToken) {
                 $headers['Authorization'] = "Bearer $accessToken";
@@ -77,7 +76,7 @@ class Request
 
         try {
             return new Response($this->httpClient->request($method, $endpoint, $request));
-        }  catch (RequestException $e) {
+        } catch (RequestException $e) {
             if ($e->getCode() >= 400 && $e->getCode() < 500) {
                 $this->client->getLogger()->warning($e->getMessage());
             }

@@ -6,7 +6,7 @@ use MR\SDK\Transport\Response;
 
 class RoleEndpoint extends Endpoint
 {
-    public function all(?string $type = null, array $extraParams = []): Response
+    public function all(string $type = null, array $extraParams = []): Response
     {
         if ($type) {
             $extraParams['type'] = $type;
